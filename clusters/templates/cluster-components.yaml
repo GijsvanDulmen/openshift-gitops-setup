@@ -10,9 +10,9 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
   {{- end }}
 
-  {{- if $ns.syncWave }} 
+  {{- if $component.syncWave }} 
   annotations:
-    argocd.argoproj.io/sync-wave: "{{ $ns.syncWave }}"
+    argocd.argoproj.io/sync-wave: "{{ $component.syncWave }}"
   {{- end }}
 spec:
   destination:
