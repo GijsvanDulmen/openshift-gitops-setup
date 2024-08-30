@@ -1,0 +1,3 @@
+update-clusterversion:
+  channel: fast-4.16
+  desiredVersion: 4.16.8
