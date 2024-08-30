@@ -1,0 +1,9 @@
+{{- range $ns := $.Values.namespaces }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: "{{ $.Values.name }}-{{ $ns.name }}"
+  annotations:
+    openshift.io/display-name: "{{ $.Values.displayName }}"
+    gitops.ticq.dev/type: "tenant"
+{{- end }}

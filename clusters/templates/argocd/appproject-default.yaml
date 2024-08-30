@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   name: default
-  namespace: 
+  namespace: "{{ $.Values.gitopsNamespace }}"
 spec:
   syncWindows:
   {{- if eq $.Values.disableAutoSync "true" }}

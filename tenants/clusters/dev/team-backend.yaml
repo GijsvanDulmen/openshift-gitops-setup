@@ -1,0 +1,6 @@
+name: team-backend
+displayName: Team API backends
+
+namespaces:
+- name: test
+- name: accept

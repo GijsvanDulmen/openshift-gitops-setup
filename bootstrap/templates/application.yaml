@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: cluster-resources
-  namespace: openshift-gitops
+  namespace: second-gitops
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
@@ -24,7 +24,11 @@ spec:
         value: $ARGOCD_APP_REVISION
       - name: targetRevision
         value: $ARGOCD_APP_SOURCE_TARGET_REVISION
-      
+      - name: gitRepo
+        value: $ARGOCD_APP_SOURCE_REPO_URL
+      - name: gitopsNamespace
+        value: $ARGOCD_APP_NAMESPACE
+
   # test this
   ignoreDifferences:
   - group: "apps"
@@ -35,6 +39,8 @@ spec:
   syncPolicy:
     automated:
       prune: true
+      allowEmpty: true
+      selfHeal: true
     syncOptions:
     - ApplyOutOfSyncOnly=true
     - PrunePropagationPolicy=foreground

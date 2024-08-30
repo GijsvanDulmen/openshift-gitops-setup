@@ -1,2 +1,6 @@
+
+# global params
 appRevision: ""
 targetRevision: ""
+gitopsNamespace: ""
+gitRepo: ""

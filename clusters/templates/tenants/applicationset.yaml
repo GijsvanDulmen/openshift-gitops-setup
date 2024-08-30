@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: tenants
+  namespace: "{{ $.Values.gitopsNamespace }}"
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      repoURL: "{{ $.Values.gitRepo }}"
+      revision: "{{ $.Values.targetRevision }}"
+      files:
+      - path: "tenants/clusters/{{ $.Values.clusterName }}/*.yaml"
+  template:
+    metadata:
+      name: "{{ `{{ .name }}-tenant` }}"
+
+      # will delete everything on the application of a tenant
+      finalizers:
+      - resources-finalizer.argocd.argoproj.io
+    spec:
+      project: default
+      source:
+        repoURL: "{{ $.Values.gitRepo }}"
+        targetRevision: "{{ $.Values.targetRevision }}"
+        path: tenants/
+        helm:
+            valueFiles:
+            - values.yaml
+            - "clusters/{{ $.Values.clusterName }}/{{ `{{ .name }}.yaml` }}"
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: "{{ $.Values.gitopsNamespace }}"
+      syncPolicy:
+        automated:
+          prune: true
+          allowEmpty: true
+          selfHeal: true
+        syncOptions:
+        - ApplyOutOfSyncOnly=true
+        - PrunePropagationPolicy=foreground
+        - ServerSideApply=true
