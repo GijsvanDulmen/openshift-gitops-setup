@@ -4,12 +4,10 @@ metadata:
   name: default
   namespace: "{{ $.Values.gitopsNamespace }}"
 spec:
-  syncWindows:
   {{- if eq $.Values.disableAutoSync "yes" }}
+  syncWindows:
   - kind: deny
     schedule: '5 0 * * *'
     duration: 24h
     manualSync: true
-  {{- else }}
-  []
   {{- end }}
