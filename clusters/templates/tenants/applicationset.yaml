@@ -3,6 +3,12 @@ kind: ApplicationSet
 metadata:
   name: tenants
   namespace: "{{ $.Values.gitopsNamespace }}"
+
+  # needed for applicationset
+  {{- if eq $.Values.disableFinalizers "yes" -}}
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  {{- end }}
 spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
@@ -17,8 +23,10 @@ spec:
       name: "{{ `{{ .name }}-tenant` }}"
 
       # will delete everything on the application of a tenant
+      {{- if eq $.Values.disableFinalizers "yes" -}}
       finalizers:
       - resources-finalizer.argocd.argoproj.io
+      {{- end }}
     spec:
       project: default
       source:

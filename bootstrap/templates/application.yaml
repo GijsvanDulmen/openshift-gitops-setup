@@ -27,7 +27,9 @@ spec:
       - name: gitRepo
         value: $ARGOCD_APP_SOURCE_REPO_URL
       - name: gitopsNamespace
-        value: $ARGOCD_APP_NAMESPACE
+        value: "second-gitops"
+      - name: "disableFinalizers"
+        value: "no"
 
   # test this
   ignoreDifferences:

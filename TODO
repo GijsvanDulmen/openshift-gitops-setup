@@ -2,3 +2,17 @@
 - AppProject per tenant
 - Multi tenant setup in ArgoCD
 - ApplicationSet things
+
+- Migration helps
+- Finalizers
+- Etc?
+- Best practices from the web
+- Labeling on resources for tracing
+- Subscription wait
+- Collection of health checks
+- Sync Windows enable global
+- Override branch?
+- PR Rollout
+- ARGOCD_SYNC_WAVE_DELAY
+- https://www.stakater.com/post/managing-openshift-operators-lifecycle-with-argo-cd
+- https://github.com/redhat-cop/helm-charts/tree/main/charts/operators-installer#argocd--red-hat-openshift-gitops-sync-status-and-health-checks
