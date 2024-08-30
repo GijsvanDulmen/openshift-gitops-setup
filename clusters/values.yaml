@@ -11,4 +11,6 @@ clusterComponents:
   syncWave: "0"
 - name: user-config
   syncWave: "1"
-- name: cluster-version
+
+# enable this for gitops cluster updates!
+# - name: cluster-version
