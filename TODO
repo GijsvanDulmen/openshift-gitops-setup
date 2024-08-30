@@ -1,11 +1,7 @@
 == TODO ==
 - AppProject per tenant
 - Multi tenant setup in ArgoCD
-- ApplicationSet things
 
-- Migration helps
-- Finalizers
-- Etc?
 - Best practices from the web
 - Labeling on resources for tracing
 - Subscription wait

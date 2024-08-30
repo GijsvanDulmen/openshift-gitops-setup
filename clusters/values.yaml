@@ -5,3 +5,9 @@
 # gitopsNamespace: ""
 # gitRepo: ""
 # disableAutoSync: "no"
+
+clusterComponents:
+- name: namespace-configuration-operator
+  argocd.argoproj.io/sync-wave: "0"
+- name: user-config
+  argocd.argoproj.io/sync-wave: "1"

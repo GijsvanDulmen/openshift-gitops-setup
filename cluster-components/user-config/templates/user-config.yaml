@@ -1,0 +1,30 @@
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: UserConfig
+metadata:
+  name: user-config
+spec:
+  providerName: githubidp
+  templates:
+  - objectTemplate: |
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: {{ lower .Name }}-sandbox
+        labels:
+          user-auto-provisioned: "true"
+  - objectTemplate: |
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: RoleBinding
+      metadata:
+        name: {{ lower .Name }}-sandbox
+        namespace: {{ lower .Name }}-sandbox
+      subjects:
+        - kind: User
+          name: {{ .Name }}
+          apiGroup: rbac.authorization.k8s.io
+      roleRef:
+        kind: ClusterRole
+        name: admin
+        apiGroup: rbac.authorization.k8s.io
+

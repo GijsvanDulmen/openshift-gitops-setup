@@ -1,0 +1,35 @@
+{{- range $component := $.Values.clusterComponents }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "{{ $component.name }}"
+  namespace: second-gitops
+  {{- if ne $.Values.disableFinalizers "yes" }}
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  {{- end }}
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: "clusters-components/{{ $component.name }}"
+    repoURL: "{{ $.Values.gitRepo }}"
+    targetRevision: "{{ $.Values.targetRevision }}"
+    helm:
+      valueFiles:
+      - values.yaml
+      - "clusters/{{ $.Values.clusterName }}.yaml"
+
+  syncPolicy:
+    automated:
+      prune: true
+      allowEmpty: true
+      selfHeal: true
+    syncOptions:
+    - ApplyOutOfSyncOnly=true
+    - PrunePropagationPolicy=foreground
+    - ServerSideApply=true
+{{- end }}
