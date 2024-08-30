@@ -8,7 +8,11 @@ spec:
     matchLabels:
       user-auto-provisioned: "true"
   templates:
-  - objectTemplate: |
+  - excludedPaths:	
+        - .metadata	
+        - .status	
+        - .spec.replicas
+    objectTemplate: |
       apiVersion: v1
       kind: ResourceQuota
       metadata:
@@ -18,7 +22,11 @@ spec:
         hard:
           requests.cpu: "4"
           requests.memory: "2Gi"
-  - objectTemplate: |
+  - excludedPaths:	
+        - .metadata	
+        - .status	
+        - .spec.replicas
+    objectTemplate: |
       apiVersion: v1
       kind: ConfigMap
       metadata:
