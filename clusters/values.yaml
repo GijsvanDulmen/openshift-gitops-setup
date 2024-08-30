@@ -1,7 +1,7 @@
 
 # global params
-appRevision: ""
-targetRevision: ""
-gitopsNamespace: ""
-gitRepo: ""
-disableAutoSync: "false"
+# appRevision: ""
+# targetRevision: ""
+# gitopsNamespace: ""
+# gitRepo: ""
+# disableAutoSync: "false"
