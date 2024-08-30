@@ -8,6 +8,6 @@
 
 clusterComponents:
 - name: namespace-configuration-operator
-  argocd.argoproj.io/sync-wave: "0"
+  syncWave: "0"
 - name: user-config
-  argocd.argoproj.io/sync-wave: "1"
+  syncWave: "1"
