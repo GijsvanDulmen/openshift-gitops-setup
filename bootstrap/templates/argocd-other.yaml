@@ -1,0 +1,158 @@
+---
+apiVersion: argoproj.io/v1beta1
+kind: ArgoCD
+metadata:
+  name: second-gitops
+  namespace: second-gitops
+spec:
+  # keep this disabled for security reasons
+  disableAdmin: true
+  usersAnonymousEnabled: false
+  # end
+
+  notifications:
+    enabled: true
+    resources:
+      limits:
+        cpu: 300m
+        memory: 512Mi
+      requests:
+        cpu: 20m
+        memory: 128Mi
+
+  server:
+    autoscale:
+      enabled: false
+    grpc:
+      ingress:
+        enabled: false
+    ingress:
+      enabled: false
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+      requests:
+        cpu: 125m
+        memory: 128Mi
+    route:
+      enabled: true
+
+    service:
+      type: ""
+  grafana:
+    enabled: false
+    ingress:
+      enabled: false
+    route:
+      enabled: false
+  prometheus:
+    enabled: false
+    ingress:
+      enabled: false
+    route:
+      enabled: false
+  initialSSHKnownHosts: {}
+  applicationSet:
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: 50m
+        memory: 100Mi
+  rbac:
+    # default anyone should have zero policies applied
+    # and therefore no access to anything - not even read-only
+    defaultPolicy: ""
+
+    policy: |
+      g, system:cluster-admins, role:admin
+      g, cluster-admins, role:admin
+    scopes: "[groups]"
+
+  repo:
+    resources:
+      limits:
+        cpu: "1500m"
+        memory: 3Gi
+      requests:
+        cpu: 50m
+        memory: 256Mi
+
+  resourceExclusions: |
+    - apiGroups:
+      - tekton.dev
+      clusters:
+      - '*'
+      kinds:
+      - TaskRun
+      - PipelineRun
+  sso:
+    provider: dex
+    dex:
+      openShiftOAuth: true
+      resources:
+        limits:
+          cpu: 300m
+          memory: 128Mi
+        requests:
+          cpu: 20m
+          memory: 128Mi
+
+  ha:
+    enabled: false #!!!
+
+    # resources not used because not enabled
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 250m
+        memory: 128Mi
+  tls:
+    ca: {}
+  redis:
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 50m
+        memory: 50Mi
+  controller:
+    processors:
+      # See https://argo-cd.readthedocs.io/en/stable/operator-manual/high_availability/#argocd-application-controller
+      # "For 1000 application we use 50 for --status-processors and 25 for --operation-processors"
+      # The defaults 10 (op) and 20 (status) should therefore be enough
+      operation: 10
+      status: 20
+
+    # Default = 3m
+    # This means applications will get a refresh every 3m which is a lot if you have a lot of applications
+    # and due to the webhook nature we probably already have synced/refreshed
+    appSync: 15s
+
+    # loglevel
+    # logLevel: "info" # could be set to debug if you want
+
+    # more time from repo server for large
+    # helm charts and slow communication towards azure devops
+    env:
+      - name: ARGOCD_APPLICATION_CONTROLLER_REPO_SERVER_TIMEOUT_SECONDS
+        value: "450"
+
+    resources:
+      limits:
+        # more cpu = more load on API server when it has a lot of resources
+        cpu: "2"
+        memory: 5Gi # argocd needs a lot!
+      requests:
+        cpu: 500m
+        memory: 3Gi
+    sharding: {}
+  extraConfig:
+    help.chatText: ""
+    help.chatUrl: ""
+    server.rbac.log.enforce.enable: "true"

@@ -1,0 +1,56 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: custom-server-role
+rules:
+  - verbs:
+      - get
+      - patch
+      - delete
+    apiGroups:
+      - '*'
+    resources:
+      - '*'
+  - verbs:
+      - create
+      - get
+      - list
+      - watch
+      - update
+      - patch
+      - delete
+    apiGroups:
+      - ''
+    resources:
+      - secrets
+      - configmaps
+  - verbs:
+      - create
+      - get
+      - list
+      - watch
+      - update
+      - delete
+      - patch
+    apiGroups:
+      - argoproj.io
+    resources:
+      - applications
+      - applicationsets
+      - appprojects
+  - verbs:
+      - create
+      - list
+    apiGroups:
+      - ''
+    resources:
+      - events
+  - verbs:
+      - create
+      - update
+    apiGroups:
+      - batch
+    resources:
+      - jobs
+      - cronjobs
+      - cronjobs/finalizers

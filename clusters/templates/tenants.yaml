@@ -28,7 +28,7 @@ spec:
       - resources-finalizer.argocd.argoproj.io
       {{- end }}
     spec:
-      project: default
+      project: cluster
       source:
         repoURL: "{{ $.Values.gitRepo }}"
         targetRevision: "{{ $.Values.targetRevision }}"

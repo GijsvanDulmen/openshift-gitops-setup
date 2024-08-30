@@ -13,7 +13,7 @@ spec:
   destination:
     namespace: default
     server: https://kubernetes.default.svc
-  project: default
+  project: cluster
   source:
     path: "cluster-components/{{ $component.name }}"
     repoURL: "{{ $.Values.gitRepo }}"

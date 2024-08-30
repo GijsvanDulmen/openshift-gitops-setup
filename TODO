@@ -6,7 +6,6 @@
 - Labeling on resources for tracing
 - Subscription wait
 - Collection of health checks
-- Sync Windows enable global
 - Override branch?
 - PR Rollout
 - ARGOCD_SYNC_WAVE_DELAY
