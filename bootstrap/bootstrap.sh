@@ -2,6 +2,12 @@
 
 export KUBECONFIG=/Users/gijs/Documents/repos/proxmox-terraform/openshift/kubeconfig-noingress
 
-helm install gitops-operator ./gitops-operator/values.yaml | kubectl apply -f -
+cd gitops-operator
+helm dependency build
+helm template . -f ./values.yaml | kubectl apply -f -
+
+cd ..
 sleep 5
+
+cd resources
 helm template . -f ./values.yaml | kubectl apply -f -

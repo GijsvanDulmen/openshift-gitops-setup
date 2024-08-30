@@ -1,0 +1,6 @@
+dependencies:
+- name: operators-installer
+  repository: https://redhat-cop.github.io/helm-charts
+  version: 3.0.1
+digest: sha256:9e29c5097c315f4a8efd0d68adcf5ea5b515d326eeedf9c1fd6e9b10b898a6fd
+generated: "2024-08-30T21:42:27.651263+02:00"
