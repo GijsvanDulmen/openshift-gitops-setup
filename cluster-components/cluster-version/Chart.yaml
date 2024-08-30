@@ -1,0 +1,8 @@
+apiVersion: v2
+name: operators
+version: 1.0.0
+dependencies:
+  - name: update-clusterversion
+    version: 1.0.0
+    repository: https://redhat-cop.github.io/helm-charts
+appVersion: 1.0.0
