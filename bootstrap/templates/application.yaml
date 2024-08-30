@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-resources
+  namespace: openshift-gitops
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: clusters
+    repoURL: https://github.com/GijsvanDulmen/openshift-gitops-setup
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+      - clusters/{{ $.Values.cluster }}.yaml
+      parameters:
+      - name: "disableAutoSync"
+        value: "{{ $.Values.disableAutoSync }}"
+      - name: appRevision
+        value: $ARGOCD_APP_REVISION
+      - name: targetRevision
+        value: $ARGOCD_APP_SOURCE_TARGET_REVISION
+      
+  # test this
+  ignoreDifferences:
+  - group: "apps"
+    kind: "Deployment"
+    jsonPointers:
+    - /spec/replicas
+
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - ApplyOutOfSyncOnly=true
+    - PrunePropagationPolicy=foreground
+    - ServerSideApply=true

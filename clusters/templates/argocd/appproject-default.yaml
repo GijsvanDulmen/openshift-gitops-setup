@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: default
+  namespace: 
+spec:
+  syncWindows:
+  {{- if eq $.Values.disableAutoSync "true" }}
+  - kind: deny
+    schedule: '5 0 * * *'
+    duration: 24h
+    manualSync: true
+  {{- end }}
