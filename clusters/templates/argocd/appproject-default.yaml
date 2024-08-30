@@ -4,6 +4,14 @@ metadata:
   name: default
   namespace: "{{ $.Values.gitopsNamespace }}"
 spec:
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  destinations:
+    - namespace: '*'
+      server: '*'
+  sourceRepos:
+    - '*'
   {{- if eq $.Values.disableAutoSync "yes" }}
   syncWindows:
   - kind: deny
