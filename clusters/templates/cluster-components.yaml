@@ -15,7 +15,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: "clusters-components/{{ $component.name }}"
+    path: "cluster-components/{{ $component.name }}"
     repoURL: "{{ $.Values.gitRepo }}"
     targetRevision: "{{ $.Values.targetRevision }}"
     helm:
