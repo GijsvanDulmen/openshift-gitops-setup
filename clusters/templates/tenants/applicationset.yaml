@@ -5,7 +5,7 @@ metadata:
   namespace: "{{ $.Values.gitopsNamespace }}"
 
   # needed for applicationset
-  {{- if ne $.Values.disableFinalizers "yes" -}}
+  {{- if ne $.Values.disableFinalizers "yes" }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
   {{- end }}
@@ -23,7 +23,7 @@ spec:
       name: "{{ `{{ .name }}-tenant` }}"
 
       # will delete everything on the application of a tenant
-      {{- if ne $.Values.disableFinalizers "yes" -}}
+      {{- if ne $.Values.disableFinalizers "yes" }}
       finalizers:
       - resources-finalizer.argocd.argoproj.io
       {{- end }}
