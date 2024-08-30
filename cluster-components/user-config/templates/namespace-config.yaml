@@ -13,7 +13,7 @@ spec:
       kind: ResourceQuota
       metadata:
         name: small-size
-        namespace: {{ .Name }}
+        namespace: {{`{{ .Name }}`}}
       spec:
         hard:
           requests.cpu: "4"
@@ -23,6 +23,6 @@ spec:
       kind: ConfigMap
       metadata:
         name: test
-        namespace: {{ .Name }}
+        namespace: {{`{{ .Name }}`}}
       data:
         foo: bar
