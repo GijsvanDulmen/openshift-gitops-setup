@@ -10,4 +10,6 @@ spec:
     schedule: '5 0 * * *'
     duration: 24h
     manualSync: true
+  {{- else }}
+  []
   {{- end }}

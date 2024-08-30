@@ -1,5 +1,5 @@
 appRevision: "123213123"
-targetRevision: "master"
+targetRevision: "main"
 gitopsNamespace: "second-gitops"
 gitRepo: "https://github.com/GijsvanDulmen/openshift-gitops-setup"
-disableAutoSync: "no"
+disableAutoSync: "yes"
