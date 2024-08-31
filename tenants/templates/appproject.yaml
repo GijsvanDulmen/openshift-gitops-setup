@@ -28,6 +28,7 @@ spec:
     - p, role:{{ $appProjectName }}:edit, projects, get, {{ $appProjectName }}/*, allow
 
     # allow repositories by tenant
+    - p, proj:{{ $appProjectName }}:edit, repositories, get, {{ $appProjectName }}/*, allow
     - p, proj:{{ $appProjectName }}:edit, repositories, create, {{ $appProjectName }}/*, allow
     - p, proj:{{ $appProjectName }}:edit, repositories, delete, {{ $appProjectName }}/*, allow
     - p, proj:{{ $appProjectName }}:edit, repositories, update, {{ $appProjectName }}/*, allow
