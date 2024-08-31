@@ -15,3 +15,4 @@ clusterComponents:
 
 # enable this for gitops cluster updates!
 # - name: cluster-version
+#   disableFinalizers: "yes" # needs this otherwise clusterversion would be deleted

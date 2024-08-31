@@ -5,7 +5,7 @@ kind: Application
 metadata:
   name: "{{ $component.name }}"
   namespace: second-gitops
-  {{- if ne $.Values.disableFinalizers "yes" }}
+  {{- if and (ne $.Values.disableFinalizers "yes") (ne ($component.disableFinalizers | default "no") "yes") }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
   {{- end }}
