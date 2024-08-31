@@ -2,3 +2,47 @@ name: "" # will fail if not given
 displayName: "None"
 
 namespaces: []
+
+# per namespace default
+resourceQuota:
+  hard:
+    # storage
+    persistentvolumeclaims: "50"
+    requests.storage: "1000Gi"
+
+    # containers
+    requests.cpu: "1"
+    requests.memory: 1Gi
+    limits.cpu: "2"
+    limits.memory: 2Gi
+
+    pods: 100
+
+    # disable load balancers
+    services.loadbalancers: 0
+
+    # Example of per storage class
+    # <storage-class-name>.storageclass.storage.k8s.io/requests.storage
+
+containerLimits:
+  default:
+    cpu: 300m
+    memory: 200Mi
+    ephemeral-storage: 1Gi
+  defaultRequest:
+    cpu: 50m
+    memory: 100Mi
+    ephemeral-storage: 100Mi
+  max:
+    cpu: "1"
+    memory: 1Gi
+    ephemeral-storage: 5Gi
+  min:
+    cpu: 10m
+    memory: 10Mi
+
+persistentVolumeClaimLimits:
+  max:
+    storage: 10Gi
+  min:
+    storage: 1Gi

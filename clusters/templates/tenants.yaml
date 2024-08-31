@@ -47,7 +47,7 @@ spec:
         helm:
             valueFiles:
             - values.yaml
-            - "clusters/{{ $.Values.clusterName }}/{{ `{{ .name }}.yaml` }}"
+            - "tenants/{{ $.Values.clusterName }}/{{ `{{ .name }}.yaml` }}"
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: "{{ $.Values.gitopsNamespace }}"

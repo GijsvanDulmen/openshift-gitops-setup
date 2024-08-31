@@ -1,0 +1,12 @@
+{{- range $ns := $.Values.namespaces }}
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: resource-quota
+  namespace: "{{ $.Values.name }}-{{ $ns.name }}"
+spec:
+  {{- $resourceQuota := merge $.Values.resourceQuota ($ns.resourceQuota | default dict) }}
+  {{- nindent 2 ($resourceQuota | toYaml) }}
+
+{{- end }}

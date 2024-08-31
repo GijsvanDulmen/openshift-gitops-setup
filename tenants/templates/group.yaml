@@ -5,5 +5,5 @@ metadata:
   name: "tenant-{{ $.Values.name }}"
 users:
 {{- range $user := $.Values.users }}
-  - "{{ $user.name }}"
+- "{{ $user.name }}"
 {{- end }}
