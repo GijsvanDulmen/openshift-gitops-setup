@@ -22,7 +22,7 @@ spec:
   - name: edit
     description: Read-only privileges to my-project
     policies:
-    {{- range $action := (list "get" "sync" "override") }}
+    {{- range $action := (list "get" "sync" "override", "create", "update", "delete", "sync", "action") }}
     - p, role:{{ $appProjectName }}:edit, applications, {{ $action }}, {{ $appProjectName }}/*, allow
     {{- end }}
     - p, role:{{ $appProjectName }}:edit, logs, get, {{ $appProjectName }}/*, allow
