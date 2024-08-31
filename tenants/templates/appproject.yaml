@@ -33,8 +33,8 @@ spec:
     - p, proj:{{ $appProjectName }}:edit, repositories, update, {{ $appProjectName }}/*, allow
 
     # does this work?
-    - p, role:{{ $appProjectName }}:edit, clusters, get, *, allow
-    - p, role:{{ $appProjectName }}:edit, repositories, get, *, allow
+    # - p, role:{{ $appProjectName }}:edit, clusters, get, *, allow
+    # - p, role:{{ $appProjectName }}:edit, repositories, get, *, allow
 
     groups:
     - "tenant-{{ $.Values.name }}"
