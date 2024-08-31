@@ -4,7 +4,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: tenants
+  name: "tenants-{{ $.Values.name }}-{{ $ns.name }}"
   namespace: "tenant-gitops"
 
   # needed for applicationset
