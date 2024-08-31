@@ -12,5 +12,5 @@ subjects:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: admin # was edit
+  name: view # was edit
 {{- end }}
