@@ -38,3 +38,4 @@ spec:
 
     groups:
     - "tenant-{{ $.Values.name }}"
+    - "system:tenant-{{ $.Values.name }}"
