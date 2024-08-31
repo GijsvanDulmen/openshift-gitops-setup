@@ -44,7 +44,7 @@ spec:
             - path: "*/pull-request/{{ $ns.name }}.yaml"
   template:
     metadata:
-      name: "{{ $.Values.name }}-{{ $ns.name }}-{{ `{{ .appName }}` }}-pr{{ `{{ .number }}` }}"
+      name: "{{ $.Values.name }}-{{ $ns.name }}-{{ `{{ index .path.segments 0 }}}` }}-pr{{ `{{ .number }}` }}"
 
       # will delete everything on the application of a tenant
       {{- if ne $.Values.disableFinalizers "yes" }}

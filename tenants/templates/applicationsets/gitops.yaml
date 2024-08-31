@@ -34,7 +34,7 @@ spec:
       - path: "*/namespaces/{{ $ns.name }}.yaml"
   template:
     metadata:
-      name: "{{ $.Values.name }}-{{ $ns.name }}-{{ `{{ .appName }}` }}"
+      name: "{{ $.Values.name }}-{{ $ns.name }}-{{ `{{ index .path.segments 0 }}` }}"
 
       # will delete everything on the application of a tenant
       {{- if ne $.Values.disableFinalizers "yes" }}
