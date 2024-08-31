@@ -12,6 +12,9 @@ namespaces:
 
   gitops:
     repository: https://github.com/GijsvanDulmen/openshift-gitops-tenants-setup
+    pullRequestEnvironments: "yes"
+    pullRequestRepositoryOwner: "GijsvanDulmen"
+    pullRequestRepository: "openshift-gitops-tenants-setup"
 
 - name: accept
   containerLimits:

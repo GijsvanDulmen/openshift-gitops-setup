@@ -1,0 +1,86 @@
+{{- range $ns := $.Values.namespaces }}
+{{- if ($ns.gitops | default dict).repository }}
+{{- if eq (($ns.gitops | default dict).pullRequestEnvironments | default "yes") }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: "tenants-{{ $.Values.name }}-{{ $ns.name }}-pr"
+  namespace: "tenant-gitops"
+
+  # needed for applicationset
+  {{- if ne $.Values.disableFinalizers "yes" }}
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  {{- end }}
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+
+  {{- if eq $.Values.overrideTenants "yes" }}
+  # ability to fast-forward and/or change targetRevisions
+  # and ability to shut down sync policy
+  ignoreApplicationDifferences:
+    - jsonPointers:
+      - /spec/source/targetRevision
+    - jsonPointers:
+      - /spec/syncPolicy
+  {{- end }}
+
+  generators:
+  - matrix:
+        generators:
+        - pullRequest:
+            github:
+              owner: "{{ $ns.gitops.pullRequestRepositoryOwner }}"
+              repo: "{{ $ns.gitops.pullRequestRepository }}"
+              labels:
+              - preview
+            requeueAfterSeconds: 1800
+        - git:
+          repoURL: "{{ $ns.gitops.repository }}"
+          revision: "{{ `{{ .branch }}` }}"
+          files:
+          - path: "*/pull-request/{{ $ns.name }}.yaml"
+  template:
+    metadata:
+      name: "{{ $.Values.name }}-{{ $ns.name }}-{{ `{{ .appName }}` }}-pr{{ `{{ .number }}` }}"
+
+      # will delete everything on the application of a tenant
+      {{- if ne $.Values.disableFinalizers "yes" }}
+      finalizers:
+      - resources-finalizer.argocd.argoproj.io
+      {{- end }}
+    spec:
+      project: {{ print "tenant-" $.Values.name }}
+      source:
+        repoURL: "{{ $ns.gitops.repository }}"
+        targetRevision: "{{ `{{ .branch }}` }}"
+        path: "{{ `{{ index .path.segments 0 }}` }}/"
+        helm:
+            valueFiles:
+            - values.yaml
+            - pull-request.yaml
+            - "pull-request/{{ $ns.name }}.yaml"
+            parameters:
+            - name: global.pr.number
+              value: "{{ `{{ .number }}` }}"
+            - name: global.pr.branch
+              value: "{{ `{{ .branch }}` }}"
+            - name: global.pr.branchSlug
+              value: "{{ `{{ .branchSlug }}` }}"
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: "{{ $.Values.name }}-{{ $ns.name }}"
+      syncPolicy:
+        automated:
+          prune: true
+          allowEmpty: true
+          selfHeal: true
+        syncOptions:
+        - ApplyOutOfSyncOnly=true
+        - PrunePropagationPolicy=foreground
+        - ServerSideApply=true
+
+{{- end }}
+{{- end }}
