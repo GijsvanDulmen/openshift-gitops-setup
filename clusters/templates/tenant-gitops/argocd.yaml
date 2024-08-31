@@ -2,8 +2,8 @@
 apiVersion: argoproj.io/v1beta1
 kind: ArgoCD
 metadata:
-  name: second-gitops
-  namespace: second-gitops
+  name: tenant-gitops
+  namespace: tenant-gitops
 spec:
   # keep this disabled for security reasons
   disableAdmin: true
@@ -35,9 +35,8 @@ spec:
       requests:
         cpu: 125m
         memory: 128Mi
-    # route:
-    #   enabled: true
-
+    route:
+      enabled: true
   grafana:
     enabled: false
     ingress:
@@ -65,7 +64,15 @@ spec:
     defaultPolicy: ""
 
     policy: |
-      g, system:cluster-admins, role:admin
+      p, role:admin, applications, *, */*, allow
+      p, role:admin, applicationsets, *, */*, allow
+      p, role:admin, clusters, get, *, allow
+      p, role:admin, logs, get, */*, allow
+      p, role:admin, repositories, get, *, allow
+      p, role:admin, repositories, create, *, allow
+      p, role:admin, repositories, update, *, allow
+      p, role:admin, repositories, delete, *, allow
+
       g, cluster-admins, role:admin
     scopes: "[groups]"
 

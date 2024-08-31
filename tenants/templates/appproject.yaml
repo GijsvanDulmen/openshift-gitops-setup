@@ -1,0 +1,37 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  {{- $appProjectName := print "tenant-" $.Values.name -}}
+  name: "{{ $appProjectName }}"
+  namespace: tenant-gitops
+spec:
+  sourceRepos:
+  - '*'
+  destinations:
+  {{- range $ns := $.Values.namespaces }}
+  - namespace: "{{ $.Values.name }}-{{ $ns.name }}"
+    server: https://kubernetes.default.svc
+  {{- end }}
+# no cluster resource whitelist allowed
+#   clusterResourceWhitelist:
+#   - group: '*'
+#     kind: '*'
+  roles:
+  # A role which provides read-only access to all applications in the project
+  - name: edit
+    description: Read-only privileges to my-project
+    policies:
+    {{- range $action := (list "get" "sync" "override") }}
+    - p, role:{{ $appProjectName }}:edit, applications, {{ $action }}, {{ $appProjectName }}/*, allow
+    {{- end }}
+    - p, role:{{ $appProjectName }}:edit, logs, get, {{ $appProjectName }}/*, allow
+    - p, role:{{ $appProjectName }}:edit, projects, get, {{ $appProjectName }}/*, allow
+
+    # does this work?
+    - p, role:{{ $appProjectName }}:edit, clusters, get, *, allow
+    - p, role:{{ $appProjectName }}:edit, repositories, get, *, allow
+
+    groups:
+    - "tenant-{{ $.Values.name }}"
+{{ end }}
