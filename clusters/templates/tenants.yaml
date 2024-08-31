@@ -12,6 +12,17 @@ metadata:
 spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
+
+  {{- if eq $.Values.overrideTenants "yes" }}
+  # ability to fast-forward and/or change targetRevisions
+  # and ability to shut down sync policy
+  ignoreApplicationDifferences:
+    - jsonPointers:
+      - /spec/source/targetRevision
+    - jsonPointers:
+      - /spec/syncPolicy
+  {{- end }}
+
   generators:
   - git:
       repoURL: "{{ $.Values.gitRepo }}"

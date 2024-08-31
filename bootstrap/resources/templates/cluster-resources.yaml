@@ -30,6 +30,8 @@ spec:
         value: "second-gitops"
       - name: "disableFinalizers"
         value: "no"
+      - name: "overrideTenants"
+        value: "no"
 
   # test this
   ignoreDifferences:

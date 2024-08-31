@@ -5,6 +5,7 @@
 # gitopsNamespace: ""
 # gitRepo: ""
 # disableAutoSync: "no"
+# overrideTenants: "no"
 
 clusterComponents:
 - name: namespace-configuration-operator
