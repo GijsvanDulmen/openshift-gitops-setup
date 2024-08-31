@@ -32,6 +32,8 @@ spec:
     - p, proj:{{ $appProjectName }}:edit, repositories, delete, {{ $appProjectName }}/*, allow
     - p, proj:{{ $appProjectName }}:edit, repositories, update, {{ $appProjectName }}/*, allow
 
+    - p, proj:{{ $appProjectName }}:edit, clusters, get, {{ $appProjectName }}/*, allow
+    
     # does this work?
     # - p, role:{{ $appProjectName }}:edit, clusters, get, *, allow
     # - p, role:{{ $appProjectName }}:edit, repositories, get, *, allow
