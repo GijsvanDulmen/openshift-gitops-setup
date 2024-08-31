@@ -1,6 +1,6 @@
 {{- range $ns := $.Values.namespaces }}
 {{- if ($ns.gitops | default dict).repository }}
-{{- if eq (($ns.gitops | default dict).pullRequestEnvironments | default "yes") "yes" }}
+{{- if eq (($ns.gitops | default dict).pullRequestEnvironments | default "no") "yes" }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
@@ -32,6 +32,7 @@ spec:
         generators:
         - pullRequest:
             github:
+              # {{ $ns.gitops }}
               owner: "{{ $ns.gitops.pullRequestRepositoryOwner }}"
               repo: "{{ $ns.gitops.pullRequestRepository }}"
               labels:
