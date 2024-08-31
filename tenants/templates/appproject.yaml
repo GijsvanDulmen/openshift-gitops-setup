@@ -18,7 +18,6 @@ spec:
 #   - group: '*'
 #     kind: '*'
   roles:
-  # A role which provides read-only access to all applications in the project
   - name: edit
     description: Read-only privileges to my-project
     policies:
@@ -27,6 +26,11 @@ spec:
     {{- end }}
     - p, role:{{ $appProjectName }}:edit, logs, get, {{ $appProjectName }}/*, allow
     - p, role:{{ $appProjectName }}:edit, projects, get, {{ $appProjectName }}/*, allow
+
+    # allow repositories by tenant
+    p, proj:{{ $appProjectName }}:edit, repositories, create, {{ $appProjectName }}/*, allow
+    p, proj:{{ $appProjectName }}:edit, repositories, delete, {{ $appProjectName }}/*, allow
+    p, proj:{{ $appProjectName }}:edit, repositories, update, {{ $appProjectName }}/*, allow
 
     # does this work?
     - p, role:{{ $appProjectName }}:edit, clusters, get, *, allow
