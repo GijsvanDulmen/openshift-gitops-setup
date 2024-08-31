@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  {{- $appProjectName := print "tenant-" $.Values.name -}}
+  {{- $appProjectName := print "tenant-" $.Values.name }}
   name: "{{ $appProjectName }}"
   namespace: tenant-gitops
 spec:
