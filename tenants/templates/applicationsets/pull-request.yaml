@@ -1,6 +1,6 @@
 {{- range $ns := $.Values.namespaces }}
 {{- if ($ns.gitops | default dict).repository }}
-{{- if eq (($ns.gitops | default dict).pullRequestEnvironments | default "yes") }}
+{{- if eq (($ns.gitops | default dict).pullRequestEnvironments | default "yes") "yes" }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
