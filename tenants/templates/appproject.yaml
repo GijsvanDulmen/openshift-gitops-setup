@@ -34,4 +34,3 @@ spec:
 
     groups:
     - "tenant-{{ $.Values.name }}"
-{{ end }}
