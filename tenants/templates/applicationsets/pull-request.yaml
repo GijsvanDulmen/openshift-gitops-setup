@@ -38,10 +38,10 @@ spec:
               - preview
             requeueAfterSeconds: 1800
         - git:
-          repoURL: "{{ $ns.gitops.repository }}"
-          revision: "{{ `{{ .branch }}` }}"
-          files:
-          - path: "*/pull-request/{{ $ns.name }}.yaml"
+            repoURL: "{{ $ns.gitops.repository }}"
+            revision: "{{ `{{ .branch }}` }}"
+            files:
+            - path: "*/pull-request/{{ $ns.name }}.yaml"
   template:
     metadata:
       name: "{{ $.Values.name }}-{{ $ns.name }}-{{ `{{ .appName }}` }}-pr{{ `{{ .number }}` }}"
