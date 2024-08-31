@@ -13,5 +13,10 @@ namespaces:
   containerLimits:
     max:
       ephemeral-storage: "100Gi"
+
+  gitops:
+    repository: https://github.com/GijsvanDulmen/openshift-gitops-tenants-setup
+  
 - name: integration
+
 

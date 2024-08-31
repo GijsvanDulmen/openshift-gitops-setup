@@ -75,20 +75,21 @@ spec:
 
       # fixated for now
 
-      p, role:tenant, clusters, get, *, allow
-      p, role:tenant, repositories, get, *, allow
+      # not needed?
+      # p, role:tenant, clusters, get, *, allow
+      # p, role:tenant, repositories, get, *, allow
 
-      p, role:tenant, applications, *, tenant-team-backend/*, allow
-      p, role:tenant, applications, *, tenant-team-frontend/*, allow
+      # p, role:tenant, applications, *, tenant-team-backend/*, allow
+      # p, role:tenant, applications, *, tenant-team-frontend/*, allow
 
-      p, role:tenant, logs, *, tenant-team-backend/*, allow
-      p, role:tenant, logs, *, tenant-team-frontend/*, allow
+      # p, role:tenant, logs, *, tenant-team-backend/*, allow
+      # p, role:tenant, logs, *, tenant-team-frontend/*, allow
 
-      p, role:tenant, projects, *, tenant-team-backend/*, allow
-      p, role:tenant, projects, *, tenant-team-frontend/*, allow
+      # p, role:tenant, projects, *, tenant-team-backend/*, allow
+      # p, role:tenant, projects, *, tenant-team-frontend/*, allow
 
-      g, tenant-team-backend, role:tenant
-      g, tenant-team-frontend, role:tenant
+      # g, tenant-team-backend, role:tenant
+      # g, tenant-team-frontend, role:tenant
 
       ### end
 

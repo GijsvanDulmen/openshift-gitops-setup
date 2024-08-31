@@ -22,7 +22,10 @@ spec:
     description: Read-only privileges to my-project
     policies:
     # - p, role:{{ $appProjectName }}:edit, applications, *, {{ $appProjectName }}/*, allow
-    - p, role:{{ $appProjectName }}:edit, applications, *, {{ $appProjectName }}/*, allow
+
+    - p, role:{{ $appProjectName }}:edit, applications, get, {{ $appProjectName }}/*, allow
+    - p, role:{{ $appProjectName }}:edit, applications, sync, {{ $appProjectName }}/*, allow
+    - p, role:{{ $appProjectName }}:edit, applications, override, {{ $appProjectName }}/*, allow
 
     - p, role:{{ $appProjectName }}:edit, logs, get, {{ $appProjectName }}/*, allow
     - p, role:{{ $appProjectName }}:edit, projects, get, {{ $appProjectName }}/*, allow
@@ -34,10 +37,6 @@ spec:
     - p, proj:{{ $appProjectName }}:edit, repositories, update, {{ $appProjectName }}/*, allow
 
     - p, proj:{{ $appProjectName }}:edit, clusters, get, {{ $appProjectName }}/*, allow
-    
-    # does this work?
-    # - p, role:{{ $appProjectName }}:edit, clusters, get, *, allow
-    # - p, role:{{ $appProjectName }}:edit, repositories, get, *, allow
 
     groups:
     - "tenant-{{ $.Values.name }}"

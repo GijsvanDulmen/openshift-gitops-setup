@@ -1,0 +1,3 @@
+disableAutoSync: "yes"
+disableFinalizers: "no"
+overrideTenants: "no"

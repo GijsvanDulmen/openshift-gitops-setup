@@ -1,8 +1,11 @@
+{{- range $ns := $.Values.namespaces }}
+{{- if ($ns.gitops | default dict).repository }}
+---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: tenants
-  namespace: "{{ $.Values.gitopsNamespace }}"
+  namespace: "tenant-gitops"
 
   # needed for applicationset
   {{- if ne $.Values.disableFinalizers "yes" }}
@@ -25,13 +28,13 @@ spec:
 
   generators:
   - git:
-      repoURL: "{{ $.Values.gitRepo }}"
-      revision: "{{ $.Values.targetRevision }}"
+      repoURL: "{{ $ns.gitops.repository }}"
+      revision: "{{ $ns.gitops.revision | default "HEAD" }}"
       files:
-      - path: "tenants/tenants/{{ $.Values.clusterName }}/*.yaml"
+      - path: "*/namespaces/{{ $ns.name }}.yaml"
   template:
     metadata:
-      name: "{{ `{{ .name }}-tenant` }}"
+      name: "{{ $.Values.name }}-{{ $ns.name }}-{{ `{{ .appName }}` }}"
 
       # will delete everything on the application of a tenant
       {{- if ne $.Values.disableFinalizers "yes" }}
@@ -39,27 +42,18 @@ spec:
       - resources-finalizer.argocd.argoproj.io
       {{- end }}
     spec:
-      project: cluster
+      project: {{ print "tenant-" $.Values.name }}
       source:
-        repoURL: "{{ $.Values.gitRepo }}"
-        targetRevision: "{{ $.Values.targetRevision }}"
-        path: tenants/
+        repoURL: "{{ $ns.gitops.repository }}"
+        targetRevision: "{{ $ns.gitops.revision | default "HEAD" }}"
+        path: "{{ `{{ index .path.segments 0 }}` }}/"
         helm:
             valueFiles:
             - values.yaml
-            - "clusters/{{ $.Values.clusterName }}.yaml"
-            - "tenants/{{ $.Values.clusterName }}/{{ `{{ .name }}.yaml` }}"
-            parameters:
-            - name: "disableAutoSync"
-              value: "{{ $.Values.disableAutoSync }}"
-            - name: "disableFinalizers"
-              value: "{{ $.Values.disableFinalizers }}"
-            - name: "overrideTenants"
-              value: "{{ $.Values.overrideTenants }}"
-
+            - "namespaces/{{ $ns.name }}.yaml"
       destination:
         server: 'https://kubernetes.default.svc'
-        namespace: "{{ $.Values.gitopsNamespace }}"
+        namespace: "{{ $.Values.name }}-{{ $ns.name }}"
       syncPolicy:
         automated:
           prune: true
@@ -69,3 +63,6 @@ spec:
         - ApplyOutOfSyncOnly=true
         - PrunePropagationPolicy=foreground
         - ServerSideApply=true
+
+{{- end }}
+{{- end }}
