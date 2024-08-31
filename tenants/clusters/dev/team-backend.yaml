@@ -1,6 +1,9 @@
 name: team-backend
 displayName: Super Team API backends
 
+users:
+- name: GijsvanDulmen
+
 namespaces:
 - name: test
 - name: accept

@@ -1,0 +1,9 @@
+---
+apiVersion: user.openshift.io/v1
+kind: Group
+metadata:
+  name: "tenant-{{ $.Values.name }}"
+users:
+{{- range $user := $.Values.users }}
+  - "{{ $user.name }}"
+{{- end }}
