@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  {{- $name := print "tenant-" $.Values.name }}
+  name: "{{ $name }}"
+  namespace: tenant-gitops
+  labels:
+    argocd.argoproj.io/secret-type: cluster
+type: Opaque
+stringData:
+  name: "{{ $name }}"
+  project: "{{ $name }}"
+  server: https://kubernetes.default.svc
+
+  {{- $namespaces := list }}
+  {{- range $ns := $.Values.namespaces }}
+  {{- $namespaces := append $namespaces (print $.Values.name "-" $ns.name) }}
+  {{- end }}
+  namespaces: "{{ join "," $namespaces }}"
