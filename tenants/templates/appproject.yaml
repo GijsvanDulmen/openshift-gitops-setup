@@ -21,7 +21,7 @@ spec:
   - name: edit
     description: tenant
     policies:
-    - p, role:{{ $appProjectName }}:edit, applications, *, {{ $appProjectName }}/*, allow
+    # - p, role:{{ $appProjectName }}:edit, applications, *, {{ $appProjectName }}/*, allow
 
     # - p, role:{{ $appProjectName }}:edit, applications, get, {{ $appProjectName }}/*, allow
     # - p, role:{{ $appProjectName }}:edit, applications, sync, {{ $appProjectName }}/*, allow
