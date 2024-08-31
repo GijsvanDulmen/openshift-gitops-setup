@@ -74,8 +74,7 @@ spec:
       p, role:admin, repositories, delete, *, allow
 
       p, role:tenant, applications, *, tenant-team-backend/*, allow
-      p, role:tenant, applications, *, tenant-team-frontend/*, allow
-
+      
       g, tenant-team-backend, role:tenant
       g, tenant-team-frontend, role:tenant
 
