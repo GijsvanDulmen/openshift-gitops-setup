@@ -28,7 +28,7 @@ spec:
       repoURL: "{{ $.Values.gitRepo }}"
       revision: "{{ $.Values.targetRevision }}"
       files:
-      - path: "tenants/clusters/{{ $.Values.clusterName }}/*.yaml"
+      - path: "tenants/tenants/{{ $.Values.clusterName }}/*.yaml"
   template:
     metadata:
       name: "{{ `{{ .name }}-tenant` }}"
@@ -47,6 +47,7 @@ spec:
         helm:
             valueFiles:
             - values.yaml
+            - "clusters/{{ $.Values.clusterName }}.yaml"
             - "tenants/{{ $.Values.clusterName }}/{{ `{{ .name }}.yaml` }}"
       destination:
         server: 'https://kubernetes.default.svc'
