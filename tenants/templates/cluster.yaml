@@ -14,6 +14,6 @@ stringData:
 
   {{- $namespaces := list }}
   {{- range $ns := $.Values.namespaces }}
-  {{- $namespaces := append $namespaces (print $.Values.name "-" $ns.name) }}
+  {{- $namespaces = append $namespaces (print $.Values.name "-" $ns.name) }}
   {{- end }}
   namespaces: "{{ join "," $namespaces }}"
