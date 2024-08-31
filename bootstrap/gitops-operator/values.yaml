@@ -14,7 +14,7 @@ operators-installer:
       config:
         env:
         - name: ARGOCD_CLUSTER_CONFIG_NAMESPACES
-          value: "openshift-gitops, second-gitops"
+          value: "openshift-gitops, second-gitops, tenant-gitops"
         - name: DISABLE_DEFAULT_ARGOCD_CONSOLELINK
           value: "false"
 
