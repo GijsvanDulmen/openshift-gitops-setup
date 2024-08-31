@@ -19,7 +19,7 @@ spec:
 #     kind: '*'
   roles:
   - name: edit
-    description: Read-only privileges to my-project
+    description: tenant
     policies:
     - p, role:{{ $appProjectName }}:edit, applications, *, {{ $appProjectName }}/*, allow
 
