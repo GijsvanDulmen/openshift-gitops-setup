@@ -1,9 +1,10 @@
 == TODO ==
-- AppProject per tenant
 - Multi tenant setup in ArgoCD
+  - RBAC needs to be better
+  - Multiple in-cluster clusters with RBAC
 
 - Collection of health checks
-- Override branch?
 - PR Rollout
 - ARGOCD_SYNC_WAVE_DELAY
-- Override 
+- Repo configuration central?
+- Notifications enabled for ArgoCD somehow?
