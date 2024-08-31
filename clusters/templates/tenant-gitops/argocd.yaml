@@ -73,25 +73,6 @@ spec:
       p, role:admin, repositories, update, *, allow
       p, role:admin, repositories, delete, *, allow
 
-      # fixated for now
-
-      # not needed?
-      # p, role:tenant, clusters, get, *, allow
-      # p, role:tenant, repositories, get, *, allow
-
-      # p, role:tenant, applications, *, tenant-team-backend/*, allow
-      # p, role:tenant, applications, *, tenant-team-frontend/*, allow
-
-      # p, role:tenant, logs, *, tenant-team-backend/*, allow
-      # p, role:tenant, logs, *, tenant-team-frontend/*, allow
-
-      # p, role:tenant, projects, *, tenant-team-backend/*, allow
-      # p, role:tenant, projects, *, tenant-team-frontend/*, allow
-
-      # g, tenant-team-backend, role:tenant
-      # g, tenant-team-frontend, role:tenant
-
-      ### end
 
       g, cluster-admins, role:admin
       g, system:cluster-admins, role:admin
