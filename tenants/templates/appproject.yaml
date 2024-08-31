@@ -22,7 +22,7 @@ spec:
     description: Read-only privileges to my-project
     policies:
     # - p, role:{{ $appProjectName }}:edit, applications, *, {{ $appProjectName }}/*, allow
-    - p, role:{{ $appProjectName }}:edit, applications, *, */*, allow
+    - p, role:{{ $appProjectName }}:edit, applications, *, {{ $appProjectName }}/*, allow
 
     - p, role:{{ $appProjectName }}:edit, logs, get, {{ $appProjectName }}/*, allow
     - p, role:{{ $appProjectName }}:edit, projects, get, {{ $appProjectName }}/*, allow
@@ -42,3 +42,4 @@ spec:
     groups:
     - "tenant-{{ $.Values.name }}"
     - "system:tenant-{{ $.Values.name }}"
+
