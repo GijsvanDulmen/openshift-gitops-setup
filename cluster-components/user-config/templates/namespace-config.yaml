@@ -6,7 +6,7 @@ metadata:
 spec:
   labelSelector:
     matchLabels:
-      user-auto-provisioned: "true"
+      gitops.ticq.dev/user-sandbox: "true"
   templates:
   - excludedPaths:	
         - .metadata	
@@ -14,14 +14,34 @@ spec:
         - .spec.replicas
     objectTemplate: |
       apiVersion: v1
-      kind: ResourceQuota
+      kind: LimitRange
       metadata:
-        name: small-size
+        name: limit-range
         namespace: {{`{{ .Name }}`}}
       spec:
-        hard:
-          requests.cpu: "4"
-          requests.memory: "2Gi"
+        limits:
+        - type: Container
+          default:
+            cpu: 300m
+            ephemeral-storage: 1Gi
+            memory: 200Mi
+          defaultRequest:
+            cpu: 50m
+            ephemeral-storage: 100Mi
+            memory: 100Mi
+          max:
+            cpu: "1"
+            ephemeral-storage: 5Gi
+            memory: 1Gi
+          min:
+            cpu: 10m
+            memory: 10Mi
+        - type: PersistentVolumeClaim
+          max:
+            storage: 1Gi
+          min:
+            storage: 1Gi
+
   - excludedPaths:	
         - .metadata	
         - .status	

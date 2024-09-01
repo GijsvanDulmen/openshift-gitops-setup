@@ -1,0 +1,24 @@
+---
+apiVersion: quota.openshift.io/v1
+kind: ClusterResourceQuota
+metadata:
+  name: "user-sandbox"
+spec:
+  quota:
+    hard:
+      # storage
+      persistentvolumeclaims: "0"
+      requests.storage: "0Gi"
+      pods: 40
+
+      # disable load balancers and nodeports
+      services.loadbalancers: 0
+      services.nodeports: 0
+
+      requests.cpu: "3"
+      requests.memory: 4Gi
+      limits.cpu: "4"
+      limits.memory: 4Gi
+  selector:
+    annotations:
+      gitops.ticq.dev/user-sandbox: "true"

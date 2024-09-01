@@ -10,6 +10,7 @@ spec:
     - type: Container
       {{- $containerLimits := merge ($ns.containerLimits | default dict) $.Values.containerLimits }}
       {{- nindent 6 ($containerLimits | toYaml) }}
+
     - type: PersistentVolumeClaim
       {{- $persistentVolumeClaimLimits := merge ($ns.persistentVolumeClaimLimits | default dict) $.Values.persistentVolumeClaimLimits }}
       {{- nindent 6 ($persistentVolumeClaimLimits | toYaml) }}

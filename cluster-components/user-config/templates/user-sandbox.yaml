@@ -2,7 +2,7 @@
 apiVersion: redhatcop.redhat.io/v1alpha1
 kind: UserConfig
 metadata:
-  name: user-config
+  name: user-sandbox
 spec:
   providerName: githubidp
   templates:
@@ -16,7 +16,9 @@ spec:
       metadata:
         name: {{`{{ lower .Name }}`}}-sandbox
         labels:
-          user-auto-provisioned: "true"
+          gitops.ticq.dev/user-sandbox: "true"
+        annotations:
+          gitops.ticq.dev/user-sandbox: "true"
   - excludedPaths:	
         - .metadata	
         - .status	
@@ -33,6 +35,6 @@ spec:
           apiGroup: rbac.authorization.k8s.io
       roleRef:
         kind: ClusterRole
-        name: admin
+        name: edit
         apiGroup: rbac.authorization.k8s.io
 
