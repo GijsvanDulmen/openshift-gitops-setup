@@ -6,15 +6,15 @@ kind: Node
 metadata:
   name: worker-2
   labels:
-    tenant: team-backend-apps
+    # tenant: team-backend-apps
     topology.kubernetes.io/zone: "deventer-01"
   annotations:
     argocd.argoproj.io/sync-options: "Delete=false"
 spec:
-  taints:
-  - effect: NoSchedule
-    key: team-backend-apps
-    value: ""
+#   taints:
+#   - effect: NoSchedule
+#     key: team-backend-apps
+#     value: ""
 ---
 apiVersion: v1
 kind: Node
