@@ -9,12 +9,12 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "3"
 spec:
-  deschedulingIntervalSeconds: 1800
+  deschedulingIntervalSeconds: 20
   profiles:
   - SoftTopologyAndDuplicates
   - LifecycleAndUtilization
   profileCustomizations:
-    podLifetime: 5m
+    podLifetime: 1m
     namespaces:
       included:
       {{- range $tenant := $tenants }}
