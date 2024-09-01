@@ -49,3 +49,4 @@ spec:
     - ApplyOutOfSyncOnly=true
     - PrunePropagationPolicy=foreground
     - ServerSideApply=true
+    - FailOnSharedResource=true
