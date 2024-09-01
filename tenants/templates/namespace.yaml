@@ -13,7 +13,7 @@ metadata:
     # openshift.io/node-selector: 'tenant={{ $ns.bindToNodes }}' 
     scheduler.alpha.kubernetes.io/node-selector: 'tenant={{ $ns.bindToNodes }}'
     scheduler.alpha.kubernetes.io/defaultTolerations: >-
-      [{"operator": "Exists", "effect": "NoSchedule", "key":"{{ $ns.bindToNodes }}"}]
+      [{"operator": "Exists", "effect": "NoSchedule", "key": "{{ $ns.bindToNodes }}"}]
 
     scheduler.alpha.kubernetes.io/tolerationsWhitelist: '[{"operator": "Exists", "effect": "NoSchedule", "key": "{{ $ns.bindToNodes }}"}]'
   {{- else }}
