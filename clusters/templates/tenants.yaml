@@ -53,7 +53,7 @@ spec:
             valueFiles:
             - ../clusters/tenants/defaults.yaml
             - ../clusters/cluster-tenants/{{ $.Values.clusterName }}.yaml
-            - ../clusters/tenants/{{ $.Values.clusterName }}/{{ `{{ .name }}.yaml` }}"
+            - ../clusters/tenants/{{ $.Values.clusterName }}/{{ `{{ .name }}.yaml` }}
             parameters:
             - name: "disableAutoSync"
               value: "{{ $.Values.disableAutoSync }}"
