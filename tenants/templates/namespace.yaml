@@ -15,7 +15,7 @@ metadata:
     scheduler.alpha.kubernetes.io/defaultTolerations: >-
       [{"operator": "Exists", "effect": "NoSchedule", "key": "{{ $ns.bindToNodes }}"}]
 
-    scheduler.alpha.kubernetes.io/tolerationsWhitelist: '[{"operator": "Exists", "effect": "NoSchedule", "key": "{{ $ns.bindToNodes }}"}]'
+    # scheduler.alpha.kubernetes.io/tolerationsWhitelist: '[{"operator": "Exists", "effect": "NoSchedule", "key": "{{ $ns.bindToNodes }}"}]'
   {{- else }}
     scheduler.alpha.kubernetes.io/tolerationsWhitelist: '[]'
   {{- end }}
