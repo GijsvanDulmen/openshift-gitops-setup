@@ -24,7 +24,7 @@ spec:
                 cpu: 10m
                 memory: 30Mi
             command:
-            - "bin/bash"
-            - "-c"
-            - "kubectl delete ns -l gitops.ticq.dev\/user-sandbox=true"
+              - "bin/bash"
+              - "-c"
+              - "kubectl delete ns -l gitops.ticq.dev\/user-sandbox=true"
           restartPolicy: Never
