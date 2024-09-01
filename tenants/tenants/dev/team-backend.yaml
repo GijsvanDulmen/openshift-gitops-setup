@@ -4,11 +4,17 @@ displayName: Super Team API backends
 users:
 - name: GijsvanDulmen
 
+quotaType: "namespace"
+
 namespaces:
 - name: test
   containerLimits:
     max:
       cpu: "3"
+  
+  resourceQuota:
+    limits.cpu: "12"
+    request.cpu: "10"
 
   gitops:
     repository: https://github.com/GijsvanDulmen/openshift-gitops-tenants-setup

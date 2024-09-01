@@ -1,0 +1,16 @@
+{{- if eq $.Values.quotaType "cluster" }}
+---
+apiVersion: quota.openshift.io/v1
+kind: ClusterResourceQuota
+metadata:
+  name: tenant-"{{ $.Values.name }}"
+spec:
+  quota:
+    hard:
+    {{- $resourceQuota := merge $.Values.defaultClusterResourceQuota $.Values.defaultOverallResourceQuota  }}
+    {{- $resourceQuota = merge $.Values.clusterResourceQuota $resourceQuota }}
+    {{- nindent 6 ($resourceQuota | toYaml) }}
+  selector:
+    labels:
+      gitops.ticq.dev/tenant: "{{ $.Values.name }}"
+{{- end }}

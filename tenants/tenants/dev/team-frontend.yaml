@@ -4,4 +4,7 @@ displayName: Super Team API frontends
 users:
 - name: GijsvanDulmen
 
-# default namespaces
+clusterResourceQuota:
+  hard:
+    requests.cpu: "5"
+    limits.cpu: "10"
