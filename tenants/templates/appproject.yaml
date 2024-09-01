@@ -17,28 +17,4 @@ spec:
 #   clusterResourceWhitelist:
 #   - group: '*'
 #     kind: '*'
-  roles:
-  - name: edit
-    description: tenant
-    policies:
-    - p, role:{{ $appProjectName }}:edit, applications, *, {{ $appProjectName }}/*, allow
-
-    # - p, role:{{ $appProjectName }}:edit, applications, get, {{ $appProjectName }}/*, allow
-    # - p, role:{{ $appProjectName }}:edit, applications, sync, {{ $appProjectName }}/*, allow
-    # - p, role:{{ $appProjectName }}:edit, applications, override, {{ $appProjectName }}/*, allow
-
-    - p, role:{{ $appProjectName }}:edit, logs, get, {{ $appProjectName }}/*, allow
-    - p, role:{{ $appProjectName }}:edit, projects, get, {{ $appProjectName }}/*, allow
-
-    # allow repositories by tenant
-    - p, proj:{{ $appProjectName }}:edit, repositories, get, {{ $appProjectName }}/*, allow
-    - p, proj:{{ $appProjectName }}:edit, repositories, create, {{ $appProjectName }}/*, allow
-    - p, proj:{{ $appProjectName }}:edit, repositories, delete, {{ $appProjectName }}/*, allow
-    - p, proj:{{ $appProjectName }}:edit, repositories, update, {{ $appProjectName }}/*, allow
-
-    - p, proj:{{ $appProjectName }}:edit, clusters, get, {{ $appProjectName }}/*, allow
-
-    groups:
-    - "tenant-{{ $.Values.name }}"
-    - "system:tenant-{{ $.Values.name }}"
 

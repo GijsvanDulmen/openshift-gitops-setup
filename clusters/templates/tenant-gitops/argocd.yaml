@@ -63,6 +63,7 @@ spec:
     # and therefore no access to anything - not even read-only
     defaultPolicy: ""
 
+{{- $tenants := (include "clusters.get-tenants" .) | fromYamlArray -}}
     policy: |
       p, role:admin, applications, *, */*, allow
       p, role:admin, applicationsets, *, */*, allow
@@ -73,11 +74,19 @@ spec:
       p, role:admin, repositories, update, *, allow
       p, role:admin, repositories, delete, *, allow
 
-      p, role:tenant, applications, *, tenant-team-backend/*, allow
-      p, role:tenant, applications, *, tenant-team-frontend/*, allow
+      {{ range $tenant := $tenants }}
+      p, role:tenant-{{ $tenant.name }}, clusters, get, *, allow
 
-      g, tenant-team-backend, role:tenant
-      g, tenant-team-frontend, role:tenant
+      p, role:tenant-{{ $tenant.name }}, applications, get, tenant-{{ $tenant.name }}/*, allow
+      p, role:tenant-{{ $tenant.name }}, applications, sync, tenant-{{ $tenant.name }}/*, allow
+      p, role:tenant-{{ $tenant.name }}, applications, override, tenant-{{ $tenant.name }}/*, allow
+
+      p, role:tenant-{{ $tenant.name }}, logs, get, {{ $tenant.tenant }}/*, allow
+      p, role:tenant-{{ $tenant.name }}, projects, get, {{ $tenant.tenant }}, allow
+      p, role:tenant-{{ $tenant.name }}, repositories, get, *, allow
+
+      g, tenant-{{ $tenant.name }}, role:tenant-{{ $tenant.name }}
+      {{ end }}
 
       g, cluster-admins, role:admin
       g, system:cluster-admins, role:admin
