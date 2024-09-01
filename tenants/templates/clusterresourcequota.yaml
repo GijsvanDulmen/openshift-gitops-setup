@@ -3,7 +3,7 @@
 apiVersion: quota.openshift.io/v1
 kind: ClusterResourceQuota
 metadata:
-  name: tenant-"{{ $.Values.name }}"
+  name: "tenant-{{ $.Values.name }}"
 spec:
   quota:
     hard:
