@@ -26,3 +26,33 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: sandbox-cleaner
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: sandbox-cleaner
+  namespace: central-config
+spec:
+  schedule: "0 0 * * 0" # every sunday
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: sandbox-cleaner
+        spec:
+          serviceAccountName: sandbox-cleaner
+          containers:
+          - name: tester
+            image: bitnami/kubectl
+            resources:
+              limits:
+                cpu: 100m
+                memory: 100Mi
+              requests:
+                cpu: 10m
+                memory: 30Mi
+            command:
+            - "bin/bash"
+            - "-c"
+            - "kubectl delete ns -l gitops.ticq.dev\/user-sandbox=true"
+          restartPolicy: Never
