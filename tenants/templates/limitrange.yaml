@@ -14,4 +14,8 @@ spec:
       {{- $persistentVolumeClaimLimits := merge ($ns.persistentVolumeClaimLimits | default dict) $.Values.persistentVolumeClaimLimits }}
       {{- nindent 6 ($persistentVolumeClaimLimits | toYaml) }}
 
+    - type: Pod
+      {{- $podLimits := merge ($ns.podLimits | default dict) $.Values.podLimits }}
+      {{- nindent 6 ($podLimits | toYaml) }}      
+
 {{- end }}

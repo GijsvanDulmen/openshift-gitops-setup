@@ -48,10 +48,26 @@ containerLimits:
   max:
     cpu: "1"
     memory: 1Gi
-    ephemeral-storage: 5Gi
+    ephemeral-storage: 5Gi # same as pod limit
   min:
     cpu: 10m
     memory: 10Mi
+
+# This needs to be in accordance with our worker nodes
+# And obviously the container limits
+# Worker node CPU: 4
+# Worker node memory: 8Gi
+podLimits:
+  max:
+    cpu: "4"
+    memory: 3Gi
+    ephemeral-storage: 5Gi # same as pod limit
+
+  # no min is needed cause it's set on container
+  # min:
+  #   cpu: 10m
+  #   memory: 10Mi
+
 
 persistentVolumeClaimLimits:
   max:
