@@ -11,6 +11,6 @@ spec:
     {{- $resourceQuota = merge $.Values.clusterResourceQuota $resourceQuota }}
     {{- nindent 6 ($resourceQuota | toYaml) }}
   selector:
-    labels:
+    annotations:
       gitops.ticq.dev/tenant: "{{ $.Values.name }}"
 {{- end }}
