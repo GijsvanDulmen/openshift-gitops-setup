@@ -1,4 +1,16 @@
-
-
-annotations:
+# usually we add this to the machineset for node labeling
+# for now we test this way
+---
+kind: Node
+apiVersion: v1
+metadata:
+  name: worker-2
+  labels:
+    tenant: team-backend-apps
+  annotations:
     argocd.argoproj.io/sync-options: Delete=false
+spec:
+  taints:
+  - effect: NoSchedule
+    key: team-backend-apps
+    value: ""

@@ -16,6 +16,10 @@ namespaces:
     pullRequestRepositoryOwner: "GijsvanDulmen"
     pullRequestRepository: "openshift-gitops-tenants-setup"
 
+  # needs specific label and taints
+  # see cluster templates
+  bindToNodes: "team-backend-apps"
+
 - name: accept
   containerLimits:
     max:
