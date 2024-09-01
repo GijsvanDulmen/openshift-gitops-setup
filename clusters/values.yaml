@@ -12,6 +12,8 @@ clusterComponents:
   syncWave: "0"
 - name: user-sandbox
   syncWave: "1"
+- name: descheduler
+  syncWave: "0"
 
 # enable this for gitops cluster updates!
 # - name: cluster-version

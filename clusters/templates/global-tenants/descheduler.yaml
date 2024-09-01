@@ -1,0 +1,24 @@
+{{- $tenants := (include "clusters.get-tenants" .) | fromYamlArray -}}
+---
+apiVersion: operator.openshift.io/v1
+kind: KubeDescheduler
+metadata:
+  name: cluster
+  namespace: openshift-kube-descheduler-operator
+  # after cluster components
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  deschedulingIntervalSeconds: 1800
+  profiles:
+  - SoftTopologyAndDuplicates
+  - LifecycleAndUtilization
+  profileCustomizations:
+    podLifetime: 5m
+    namespaces:
+      included:
+      {{- range $tenant := $tenants }}
+      {{- range $ns := $tenant.namespaces }}
+      - "{{ $tenant.name }}-{{ $ns.name }}"
+      {{- end }}
+      {{- end }}
