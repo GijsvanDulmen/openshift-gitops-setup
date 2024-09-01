@@ -63,7 +63,7 @@ spec:
     # and therefore no access to anything - not even read-only
     defaultPolicy: ""
 
-{{- $tenants := (include "clusters.get-tenants" .) | fromYamlArray -}}
+{{- $tenants := (include "clusters.get-tenants" .) | fromYamlArray }}
     policy: |
       p, role:admin, applications, *, */*, allow
       p, role:admin, applicationsets, *, */*, allow
