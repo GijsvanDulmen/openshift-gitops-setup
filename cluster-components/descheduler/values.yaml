@@ -15,4 +15,4 @@ operators-installer:
   operatorGroups:
   - name: openshift-kube-descheduler-operator
     createNamespace: true
-    targetOwnNamespace: false
+    targetOwnNamespace: true
