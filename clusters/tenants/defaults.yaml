@@ -3,6 +3,12 @@ displayName: "None"
 
 namespaces: []
 
+# Auto provising by tenants
+enableTenantNamespaceAutoProvisioning: "false"
+tenantProvisionedNamespaces: []
+tenantProvisionedRepository: ""
+tenantProvisionedBranch: ""
+
 # type of quota used
 quotaType: "cluster"
 
@@ -37,6 +43,17 @@ namespaceResourceQuota:
   limits.memory: 2Gi
 
 containerLimits:
+
+  # ephemeral-storage limits
+  # 
+  # emptyDir volumes, except tmpfs emptyDir volumes
+  # directories holding node-level logs
+  # writeable container layers
+  #
+  # see: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-emphemeralstorage-consumption
+
+  # tmpfs emptydir = memory
+
   default:
     cpu: 300m
     memory: 200Mi
@@ -53,6 +70,9 @@ containerLimits:
     cpu: 10m
     memory: 10Mi
 
+  # limits can only be 10 times higher then requests
+  maxLimitRequestRatio: 10
+
 # This needs to be in accordance with our worker nodes
 # And obviously the container limits
 # Worker node CPU: 4
@@ -67,7 +87,6 @@ podLimits:
   # min:
   #   cpu: 10m
   #   memory: 10Mi
-
 
 persistentVolumeClaimLimits:
   max:

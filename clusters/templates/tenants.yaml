@@ -1,8 +1,13 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: tenants
   namespace: "{{ $.Values.gitopsNamespace }}"
+
+  # after cluster components
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
 
   # needed for applicationset
   {{- if ne $.Values.disableFinalizers "yes" }}
@@ -28,7 +33,7 @@ spec:
       repoURL: "{{ $.Values.gitRepo }}"
       revision: "{{ $.Values.targetRevision }}"
       files:
-      - path: "tenants/tenants/{{ $.Values.clusterName }}/*.yaml"
+      - path: "clusters/tenants/{{ $.Values.clusterName }}/*.yaml"
   template:
     metadata:
       name: "{{ `{{ .name }}-tenant` }}"
@@ -46,9 +51,9 @@ spec:
         path: tenants/
         helm:
             valueFiles:
-            - values.yaml
-            - "clusters/{{ $.Values.clusterName }}.yaml"
-            - "tenants/{{ $.Values.clusterName }}/{{ `{{ .name }}.yaml` }}"
+            - ../clusters/tenants/defaults.yaml
+            - ../clusters/cluster-tenants/{{ $.Values.clusterName }}.yaml
+            - ../clusters/tenants/{{ $.Values.clusterName }}/{{ `{{ .name }}.yaml` }}"
             parameters:
             - name: "disableAutoSync"
               value: "{{ $.Values.disableAutoSync }}"

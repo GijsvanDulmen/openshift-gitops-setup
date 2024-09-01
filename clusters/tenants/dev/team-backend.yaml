@@ -6,6 +6,11 @@ users:
 
 quotaType: "namespace"
 
+# enable auto provising
+enableTenantNamespaceAutoProvisioning: "true"
+tenantProvisionedRepository: "https://github.com/GijsvanDulmen/openshift-gitops-tenants-setup"
+tenantProvisionedBranch: "main"
+
 namespaces:
 - name: test
   containerLimits:
