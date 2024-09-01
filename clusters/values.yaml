@@ -10,7 +10,7 @@
 clusterComponents:
 - name: namespace-configuration-operator
   syncWave: "0"
-- name: user-config
+- name: user-sandbox
   syncWave: "1"
 
 # enable this for gitops cluster updates!
