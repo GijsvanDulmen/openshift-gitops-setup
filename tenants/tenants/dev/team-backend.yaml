@@ -14,7 +14,7 @@ namespaces:
   
   resourceQuota:
     limits.cpu: "12"
-    request.cpu: "10"
+    requests.cpu: "10"
 
   gitops:
     repository: https://github.com/GijsvanDulmen/openshift-gitops-tenants-setup
