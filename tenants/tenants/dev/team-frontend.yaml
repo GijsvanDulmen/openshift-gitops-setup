@@ -5,6 +5,5 @@ users:
 - name: GijsvanDulmen
 
 clusterResourceQuota:
-  hard:
-    requests.cpu: "5"
-    limits.cpu: "10"
+  requests.cpu: "5"
+  limits.cpu: "10"
