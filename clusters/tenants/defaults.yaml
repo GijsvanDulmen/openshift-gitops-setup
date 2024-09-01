@@ -71,7 +71,9 @@ containerLimits:
     memory: 10Mi
 
   # limits can only be 10 times higher then requests
-  maxLimitRequestRatio: 10
+  maxLimitRequestRatio:
+    cpu: 10
+    memory: 4
 
 # This needs to be in accordance with our worker nodes
 # And obviously the container limits
