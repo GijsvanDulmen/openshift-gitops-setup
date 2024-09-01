@@ -27,6 +27,7 @@ spec:
       valueFiles:
       - values.yaml
       - "clusters/{{ $.Values.clusterName }}.yaml"
+      ignoreMissingValueFiles: true
 
   syncPolicy:
     automated:
