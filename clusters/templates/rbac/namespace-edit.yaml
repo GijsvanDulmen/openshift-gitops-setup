@@ -1,0 +1,484 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  # copied from OpenShift edit role
+  # but does not contain aggregation to make sure
+  # we don't by accident add rights to tenants
+  name: tenant-edit
+rules:
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - operators.coreos.com
+    resources:
+      - clusterserviceversions
+      - catalogsources
+      - installplans
+      - subscriptions
+      - operatorgroups
+  - verbs:
+      - create
+      - delete
+      - deletecollection
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - ''
+    resources:
+      - secrets
+      - serviceaccounts
+  - verbs:
+      - get
+    apiGroups:
+      - ''
+    resources:
+      - namespaces
+  - verbs:
+      - get
+    apiGroups:
+      - ''
+      - project.openshift.io
+    resources:
+      - projects
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - ''
+    resources:
+      - pods/attach
+      - pods/exec
+      - pods/portforward
+      - pods/proxy
+      - secrets
+      - services/proxy
+  - verbs:
+      - impersonate
+    apiGroups:
+      - ''
+    resources:
+      - serviceaccounts
+  - verbs:
+      - create
+      - delete
+      - deletecollection
+      - patch
+      - update
+    apiGroups:
+      - ''
+    resources:
+      - pods
+      - pods/attach
+      - pods/exec
+      - pods/portforward
+      - pods/proxy
+  - verbs:
+      - create
+    apiGroups:
+      - ''
+    resources:
+      - pods/eviction
+  - verbs:
+      - create
+      - delete
+      - deletecollection
+      - patch
+      - update
+    apiGroups:
+      - ''
+    resources:
+      - configmaps
+      - endpoints
+      - events
+      - persistentvolumeclaims
+      # old stuff - don't use
+      # - replicationcontrollers
+      # - replicationcontrollers/scale
+      - secrets
+      - serviceaccounts
+      - services
+      - services/proxy
+  - verbs:
+      - create
+    apiGroups:
+      - ''
+    resources:
+      - serviceaccounts/token
+  - verbs:
+      - create
+      - delete
+      - deletecollection
+      - patch
+      - update
+    apiGroups:
+      - apps
+    resources:
+      - daemonsets
+      - deployments
+      - deployments/rollback
+      - deployments/scale
+      - replicasets
+      - replicasets/scale
+      - statefulsets
+      - statefulsets/scale
+  - verbs:
+      - create
+      - delete
+      - deletecollection
+      - patch
+      - update
+    apiGroups:
+      - autoscaling
+    resources:
+      - horizontalpodautoscalers
+  - verbs:
+      - create
+      - delete
+      - deletecollection
+      - patch
+      - update
+    apiGroups:
+      - batch
+    resources:
+      - cronjobs
+      - jobs
+  - verbs:
+      - create
+      - delete
+      - deletecollection
+      - patch
+      - update
+    apiGroups:
+      - extensions
+    resources:
+      - daemonsets
+      - deployments
+      - deployments/rollback
+      - deployments/scale
+      - ingresses
+      - networkpolicies
+      - replicasets
+      - replicasets/scale
+      # - replicationcontrollers/scale
+  - verbs:
+      - create
+      - delete
+      - deletecollection
+      - patch
+      - update
+    apiGroups:
+      - policy
+    resources:
+      - poddisruptionbudgets
+  - verbs:
+      - create
+      - delete
+      - deletecollection
+      - patch
+      - update
+    apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses
+      # - networkpolicies # network policies is an admin thing
+  - verbs:
+      - create
+      - delete
+      - deletecollection
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - coordination.k8s.io
+    resources:
+      - leases
+  - verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+      - deletecollection
+    apiGroups:
+      - snapshot.storage.k8s.io
+    resources:
+      - volumesnapshots
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - ''
+      - quota.openshift.io
+    resources:
+      - appliedclusterresourcequotas
+  - verbs:
+      - create
+      - delete
+      - deletecollection
+      - get
+      - list
+      - patch
+      - update
+      - watch
+    apiGroups:
+      - ''
+      - route.openshift.io
+    resources:
+      - routes
+  - verbs:
+      - create
+    apiGroups:
+      - ''
+      - route.openshift.io
+    resources:
+      - routes/custom-host
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - ''
+      - route.openshift.io
+    resources:
+      - routes/status
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - networking.k8s.io
+    resources:
+      - networkpolicies
+  - verbs:
+      - create
+      - update
+      - patch
+      - delete
+    apiGroups:
+      - autoscaling.k8s.io
+    resources:
+      - verticalpodautoscalercheckpoints
+  - verbs:
+      - create
+      - update
+      - patch
+      - delete
+    apiGroups:
+      - autoscaling.openshift.io
+    resources:
+      - verticalpodautoscalercontrollers
+  - verbs:
+      - create
+      - update
+      - patch
+      - delete
+    apiGroups:
+      - autoscaling.k8s.io
+    resources:
+      - verticalpodautoscalers
+  - verbs:
+      - get
+    apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions
+    resourceNames:
+      - analysisruns.argoproj.io
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - ''
+    resources:
+      - configmaps
+      - endpoints
+      - persistentvolumeclaims
+      - persistentvolumeclaims/status
+      - pods
+      - serviceaccounts
+      - services
+      - services/status
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - ''
+    resources:
+      - bindings
+      - events
+      - limitranges
+      - namespaces/status
+      - pods/log
+      - pods/status
+      - resourcequotas
+      - resourcequotas/status
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - ''
+    resources:
+      - namespaces
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - discovery.k8s.io
+    resources:
+      - endpointslices
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - apps
+    resources:
+      - controllerrevisions
+      - daemonsets
+      - daemonsets/status
+      - deployments
+      - deployments/scale
+      - deployments/status
+      - replicasets
+      - replicasets/scale
+      - replicasets/status
+      - statefulsets
+      - statefulsets/scale
+      - statefulsets/status
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - autoscaling
+    resources:
+      - horizontalpodautoscalers
+      - horizontalpodautoscalers/status
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - batch
+    resources:
+      - cronjobs
+      - cronjobs/status
+      - jobs
+      - jobs/status
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - extensions
+    resources:
+      - daemonsets
+      - daemonsets/status
+      - deployments
+      - deployments/scale
+      - deployments/status
+      - ingresses
+      - ingresses/status
+      - networkpolicies
+      - replicasets
+      - replicasets/scale
+      - replicasets/status
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - policy
+    resources:
+      - poddisruptionbudgets
+      - poddisruptionbudgets/status
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses
+      - ingresses/status
+      - networkpolicies
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - snapshot.storage.k8s.io
+    resources:
+      - volumesnapshots
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - ''
+      - route.openshift.io
+    resources:
+      - routes
+  - verbs:
+      - get
+    apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions
+    resourceNames:
+      - verticalpodautoscalercheckpoints.autoscaling.k8s.io
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - autoscaling.k8s.io
+    resources:
+      - verticalpodautoscalercheckpoints
+  - verbs:
+      - get
+    apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions
+    resourceNames:
+      - verticalpodautoscalercontrollers.autoscaling.openshift.io
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - autoscaling.openshift.io
+    resources:
+      - verticalpodautoscalercontrollers
+  - verbs:
+      - get
+    apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions
+    resourceNames:
+      - verticalpodautoscalers.autoscaling.k8s.io
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - autoscaling.k8s.io
+    resources:
+      - verticalpodautoscalers
