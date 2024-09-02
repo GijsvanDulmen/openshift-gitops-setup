@@ -24,7 +24,7 @@ spec:
     path: tenants/
     helm:
         valueFiles:
-        {{- if eq $.Values.enableTenantNamespaceAutoProvisioning "true" }}
+        {{- if eq $tenant.enableTenantNamespaceAutoProvisioning "true" }}
         - $values/namespaces.yaml
         {{- end }}
         - ../clusters/tenants/defaults.yaml
@@ -37,9 +37,9 @@ spec:
           value: "{{ $.Values.disableFinalizers }}"
         - name: "overrideTenants"
           value: "{{ $.Values.overrideTenants }}"
-  {{- if eq $.Values.enableTenantNamespaceAutoProvisioning "true" }}
-  - repoURL: "{{ $.Values.tenantProvisionedRepository }}"
-    targetRevision: "{{ $.Values.tenantProvisionedBranch }}"
+  {{- if eq $tenant.enableTenantNamespaceAutoProvisioning "true" }}
+  - repoURL: "{{ $tenant.tenantProvisionedRepository }}"
+    targetRevision: "{{ $tenant.tenantProvisionedBranch }}"
     ref: values
   {{- end }}
 
@@ -57,4 +57,3 @@ spec:
     - ServerSideApply=true
     - FailOnSharedResource=true
 {{- end }}
-      
