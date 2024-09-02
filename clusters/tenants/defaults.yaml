@@ -4,10 +4,10 @@ displayName: "None"
 namespaces: []
 
 # Auto provising by tenants
-# enableTenantNamespaceAutoProvisioning: "false"
+enableTenantNamespaceAutoProvisioning: "false"
 # tenantProvisionedNamespaces: []
-# tenantProvisionedRepository: ""
-# tenantProvisionedBranch: ""
+tenantProvisionedRepository: ""
+tenantProvisionedBranch: ""
 
 # type of quota used
 quotaType: "cluster"

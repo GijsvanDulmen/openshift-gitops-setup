@@ -45,23 +45,31 @@ spec:
       {{- end }}
     spec:
       project: cluster
-      source:
-        repoURL: "{{ $.Values.gitRepo }}"
-        targetRevision: "{{ $.Values.targetRevision }}"
-        path: tenants/
-        helm:
-            valueFiles:
-            - ../clusters/tenants/defaults.yaml
-            - ../clusters/cluster-tenants/{{ $.Values.clusterName }}.yaml
-            - ../clusters/tenants/{{ $.Values.clusterName }}/{{ `{{ .name }}.yaml` }}
-            parameters:
-            - name: "disableAutoSync"
-              value: "{{ $.Values.disableAutoSync }}"
-            - name: "disableFinalizers"
-              value: "{{ $.Values.disableFinalizers }}"
-            - name: "overrideTenants"
-              value: "{{ $.Values.overrideTenants }}"
-
+      sources:
+        - repoURL: "{{ $.Values.gitRepo }}"
+          targetRevision: "{{ $.Values.targetRevision }}"
+          path: tenants/
+          helm:
+              valueFiles:
+              {{- if eq $.Values.enableTenantNamespaceAutoProvisioning "true" -}}
+              - $values/namespaces.yaml
+              {{- end -}}
+              - ../clusters/tenants/defaults.yaml
+              - ../clusters/cluster-tenants/{{ $.Values.clusterName }}.yaml
+              - ../clusters/tenants/{{ $.Values.clusterName }}/{{ `{{ .name }}.yaml` }}
+              parameters:
+              - name: "disableAutoSync"
+                value: "{{ $.Values.disableAutoSync }}"
+              - name: "disableFinalizers"
+                value: "{{ $.Values.disableFinalizers }}"
+              - name: "overrideTenants"
+                value: "{{ $.Values.overrideTenants }}"
+        {{- if eq $.Values.enableTenantNamespaceAutoProvisioning "true" -}}
+        - repoURL: "{{ $.Values.tenantProvisionedRepository }}"
+          targetRevision: "{{ $.Values.tenantProvisionedBranch }}"
+          ref: values
+        {{- end -}}
+      
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: "{{ $.Values.gitopsNamespace }}"

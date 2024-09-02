@@ -1,10 +1,11 @@
-{{- range $ns := $.Values.namespaces }}
+{{- $namespaces := (include "tenants.namespaces" .) | fromYamlArray -}}
+{{- range $ns := $namespaces }}
 ---
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: "tenant-edit-{{ $.Values.name }}"
-  namespace: "{{ $.Values.name }}-{{ $ns.name }}"
+  namespace: "{{ $ns.namespaceName }}"
 subjects:
   - kind: Group
     apiGroup: rbac.authorization.k8s.io

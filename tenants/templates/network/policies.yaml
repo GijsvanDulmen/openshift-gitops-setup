@@ -1,10 +1,11 @@
-{{- range $ns := $.Values.namespaces }}
+{{- $namespaces := (include "tenants.namespaces" .) | fromYamlArray -}}
+{{- range $ns := $namespaces }}
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: allow-from-same-namespace
-  namespace: "{{ $.Values.name }}-{{ $ns.name }}"
+  namespace: "{{ $ns.namespaceName }}"
 spec:
   podSelector: {}
   ingress:
@@ -15,7 +16,7 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: allow-from-openshift-ingress
-  namespace: "{{ $.Values.name }}-{{ $ns.name }}"
+  namespace: "{{ $ns.namespaceName }}"
 spec:
   ingress:
   - from:
@@ -30,7 +31,7 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: allow-from-openshift-monitoring
-  namespace: "{{ $.Values.name }}-{{ $ns.name }}"
+  namespace: "{{ $ns.namespaceName }}"
 spec:
   ingress:
   - from:

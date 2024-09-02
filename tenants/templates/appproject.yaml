@@ -9,8 +9,9 @@ spec:
   sourceRepos:
   - '*'
   destinations:
-  {{- range $ns := $.Values.namespaces }}
-  - namespace: "{{ $.Values.name }}-{{ $ns.name }}"
+  {{- $namespaces := (include "tenants.namespaces" .) | fromYamlArray -}}
+  {{- range $ns := $namespaces }}
+  - namespace: "{{ $ns.namespaceName }}"
     server: https://kubernetes.default.svc
   {{- end }}
 # no cluster resource whitelist allowed

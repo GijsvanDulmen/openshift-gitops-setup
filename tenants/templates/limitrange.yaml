@@ -1,10 +1,11 @@
-{{- range $ns := $.Values.namespaces }}
+{{- $namespaces := (include "tenants.namespaces" .) | fromYamlArray -}}
+{{- range $ns := $namespaces }}
 ---
 apiVersion: v1
 kind: LimitRange
 metadata:
   name: limit-range
-  namespace: "{{ $.Values.name }}-{{ $ns.name }}"
+  namespace: "{{ $ns.namespaceName }}"
 spec:
   limits:
     - type: Container

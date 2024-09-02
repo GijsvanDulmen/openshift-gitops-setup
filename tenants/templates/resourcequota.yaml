@@ -1,11 +1,12 @@
-{{- range $ns := $.Values.namespaces }}
+{{- $namespaces := (include "tenants.namespaces" .) | fromYamlArray -}}
+{{- range $ns := $namespaces }}
 {{- if eq $.Values.quotaType "namespace" }}
 ---
 apiVersion: v1
 kind: ResourceQuota
 metadata:
   name: resource-quota
-  namespace: "{{ $.Values.name }}-{{ $ns.name }}"
+  namespace: "{{ $ns.namespaceName }}"
 spec:
   hard:
     {{- $resourceQuota := merge $.Values.namespaceResourceQuota $.Values.defaultOverallResourceQuota }}

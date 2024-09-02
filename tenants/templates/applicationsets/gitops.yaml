@@ -1,10 +1,11 @@
-{{- range $ns := $.Values.namespaces }}
+{{- $namespaces := (include "tenants.namespaces" .) | fromYamlArray -}}
+{{- range $ns := $namespaces }}
 {{- if ($ns.gitops | default dict).repository }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: "tenants-{{ $.Values.name }}-{{ $ns.name }}"
+  name: "tenants-{{ $ns.namespaceName }}"
   namespace: "tenant-gitops"
 
   # needed for applicationset
@@ -34,7 +35,7 @@ spec:
       - path: "*/namespaces/{{ $ns.name }}.yaml"
   template:
     metadata:
-      name: "{{ $.Values.name }}-{{ $ns.name }}-{{ `{{ index .path.segments 0 }}` }}"
+      name: "{{ $ns.namespaceName }}-{{ `{{ index .path.segments 0 }}` }}"
 
       # will delete everything on the application of a tenant
       {{- if ne $.Values.disableFinalizers "yes" }}
@@ -53,7 +54,7 @@ spec:
             - "namespaces/{{ $ns.name }}.yaml"
       destination:
         server: 'https://kubernetes.default.svc'
-        namespace: "{{ $.Values.name }}-{{ $ns.name }}"
+        namespace: {{ $ns.namespaceName }}
       syncPolicy:
         automated:
           prune: true

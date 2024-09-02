@@ -1,9 +1,10 @@
-{{- range $ns := $.Values.namespaces }}
+{{- $namespaces := (include "tenants.namespaces" .) | fromYamlArray -}}
+{{- range $ns := $namespaces }}
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: "{{ $.Values.name }}-{{ $ns.name }}"
+  name: "{{ $ns.namespaceName }}"
   labels:
     gitops.ticq.dev/type: "tenant"
     gitops.ticq.dev/tenant: "{{ $.Values.name }}"
