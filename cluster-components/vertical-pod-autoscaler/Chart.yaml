@@ -1,0 +1,8 @@
+apiVersion: v2
+name: vertical-pod-autoscaler
+version: 1.0.0
+dependencies:
+  - name: operators-installer
+    version: 3.0.1
+    repository: https://redhat-cop.github.io/helm-charts
+appVersion: 1.0.0
