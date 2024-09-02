@@ -9,6 +9,6 @@ spec:
   replicas: 1
   domain: ingress.vandulmen.net
   endpointPublishingStrategy:
-    type: LoadBalancerService
-    # loadBalancer:
-    #   scope: Internal
+    nodePort:
+      protocol: PROXY
+    type: NodePortService
