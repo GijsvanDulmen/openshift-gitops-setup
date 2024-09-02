@@ -1,85 +1,60 @@
+
+{{- $tenants := (include "clusters.get-tenants" .) | fromYamlArray }}
+{{- range $tenant := $tenants }}
 ---
 apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
+kind: Application
 metadata:
-  name: tenants
+  name: "{{ print $tenant.name "-tenant" }}"
   namespace: "{{ $.Values.gitopsNamespace }}"
 
   # after cluster components
   annotations:
     argocd.argoproj.io/sync-wave: "3"
 
-  # needed for applicationset
   {{- if ne $.Values.disableFinalizers "yes" }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
   {{- end }}
 spec:
-  goTemplate: true
-  goTemplateOptions: ["missingkey=error"]
-
-  {{- if eq $.Values.overrideTenants "yes" }}
-  # ability to fast-forward and/or change targetRevisions
-  # and ability to shut down sync policy
-  ignoreApplicationDifferences:
-    - jsonPointers:
-      - /spec/source/targetRevision
-    - jsonPointers:
-      - /spec/syncPolicy
+  project: cluster
+  sources:
+  - repoURL: "{{ $.Values.gitRepo }}"
+    targetRevision: "{{ $.Values.targetRevision }}"
+    path: tenants/
+    helm:
+        valueFiles:
+        {{- if eq $.Values.enableTenantNamespaceAutoProvisioning "true" }}
+        - $values/namespaces.yaml
+        {{- end }}
+        - ../clusters/tenants/defaults.yaml
+        - ../clusters/cluster-tenants/{{ $.Values.clusterName }}.yaml
+        - ../clusters/tenants/{{ $.Values.clusterName }}/{{ $tenant.name }}.yaml
+        parameters:
+        - name: "disableAutoSync"
+          value: "{{ $.Values.disableAutoSync }}"
+        - name: "disableFinalizers"
+          value: "{{ $.Values.disableFinalizers }}"
+        - name: "overrideTenants"
+          value: "{{ $.Values.overrideTenants }}"
+  {{- if eq $.Values.enableTenantNamespaceAutoProvisioning "true" }}
+  - repoURL: "{{ $.Values.tenantProvisionedRepository }}"
+    targetRevision: "{{ $.Values.tenantProvisionedBranch }}"
+    ref: values
   {{- end }}
 
-  generators:
-  - git:
-      repoURL: "{{ $.Values.gitRepo }}"
-      revision: "{{ $.Values.targetRevision }}"
-      files:
-      - path: "clusters/tenants/{{ $.Values.clusterName }}/*.yaml"
-  template:
-    metadata:
-      name: "{{ `{{ .name }}-tenant` }}"
-
-      # will delete everything on the application of a tenant
-      {{- if ne $.Values.disableFinalizers "yes" }}
-      finalizers:
-      - resources-finalizer.argocd.argoproj.io
-      {{- end }}
-    spec:
-      project: cluster
-      sources:
-        - repoURL: "{{ $.Values.gitRepo }}"
-          targetRevision: "{{ $.Values.targetRevision }}"
-          path: tenants/
-          helm:
-              valueFiles:
-              {{- if eq $.Values.enableTenantNamespaceAutoProvisioning "true" }}
-              - $values/namespaces.yaml
-              {{- end }}
-              - ../clusters/tenants/defaults.yaml
-              - ../clusters/cluster-tenants/{{ $.Values.clusterName }}.yaml
-              - ../clusters/tenants/{{ $.Values.clusterName }}/{{ `{{ .name }}.yaml` }}
-              parameters:
-              - name: "disableAutoSync"
-                value: "{{ $.Values.disableAutoSync }}"
-              - name: "disableFinalizers"
-                value: "{{ $.Values.disableFinalizers }}"
-              - name: "overrideTenants"
-                value: "{{ $.Values.overrideTenants }}"
-        {{- if eq $.Values.enableTenantNamespaceAutoProvisioning "true" }}
-        - repoURL: "{{ $.Values.tenantProvisionedRepository }}"
-          targetRevision: "{{ $.Values.tenantProvisionedBranch }}"
-          ref: values
-        {{- end }}
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: "{{ $.Values.gitopsNamespace }}"
+  syncPolicy:
+    automated:
+      prune: true
+      allowEmpty: true
+      selfHeal: true
+    syncOptions:
+    - ApplyOutOfSyncOnly=true
+    - PrunePropagationPolicy=foreground
+    - ServerSideApply=true
+    - FailOnSharedResource=true
+{{- end }}
       
-      destination:
-        server: 'https://kubernetes.default.svc'
-        namespace: "{{ $.Values.gitopsNamespace }}"
-      syncPolicy:
-        automated:
-          prune: true
-          allowEmpty: true
-          selfHeal: true
-        syncOptions:
-        - ApplyOutOfSyncOnly=true
-        - PrunePropagationPolicy=foreground
-        - ServerSideApply=true
-        - FailOnSharedResource=true
