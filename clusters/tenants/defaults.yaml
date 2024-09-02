@@ -4,6 +4,8 @@ displayName: "None"
 namespaces: []
 
 # Auto provising by tenants
+### Highly unsafe!!! ###
+# Not production proof
 enableTenantNamespaceAutoProvisioning: "false"
 # tenantProvisionedNamespaces: []
 tenantProvisionedRepository: ""
