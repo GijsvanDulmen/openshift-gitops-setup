@@ -51,9 +51,9 @@ spec:
           path: tenants/
           helm:
               valueFiles:
-              {{- if eq $.Values.enableTenantNamespaceAutoProvisioning "true" -}}
+              {{- if eq $.Values.enableTenantNamespaceAutoProvisioning "true" }}
               - $values/namespaces.yaml
-              {{- end -}}
+              {{- end }}
               - ../clusters/tenants/defaults.yaml
               - ../clusters/cluster-tenants/{{ $.Values.clusterName }}.yaml
               - ../clusters/tenants/{{ $.Values.clusterName }}/{{ `{{ .name }}.yaml` }}
@@ -64,11 +64,11 @@ spec:
                 value: "{{ $.Values.disableFinalizers }}"
               - name: "overrideTenants"
                 value: "{{ $.Values.overrideTenants }}"
-        {{- if eq $.Values.enableTenantNamespaceAutoProvisioning "true" -}}
+        {{- if eq $.Values.enableTenantNamespaceAutoProvisioning "true" }}
         - repoURL: "{{ $.Values.tenantProvisionedRepository }}"
           targetRevision: "{{ $.Values.tenantProvisionedBranch }}"
           ref: values
-        {{- end -}}
+        {{- end }}
       
       destination:
         server: 'https://kubernetes.default.svc'
