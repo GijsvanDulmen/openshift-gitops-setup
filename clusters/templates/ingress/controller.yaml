@@ -10,5 +10,5 @@ spec:
   domain: ingress.vandulmen.net
   endpointPublishingStrategy:
     type: LoadBalancerService
-    loadBalancer:
-      scope: Internal
+    # loadBalancer:
+    #   scope: Internal
