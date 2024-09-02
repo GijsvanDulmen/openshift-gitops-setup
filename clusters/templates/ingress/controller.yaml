@@ -8,3 +8,7 @@ spec:
   #     name: <custom-ingress-custom-certs> 
   replicas: 1
   domain: ingress.vandulmen.net
+  endpointPublishingStrategy:
+    type: LoadBalancerService
+    loadBalancer:
+      scope: Internal
