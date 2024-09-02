@@ -1,0 +1,22 @@
+apiVersion: operator.openshift.io/v1
+kind: IngressController
+metadata:
+  name: default
+  namespace: openshift-ingress-operator
+  annotations:
+    argocd.argoproj.io/sync-options: "Delete=false"
+spec:
+  replicas: 1 # should be more obviously
+
+  tuningOptions:
+    reloadInterval: 0s
+    clientTimeout: 30s # = default
+    serverTimeout: 30s # = default
+    threadCount: 4 # = default
+    maxConnections: 50000 # 50000 = default
+  
+  # access logging
+  logging:
+    access:
+      destination:
+        type: Container
