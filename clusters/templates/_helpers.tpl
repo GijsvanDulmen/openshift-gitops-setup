@@ -4,7 +4,7 @@
 {{- $tenantDefaults := $.Files.Get "tenants/defaults.yaml" | fromYaml }}
 {{- $tenantClusterDefaults := $.Files.Get (print "cluster-tenants/" $.Values.clusterName ".yaml") | fromYaml  }}
 {{- $tenantSpecific := $.Files.Get $path | fromYaml }}
-{{- $yamlMerged := merge $tenantDefaults $tenantClusterDefaults $tenantSpecific }}
+{{- $yamlMerged := merge $tenantSpecific $tenantClusterDefaults $tenantDefaults }}
 {{- $tenants = append $tenants $yamlMerged -}}
 {{- end -}}
 {{- $tenants | toYaml -}}
