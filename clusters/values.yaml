@@ -16,6 +16,8 @@ clusterComponents:
   syncWave: "0"
 - name: vertical-pod-autoscaler
   syncWave: "0"
+- name: openshift-console-plugin
+  syncWave: "0"
 
 # enable this for gitops cluster updates!
 # - name: cluster-version
