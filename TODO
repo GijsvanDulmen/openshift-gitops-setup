@@ -1,10 +1,9 @@
 == TODO ==
-- Multi tenant setup in ArgoCD
-  - RBAC needs to be better
-  - Multiple in-cluster clusters with RBAC
-
 - Collection of health checks
-- PR Rollout
 - ARGOCD_SYNC_WAVE_DELAY
 - Repo configuration central?
 - Notifications enabled for ArgoCD somehow?
+- SCC setup
+- PodSecurity setup
+- Better ArgoCD setup (less cluster-admin rights obviously)
+- https://github.com/redhat-developer/gitops-operator/blob/master/docs/OpenShift%20GitOps%20Usage%20Guide.md#running-default-gitops-workloads-on-infrastructure-nodes
