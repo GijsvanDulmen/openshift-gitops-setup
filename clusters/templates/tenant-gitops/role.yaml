@@ -1,0 +1,18 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: safer-cluster-admin
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["create", "delete", "deletecollection", "get", "list", "patch", "update", "watch"]
+- apiGroups:
+  - "security.openshift.io"
+  resources:
+  - "SecurityContextConstraints"
+  verbs:
+  - "use"
+  resourceNames:
+  - "nonroot-v2"
+  - "restricted-v2"
