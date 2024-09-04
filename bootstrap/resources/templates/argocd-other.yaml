@@ -35,8 +35,8 @@ spec:
       requests:
         cpu: 125m
         memory: 128Mi
-    # route:
-    #   enabled: true
+    route:
+      enabled: true
 
   grafana:
     enabled: false
