@@ -4,7 +4,7 @@ plugin:
   description: ""
   image: "ghcr.io/gijsvandulmen/openshift-console-plugin:1.0"
   imagePullPolicy: IfNotPresent
-  replicas: 2
+  replicas: 1
   port: 9443
   securityContext:
     enabled: false
