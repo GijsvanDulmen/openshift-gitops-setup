@@ -8,7 +8,7 @@ operators-installer:
       name: vertical-pod-autoscaler
       sourceNamespace: openshift-marketplace
       source: redhat-operators
-      csv: verticalpodautoscaler.v4.16.0-202408201708
+      csv: verticalpodautoscaler.v4.16.0-202408262007
       namespace: openshift-vertical-pod-autoscaler
       automaticIntermediateManualUpgrades: true
 
