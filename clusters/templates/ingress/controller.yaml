@@ -6,6 +6,9 @@ metadata:
 spec:
   # defaultCertificate:
   #     name: <custom-ingress-custom-certs> 
+  routeSelector:
+    matchLabels:
+      type: custom-domain
   replicas: 1
   domain: ingress.vandulmen.net
   endpointPublishingStrategy:
