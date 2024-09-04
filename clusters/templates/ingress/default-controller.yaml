@@ -19,7 +19,7 @@ spec:
   namespaceSelector:
     matchExpressions:
     - key: gitops.ticq.dev/tenant
-      operator: Exists
+      operator: DoesNotExist
   
   # access logging
   logging:
