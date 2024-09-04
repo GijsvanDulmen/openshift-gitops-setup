@@ -14,6 +14,12 @@ spec:
     serverTimeout: 30s # = default
     threadCount: 4 # = default
     maxConnections: 50000 # 50000 = default
+
+  # tenant namespaces cant use the default
+  namespaceSelector:
+    matchExpressions:
+    - key: gitops.ticq.dev/tenant
+      operator: Exists
   
   # access logging
   logging:
