@@ -1,0 +1,14 @@
+{{- if ne $.Values.assignEgressIp "" }}
+---
+apiVersion: k8s.ovn.org/v1
+kind: EgressIP
+metadata:
+  name: "tenant-{{ $.Values.name }}"
+spec:
+  egressIPs:
+  - "{{ $.Values.assignEgressIp }}"
+  namespaceSelector:
+    matchLabels:
+      gitops.ticq.dev/tenant: "{{ $.Values.name }}"
+
+{{- end }}

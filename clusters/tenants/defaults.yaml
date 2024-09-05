@@ -11,6 +11,9 @@ enableTenantNamespaceAutoProvisioning: "false"
 tenantProvisionedRepository: ""
 tenantProvisionedBranch: ""
 
+# ability to assign egress IP of all pods in the namespaces of the tenants
+assignEgressIp: ""
+
 # type of quota used
 quotaType: "cluster"
 
