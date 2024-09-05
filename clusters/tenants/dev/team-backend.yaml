@@ -11,7 +11,7 @@ enableTenantNamespaceAutoProvisioning: "true"
 tenantProvisionedRepository: "https://github.com/GijsvanDulmen/openshift-gitops-tenants-setup"
 tenantProvisionedBranch: "main"
 
-assignEgressIp: "192.168.2.199"
+assignEgressIp: "192.168.1.222"
 
 namespaces:
 - name: test
