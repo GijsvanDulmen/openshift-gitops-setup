@@ -1,0 +1,24 @@
+{{- $namespaces := (include "tenants.namespaces" .) | fromYamlArray -}}
+{{- range $ns := $namespaces }}
+---
+apiVersion: k8s.ovn.org/v1
+kind: EgressFirewall
+metadata:
+  name: default
+  namespace: "{{ $ns.namespaceName }}"
+spec:
+  egress:
+  {{- range $domain := ($ns.allowedEgressWebDomains | default list }}
+  - type: Allow
+    to:
+      dnsName: "{{ $domaine }}"
+    ports: 
+    - port: 80
+      protocol: TCP
+    - port: 443
+      protocol: TCP
+  {{- end }}
+  - type: Deny
+    to:
+      cidrSelector: 0.0.0.0/0
+{{- end }}

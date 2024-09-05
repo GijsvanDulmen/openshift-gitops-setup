@@ -38,6 +38,10 @@ namespaces:
     max:
       ephemeral-storage: "100Gi"
 
+  # opens up 443 and 80 to this domain
+  allowedEgressWebDomains:
+  - tweakers.net
+
   gitops:
     repository: https://github.com/GijsvanDulmen/openshift-gitops-tenants-setup
   
