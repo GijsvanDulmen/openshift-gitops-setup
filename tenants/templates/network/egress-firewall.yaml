@@ -11,7 +11,7 @@ spec:
   {{- range $domain := ($ns.allowedEgressWebDomains | default list) }}
   - type: Allow
     to:
-      dnsName: "{{ $domaine }}"
+      dnsName: "{{ $domain }}"
     ports: 
     - port: 80
       protocol: TCP
