@@ -12,14 +12,14 @@ spec:
 
   # openshift components
   - name: "allow-from-openshift-ingress" 
-    action: "Pass"
+    action: "Allow"
     from:
     - namespaces:
         matchLabels:
           network.openshift.io/policy-group: ingress
 
   - name: "allow-ingress-from-monitoring"
-    action: "Pass"
+    action: "Allow"
     from:
     - namespaces:
         matchLabels:
@@ -29,7 +29,7 @@ spec:
 
   # egress is closed!
   - name: "allow-dns-resolution"
-    action: "Pass"
+    action: "Allow"
     to:
     - namespaces:
         # TODO: make more specific with DNS ports
@@ -41,12 +41,9 @@ spec:
     action: "Deny"
     to:
     - networks:
-      - 10.128.0.0/14
-  - name: "deny-service-network"
-    action: "Deny"
-    to:
-    - networks:
-      - 172.30.0.0/16
+      - 10.128.0.0/14 # pods 
+      - 172.30.0.0/16 # services
+      
   - name: "allow-other-internet"
     action: "Allow"
     to:
