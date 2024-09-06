@@ -1,0 +1,53 @@
+apiVersion: policy.networking.k8s.io/v1alpha1
+kind: AdminNetworkPolicy
+metadata:
+  name: tenant-policies
+spec:
+  priority: 50 
+  subject:
+    namespaces:
+      matchLabels:
+        gitops.ticq.dev/type: "tenant"
+  ingress: 
+
+  # openshift components
+  - name: "allow-from-openshift-ingress" 
+    action: "Pass"
+    from:
+    - pods:
+        namespaceSelector:
+          matchLabels:
+            network.openshift.io/policy-group: ingress
+        podSelector: {}
+  - name: "allow-ingress-from-monitoring"
+    action: "Pass"
+    from:
+    - namespaces:
+        namespaceSelector:
+          matchLabels:
+            network.openshift.io/policy-group: monitoring
+
+  egress:
+
+  # egress is closed!
+  - name: "allow-dns-resolution"
+    action: "Pass"
+    to:
+    - pods:
+        # TODO: make more specific with DNS ports
+        namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: openshift-dns
+  
+  # networks (oc get networks.config.openshift.io cluster -o yaml)
+  - name: "deny-cluster-network"
+    action: "Deny"
+    to:
+    - networks:
+      - 10.128.0.0/14
+  - name: "deny-service-network"
+    action: "Deny"
+    to:
+    - networks:
+      - 172.30.0.0/16
+

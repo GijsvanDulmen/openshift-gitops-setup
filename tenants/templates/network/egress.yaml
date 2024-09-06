@@ -1,35 +1,35 @@
 {{- $namespaces := (include "tenants.namespaces" .) | fromYamlArray -}}
 {{- range $ns := $namespaces }}
----
-kind: NetworkPolicy
-apiVersion: networking.k8s.io/v1
-metadata:
-  name: default-egress
-  namespace: "{{ $ns.namespaceName }}"
-spec:
-  policyTypes:
-  - Egress
-  podSelector: {}
-  egress:
-  # allow DNS resolution
-  - to:
-    # TODO: make more specific with DNS ports
-    - namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: openshift-dns
+# ---
+# kind: NetworkPolicy
+# apiVersion: networking.k8s.io/v1
+# metadata:
+#   name: default-egress
+#   namespace: "{{ $ns.namespaceName }}"
+# spec:
+#   policyTypes:
+#   - Egress
+#   podSelector: {}
+#   egress:
+#   # allow DNS resolution
+#   - to:
+#     # TODO: make more specific with DNS ports
+#     - namespaceSelector:
+#         matchLabels:
+#           kubernetes.io/metadata.name: openshift-dns
 
-  # example of something specific
-  # - to:
-  #   - ipBlock:
-  #       cidr: 192.168.1.184/32
+#   # example of something specific
+#   # - to:
+#   #   - ipBlock:
+#   #       cidr: 192.168.1.184/32
 
-  # allow everything outside of cluster
-  - to:
-      - ipBlock:
-          cidr: 0.0.0.0/0
-          except:
-            # clusterNetwork (oc get networks.config.openshift.io cluster -o yaml)
-            - 10.128.0.0/14
-            # serviceNetwork (oc get networks.config.openshift.io cluster -o yaml)
-            - 172.30.0.0/16
+#   # allow everything outside of cluster
+#   - to:
+#       - ipBlock:
+#           cidr: 0.0.0.0/0
+#           except:
+#             # clusterNetwork (oc get networks.config.openshift.io cluster -o yaml)
+#             - 10.128.0.0/14
+#             # serviceNetwork (oc get networks.config.openshift.io cluster -o yaml)
+#             - 172.30.0.0/16
 {{- end }}
