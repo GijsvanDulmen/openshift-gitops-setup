@@ -41,6 +41,7 @@ namespaces:
   # opens up 443 and 80 to this domain
   allowedEgressWebDomains:
   - tweakers.net
+  - "192.168.1.184" # laptop
 
   gitops:
     repository: https://github.com/GijsvanDulmen/openshift-gitops-tenants-setup
