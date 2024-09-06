@@ -14,18 +14,16 @@ spec:
   - name: "allow-from-openshift-ingress" 
     action: "Pass"
     from:
-    - pods:
-        namespaceSelector:
-          matchLabels:
-            network.openshift.io/policy-group: ingress
+    - namespaces:
+        matchLabels:
+          network.openshift.io/policy-group: ingress
 
   - name: "allow-ingress-from-monitoring"
     action: "Pass"
     from:
-    - pods:
-        namespaceSelector:
-          matchLabels:
-            network.openshift.io/policy-group: monitoring
+    - namespaces:
+        matchLabels:
+          network.openshift.io/policy-group: monitoring
 
   egress:
 
@@ -33,12 +31,11 @@ spec:
   - name: "allow-dns-resolution"
     action: "Pass"
     to:
-    - pods:
+    - namespaces:
         # TODO: make more specific with DNS ports
-        namespaceSelector:
-          matchLabels:
-            kubernetes.io/metadata.name: openshift-dns
-  
+        matchLabels:
+          kubernetes.io/metadata.name: openshift-dns
+
   # networks (oc get networks.config.openshift.io cluster -o yaml)
   - name: "deny-cluster-network"
     action: "Deny"
