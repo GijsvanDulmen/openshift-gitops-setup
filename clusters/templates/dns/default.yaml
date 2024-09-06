@@ -1,0 +1,15 @@
+---
+apiVersion: operator.openshift.io/v1
+kind: DNS
+metadata:
+  name: default
+spec:
+  servers:
+
+  # just a small example from docs
+  - name: foo-server
+    zones:
+      - foo.com
+    forwardPlugin:
+      upstreams:
+        - 1.1.1.1
