@@ -47,4 +47,10 @@ spec:
     to:
     - networks:
       - 172.30.0.0/16
+  - name: "allow-other-internet"
+    action: "Allow"
+    to:
+    - networks:
+      - 0.0.0.0/0
+
 
