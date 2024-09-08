@@ -39,6 +39,10 @@ spec:
     kind: "Deployment"
     jsonPointers:
     - /spec/replicas
+  - group: ""
+    kind: "Service"
+    jsonPointers:
+    - /spec/externalIPs
 
   syncPolicy:
     automated:
