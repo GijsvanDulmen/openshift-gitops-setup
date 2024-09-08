@@ -2,6 +2,10 @@
 
 export KUBECONFIG=/Users/gijs/Documents/repos/proxmox-terraform/openshift/kubeconfig-noingress
 
+# make more room on cluster
+kubectl patch --type=merge scheduler cluster -p '{"spec":{"mastersSchedulable":true}}'
+
+# install gitops operators
 cd gitops-operator
 helm dependency build
 helm template . -f ./values.yaml | kubectl apply -f -
