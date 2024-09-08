@@ -11,10 +11,10 @@ spec:
       type: custom-domain
   replicas: 1
   domain: "{{ $.Values.ingressDomain }}"
-  endpointPublishingStrategy:
-    nodePort:
-      protocol: PROXY
-    type: NodePortService
+
+  # VIP via keepalived operator
+  endpointPublishingStrategy: 
+    type: Private
 
   # access logging
   logging:
