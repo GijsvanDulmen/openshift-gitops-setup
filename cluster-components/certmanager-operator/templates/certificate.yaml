@@ -13,5 +13,5 @@ spec:
   isCA: false
   issuerRef:
     group: cert-manager.io
-    name: letsencrypt-cluster-issuer
+    name: letsencrypt-cluster-issuer-production
     kind: ClusterIssuer
