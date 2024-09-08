@@ -25,7 +25,7 @@ namespaces:
 
   gitops:
     repository: https://github.com/GijsvanDulmen/openshift-gitops-tenants-setup
-    pullRequestEnvironments: "yes"
+    pullRequestEnvironments: "no" # hits limit quit fast
     pullRequestRepositoryOwner: "GijsvanDulmen"
     pullRequestRepository: "openshift-gitops-tenants-setup"
 
