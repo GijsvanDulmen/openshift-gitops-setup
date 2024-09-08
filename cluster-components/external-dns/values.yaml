@@ -20,6 +20,16 @@ external-dns:
     fsGroup: 1000710000
     seccompProfile:
       type: RuntimeDefault
+
+  securityContext:
+    privileged: false
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 1000710000
+    runAsGroup: 1000710000
+    capabilities:
+      drop: ["ALL"]
     
   extraArgs:
   # cloud flare specifics
