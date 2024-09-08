@@ -26,6 +26,8 @@ clusterComponents:
 - name: external-dns
   syncWave: "0"
   namespace: "external-dns"
+- name: certmanager-operator
+  syncWave: "0"
 
 # enable this for gitops cluster updates!
 # - name: cluster-version
