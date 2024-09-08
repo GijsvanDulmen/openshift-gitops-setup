@@ -4,8 +4,8 @@ metadata:
   name: custom
   namespace: openshift-ingress-operator
 spec:
-  # defaultCertificate:
-  #     name: <custom-ingress-custom-certs> 
+  defaultCertificate:
+    name: cloud-ticq-org
   routeSelector:
     matchLabels:
       type: custom-domain
