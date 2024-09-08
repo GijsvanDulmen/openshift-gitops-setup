@@ -9,3 +9,5 @@ spec:
     policy:
       allowedCIDRs:
       - "192.168.2.100/26"
+    autoAssignCIDRs:
+      - "192.168.2.100/26"
