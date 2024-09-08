@@ -21,7 +21,6 @@ subjects:
 - kind: ServiceAccount
   name: router
   namespace: openshift-ingress
-  apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: Role
   name: router-secret-reader
