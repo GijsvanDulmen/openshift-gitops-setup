@@ -14,7 +14,7 @@ spec:
 
   # VIP via keepalived operator
   endpointPublishingStrategy: 
-    type: NodePort
+    type: NodePortService
     
   # access logging
   logging:
