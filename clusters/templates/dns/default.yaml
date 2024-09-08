@@ -3,6 +3,8 @@ apiVersion: operator.openshift.io/v1
 kind: DNS
 metadata:
   name: default
+  annotations:
+    argocd.argoproj.io/sync-options: "Delete=false"
 spec:
   servers:
 
