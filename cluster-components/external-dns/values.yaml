@@ -10,6 +10,13 @@ external-dns:
   interval: 2m
   sources:
   - service
+
+  podSecurityContext:
+    runAsNonRoot: true
+    fsGroup: 1000710000
+    seccompProfile:
+      type: RuntimeDefault
+
   extraArgs:
   # cloud flare specifics
   - --cloudflare-dns-records-per-page=5000
