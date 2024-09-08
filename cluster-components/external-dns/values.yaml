@@ -39,6 +39,6 @@ external-dns:
   - --dyn-min-ttl=60 # cloud flare does not support lower
 
   # ingress VIP
-  - --domain-filter=ticq.org
+  - --domain-filter=cloud.ticq.org
   - --default-targets=192.168.1.101
   # - --zone-id-filter=????
