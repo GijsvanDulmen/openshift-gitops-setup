@@ -19,6 +19,8 @@ clusterComponents:
   syncWave: "0"
 - name: vertical-pod-autoscaler
   syncWave: "0"
+- name: keepalived-operator
+  syncWave: "0"
 - name: openshift-console-plugin
   syncWave: "0"
 - name: external-dns
