@@ -2,7 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   annotations:
-    keepalived-operator.redhat-cop.io/keepalivedgroup: keepalivedgroup-router
+    keepalived-operator.redhat-cop.io/keepalivedgroup: keepalived-operator/keepalivedgroup-router
   name: router-custom
   namespace: openshift-ingress
 spec:
