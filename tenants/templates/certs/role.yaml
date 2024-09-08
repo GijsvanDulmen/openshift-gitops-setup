@@ -1,0 +1,30 @@
+{{- $namespaces := (include "tenants.namespaces" .) | fromYamlArray }}
+{{- range $ns := $namespaces }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: router-secret-reader
+  namespace: "{{ $ns.namespaceName }}"
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["secrets"]
+  verbs: ["get", "watch", "list"]
+  resourceNames: ["subdomain-certs"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: router-secret-reader
+  namespace: "{{ $ns.namespaceName }}"
+subjects:
+- kind: ServiceAccount
+  name: router
+  namespace: openshift-ingress
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: router-secret-reader
+  apiGroup: rbac.authorization.k8s.io
+
+{{- end }}
