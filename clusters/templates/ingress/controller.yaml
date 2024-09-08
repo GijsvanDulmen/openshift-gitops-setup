@@ -15,3 +15,9 @@ spec:
     nodePort:
       protocol: PROXY
     type: NodePortService
+
+  # access logging
+  logging:
+    access:
+      destination:
+        type: Container
