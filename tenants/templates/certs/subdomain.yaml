@@ -1,5 +1,6 @@
 {{- $namespaces := (include "tenants.namespaces" .) | fromYamlArray }}
 {{- range $ns := $namespaces }}
+{{- if ne ($ns.subdomain | default "none") "none" }}
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -7,10 +8,10 @@ metadata:
   name: cloud-ticq-org
   namespace: "{{ $ns.namespaceName }}"
 spec:
-  commonName: "{{ $.Values.subdomain }}.cloud.ticq.org"
+  commonName: "{{ $ns.subdomain }}.cloud.ticq.org"
   dnsNames:
-    - "{{ $.Values.subdomain }}.cloud.ticq.org"
-    - "*.{{ $.Values.subdomain }}.cloud.ticq.org"
+    - "{{ $ns.subdomain }}.cloud.ticq.org"
+    - "*.{{ $ns.subdomain }}.cloud.ticq.org"
   secretName: subdomain-certs
   issuerRef:
     group: cert-manager.io
