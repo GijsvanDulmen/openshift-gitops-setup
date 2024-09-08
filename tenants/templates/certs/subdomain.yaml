@@ -1,4 +1,4 @@
-{{- $namespaces := (include "tenants.namespaces" .) | fromYamlArray -}}
+{{- $namespaces := (include "tenants.namespaces" .) | fromYamlArray }}
 {{- range $ns := $namespaces }}
 ---
 apiVersion: cert-manager.io/v1
@@ -16,5 +16,6 @@ spec:
     group: cert-manager.io
     name: letsencrypt-cluster-issuer-production
     kind: ClusterIssuer
+
 {{- end }}
 {{- end }}
