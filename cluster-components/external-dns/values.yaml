@@ -1,6 +1,10 @@
 external-dns:
   provider: 
     name: cloudflare
+    webhook:
+      securityContext:
+        fsGroup: 1000710000
+
   env:
   - name: CF_API_TOKEN
     valueFrom:
@@ -16,7 +20,7 @@ external-dns:
     fsGroup: 1000710000
     seccompProfile:
       type: RuntimeDefault
-
+    
   extraArgs:
   # cloud flare specifics
   - --cloudflare-dns-records-per-page=5000
