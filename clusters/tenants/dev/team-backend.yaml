@@ -45,7 +45,7 @@ namespaces:
 
   gitops:
     repository: https://github.com/GijsvanDulmen/openshift-gitops-tenants-setup
-  
-- name: integration
 
+  # Will create a certificate to use
+  subdomain: "backend"
 
