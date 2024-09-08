@@ -5,7 +5,7 @@ operators-installer:
   operators:
     - channel: stable-v1
       installPlanApproval: "Manual"
-      name: cert-manager-operator
+      name: openshift-cert-manager-operator
       sourceNamespace: openshift-marketplace
       source: redhat-operators
       csv: cert-manager-operator.v1.14.0
