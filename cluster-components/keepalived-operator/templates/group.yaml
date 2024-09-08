@@ -1,14 +1,14 @@
-# apiVersion: redhatcop.redhat.io/v1alpha1
-# kind: KeepalivedGroup
-# metadata:
-#   name: keepalivedgroup-router
-# spec:
-#   # interface: ens18
-#   interfaceFromIP: 192.168.1.5 # used for auto-detect which interface to use
-#   nodeSelector:
-#     node-role.kubernetes.io/worker: ""
-# #   blacklistRouterIDs:
-# #   - 1
-# #   - 2  
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: KeepalivedGroup
+metadata:
+  name: keepalivedgroup-router
+spec:
+  # interface: ens18
+  interfaceFromIP: 192.168.1.5 # used for auto-detect which interface to use
+  nodeSelector:
+    node-role.kubernetes.io/worker: ""
+#   blacklistRouterIDs:
+#   - 1
+#   - 2  
 
-# # 
+# 
