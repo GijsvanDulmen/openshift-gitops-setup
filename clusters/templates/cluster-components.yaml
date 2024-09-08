@@ -16,7 +16,7 @@ metadata:
   {{- end }}
 spec:
   destination:
-    namespace: default
+    namespace: "{{ $component.namespace | default "default" }}"
     server: https://kubernetes.default.svc
   project: cluster
   source:
@@ -39,4 +39,8 @@ spec:
     - PrunePropagationPolicy=foreground
     - ServerSideApply=true
     - FailOnSharedResource=true
+
+    {{- if ne ($component.namespace | default "default") "default" }}
+    - CreateNamespace=true
+    {{- end }}
 {{- end }}

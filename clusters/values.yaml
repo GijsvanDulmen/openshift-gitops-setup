@@ -7,6 +7,9 @@
 # disableAutoSync: "no"
 # overrideTenants: "no"
 
+# override per cluster!
+ingressDomain: "cloud.ticq.org"
+
 clusterComponents:
 - name: namespace-configuration-operator
   syncWave: "0"
@@ -18,6 +21,9 @@ clusterComponents:
   syncWave: "0"
 - name: openshift-console-plugin
   syncWave: "0"
+- name: external-dns
+  syncWave: "0"
+  namespace: "external-dns"
 
 # enable this for gitops cluster updates!
 # - name: cluster-version

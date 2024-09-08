@@ -10,7 +10,7 @@ spec:
     matchLabels:
       type: custom-domain
   replicas: 1
-  domain: ingress.vandulmen.net
+  domain: "{{ $.Values.ingressDomain }}"
   endpointPublishingStrategy:
     nodePort:
       protocol: PROXY

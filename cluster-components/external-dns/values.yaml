@@ -1,0 +1,22 @@
+external-dns:
+  provider: 
+    name: cloudflare
+  env:
+  - name: CF_API_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: cloudflare-api-key
+        key: apiKey
+  interval: 2m
+  sources:
+  - service
+  extraArgs:
+  # cloud flare specifics
+  - --cloudflare-dns-records-per-page=5000
+  - --cloudflare-proxied
+  - --dyn-min-ttl=60 # cloud flare does not support lower
+
+  # ingress VIP
+  - --domain-filter=ticq.org
+  - --default-targets=192.168.1.101
+  # - --zone-id-filter=????
