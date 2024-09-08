@@ -11,5 +11,6 @@ spec:
     zones:
       - foo.com
     forwardPlugin:
+      policy: Random
       upstreams:
         - 1.1.1.1
