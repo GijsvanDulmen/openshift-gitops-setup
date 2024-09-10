@@ -2,14 +2,12 @@
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: letsencrypt-cluster-issuer-production
+  name: letsencrypt-cluster-issuer-staging
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
-    email: "gijs@vandulmen.net"
+    server: 'https://acme-staging-v02.api.letsencrypt.org/directory'
     privateKeySecretRef:
       name: acme-account-private-key
     solvers:

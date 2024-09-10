@@ -21,6 +21,8 @@ clusterComponents:
   syncWave: "0"
 - name: keepalived-operator
   syncWave: "0"
+- name: keepalived-config
+  syncWave: "1"
 - name: openshift-console-plugin
   syncWave: "0"
 - name: external-dns
@@ -28,6 +30,8 @@ clusterComponents:
   namespace: "external-dns"
 - name: certmanager-operator
   syncWave: "0"
+- name: certmanager-config
+  syncWave: "1"
 
 # enable this for gitops cluster updates!
 # - name: cluster-version
