@@ -1,0 +1,13 @@
+variant: openshift
+version: 4.16.0
+metadata:
+  name: 101-test-file-gijs
+  labels:
+    machineconfiguration.openshift.io/role: workerpool-canary 
+storage:
+  files:
+  - path: /home/test
+    mode: 0644 
+    contents:
+      inline: |
+        Gijs van Dulmen worker 1 with ignition test123
