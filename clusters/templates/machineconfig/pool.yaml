@@ -1,7 +1,9 @@
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfigPool
 metadata:
-  name: workerpool-canary 
+  name: workerpool-canary
+  labels:
+    pool/workerpool-canary: ""
 spec:
   machineConfigSelector:
     matchExpressions: 
