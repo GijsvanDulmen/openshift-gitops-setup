@@ -34,18 +34,12 @@ metadata:
   {{- else }}
     scheduler.alpha.kubernetes.io/tolerationsWhitelist: '[]'
   {{- end }}
+
+    # TODO: fixate these
+    # openshift.io/sa.scc.mcs: 's0:c28,c7'
+    # openshift.io/sa.scc.supplemental-groups: 1000770000/10000
+    # openshift.io/sa.scc.uid-range: 1000770000/10000
+
 {{- end }}
 
-# labels:
-# app.kubernetes.io/instance: team-backend-tenant
-# kubernetes.io/metadata.name: team-backend-accept
-# pod-security.kubernetes.io/audit: restricted
-# pod-security.kubernetes.io/audit-version: v1.24
-# pod-security.kubernetes.io/warn: restricted
-# pod-security.kubernetes.io/warn-version: v1.24
-# annotations:
-# gitops.ticq.dev/type: tenant
-# openshift.io/display-name: Super Team API backends
-# openshift.io/sa.scc.mcs: 's0:c28,c7'
-# openshift.io/sa.scc.supplemental-groups: 1000770000/10000
-# openshift.io/sa.scc.uid-range: 1000770000/10000
+
