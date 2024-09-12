@@ -7,4 +7,4 @@ metadata:
 data:
   # disabled cause memory!
   config.yaml: |
-    enableUserWorkload: false
+    enableUserWorkload: true
