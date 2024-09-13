@@ -21,7 +21,7 @@ spec:
         from: All
   - name: https
     port: 443
-    protocol: HTTP
+    protocol: HTTPS
 
     tls:
       mode: Terminate # If protocol is `TLS`, `Passthrough` is a possible mode
