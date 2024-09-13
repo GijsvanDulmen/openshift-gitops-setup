@@ -5,6 +5,10 @@ export KUBECONFIG=/Users/gijs/Documents/repos/proxmox-terraform/openshift/kubeco
 # make more room on cluster
 kubectl patch --type=merge scheduler cluster -p '{"spec":{"mastersSchedulable":true}}'
 
+# needed for istio
+kubectl get crd gateways.gateway.networking.k8s.io &> /dev/null || \
+  { kubectl kustomize "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v1.1.0" | kubectl apply -f -; }
+
 # install gitops operators
 cd gitops-operator
 helm dependency build

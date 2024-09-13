@@ -32,6 +32,10 @@ clusterComponents:
   syncWave: "0"
 - name: certmanager-config
   syncWave: "1"
+- name: istio-operator
+  syncWave: "0"
+- name: istio-config
+  syncWave: "2"
 
 # enable this for gitops cluster updates!
 # - name: cluster-version

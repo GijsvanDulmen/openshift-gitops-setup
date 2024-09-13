@@ -1,0 +1,19 @@
+operators-installer:
+
+  installPlanApproverAndVerifyJobsImage: registry.redhat.io/openshift4/ose-cli:v4.15
+
+  operators:
+    - channel: candidates
+      installPlanApproval: "Manual"
+      name: servicemeshoperator3
+      sourceNamespace: openshift-marketplace
+      source: redhat-operators
+
+      csv: servicemeshoperator3.v3.0.0-tp.1
+      namespace: service-mesh
+      automaticIntermediateManualUpgrades: true
+
+  operatorGroups:
+  - name: service-mesh
+    createNamespace: true
+    targetOwnNamespace: false
