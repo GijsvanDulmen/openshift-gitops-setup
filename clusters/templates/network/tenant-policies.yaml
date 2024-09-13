@@ -43,6 +43,15 @@ spec:
         matchLabels:
           kubernetes.io/metadata.name: openshift-dns
 
+  # allow istio for certs for sidecars
+  - name: "allow-istio-system"
+    action: "Allow"
+    to:
+    - namespaces:
+        # TODO: make more specific
+        matchLabels:
+          kubernetes.io/metadata.name: istio-system
+
   # networks (oc get networks.config.openshift.io cluster -o yaml)
   - name: "deny-cluster-network"
     action: "Deny"
