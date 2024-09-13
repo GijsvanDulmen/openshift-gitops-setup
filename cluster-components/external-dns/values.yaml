@@ -15,6 +15,10 @@ external-dns:
   sources:
   - service
   - openshift-route
+  - gateway-httproute
+  - gateway-tlsroute
+  - gateway-tcproute
+  - gateway-udproute
 
   podSecurityContext:
     runAsNonRoot: true
@@ -43,10 +47,10 @@ external-dns:
   - --default-targets=192.168.2.100
 
   # only on our custom router
-  - --source=gateway-httproute
-  - --source=gateway-tlsroute
-  - --source=gateway-tcproute
-  - --source=gateway-udproute
+  # - --source=gateway-httproute
+  # - --source=gateway-tlsroute
+  # - --source=gateway-tcproute
+  # - --source=gateway-udproute
 
   - --openshift-router-name=custom
   # - --zone-id-filter=????
