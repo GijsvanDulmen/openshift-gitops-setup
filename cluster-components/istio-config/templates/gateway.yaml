@@ -19,7 +19,7 @@ spec:
     allowedRoutes:
       namespaces:
         from: All
-  - name: default
+  - name: https
     port: 443
     protocol: HTTP
 
