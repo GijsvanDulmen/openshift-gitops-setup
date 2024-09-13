@@ -18,6 +18,13 @@ spec:
         matchLabels:
           network.openshift.io/policy-group: ingress
 
+  - name: "allow-from-istio-ingress" 
+    action: "Allow"
+    from:
+    - namespaces:
+        matchLabels:
+          kubernetes.io/metadata.name: istio-ingress
+
   - name: "allow-ingress-from-monitoring"
     action: "Allow"
     from:
