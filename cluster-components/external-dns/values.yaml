@@ -44,7 +44,7 @@ external-dns:
 
   # ingress VIP
   - --domain-filter=ticq.org
-  - --default-targets=192.168.2.100
+  # - --default-targets=192.168.2.100
 
   # only on our custom router
   # - --source=gateway-httproute
