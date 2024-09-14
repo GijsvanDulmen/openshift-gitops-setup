@@ -21,12 +21,11 @@ spec:
 
     hostname: "*.cloud.ticq.org"
 
-    # Q: Could this be more specific for team namespaces
     allowedRoutes:
       namespaces:
         selector:
           matchLabels:
-            gitops.ticq.dev/ingress-type: "istio"
+            gitops.ticq.dev/ingress-type: istio
 
   - name: https
     port: 443
@@ -45,4 +44,4 @@ spec:
       namespaces:
         selector:
           matchLabels:
-            gitops.ticq.dev/ingress-type: "istio"
+            gitops.ticq.dev/ingress-type: istio
