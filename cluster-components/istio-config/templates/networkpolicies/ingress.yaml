@@ -41,3 +41,18 @@ spec:
   podSelector: {}
   policyTypes:
   - Egress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-to-tenants
+  namespace: "istio-ingress"
+spec:
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          gitops.ticq.dev/ingress-type: istio
+  podSelector: {}
+  policyTypes:
+  - Egress
