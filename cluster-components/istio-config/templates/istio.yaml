@@ -9,7 +9,7 @@ spec:
       accessLogFile: /dev/stdout
     pilot:
       env:
-        PILOT_ENABLE_ALPHA_GATEWAY_API: true
+        PILOT_ENABLE_ALPHA_GATEWAY_API: "true"
   updateStrategy:
     type: InPlace
     inactiveRevisionDeletionGracePeriodSeconds: 30
