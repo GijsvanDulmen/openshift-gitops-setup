@@ -3,7 +3,7 @@ apiVersion: networking.istio.io/v1
 kind: ServiceEntry
 metadata:
   name: tweakers-net
-  namespace: istio-egress
+  namespace: team-backend-accept
 spec:
   hosts:
   - tweakers.net
@@ -17,7 +17,7 @@ apiVersion: networking.istio.io/v1
 kind: DestinationRule
 metadata:
   name: egressgateway-for-tweakers-net
-  namespace: istio-egress
+  namespace: team-backend-accept
 spec:
   host: egress-gateway.istio-egress.svc.cluster.local
   subsets:
@@ -27,7 +27,7 @@ apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
   name: direct-tweakers-net-through-egress-gateway
-  namespace: istio-egress
+  namespace: team-backend-accept
 spec:
   hosts:
   - tweakers.net
