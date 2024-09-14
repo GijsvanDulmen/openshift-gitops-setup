@@ -31,12 +31,12 @@ spec:
           kubernetes.io/metadata.name: openshift-dns
 
   # networks (oc get networks.config.openshift.io cluster -o yaml)
-  # - name: "deny-cluster-network"
-  #   action: "Deny"
-  #   to:
-  #   - networks:
-  #     - 10.128.0.0/14 # pods 
-  #     - 172.30.0.0/16 # services
+  - name: "deny-cluster-network"
+    action: "Deny"
+    to:
+    - networks:
+      - 10.128.0.0/14 # pods 
+      - 172.30.0.0/16 # services
       
   - name: "allow-other-internet"
     action: "Allow"
