@@ -13,11 +13,6 @@ tenantProvisionedBranch: "main"
 
 assignEgressIp: "192.168.1.222"
 
-# Because we use Istio we can't use
-# egress firewall anymore because traphic in this example
-# runs through the egress gateway
-ingressType: "istio"
-
 namespaces:
 - name: test
   containerLimits:
@@ -34,6 +29,11 @@ namespaces:
     pullRequestRepositoryOwner: "GijsvanDulmen"
     pullRequestRepository: "openshift-gitops-tenants-setup"
 
+  # opens up 443 and 80 to this domain
+  allowedEgressWebDomains:
+  - tweakers.net
+  - "192.168.1.184" # laptop
+
   # needs specific label and taints
   # see cluster templates
   # bindToNodes: "team-backend-apps"
@@ -43,11 +43,10 @@ namespaces:
     max:
       ephemeral-storage: "100Gi"
 
-  # opens up 443 and 80 to this domain
-  # disable cause istio
-  # allowedEgressWebDomains:
-  # - tweakers.net
-  # - "192.168.1.184" # laptop
+  # Because we use Istio we can't use
+  # egress firewall anymore because traphic in this example
+  # runs through the egress gateway
+  ingressType: "istio"
   
   gitops:
     repository: https://github.com/GijsvanDulmen/openshift-gitops-tenants-setup

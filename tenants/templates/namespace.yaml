@@ -9,9 +9,9 @@ metadata:
     gitops.ticq.dev/type: "tenant"
     gitops.ticq.dev/tenant: "{{ $.Values.name }}"
 
-    gitops.ticq.dev/ingress-type: "{{ $.Values.ingressType }}"
+    gitops.ticq.dev/ingress-type: "{{ $.Values.ingressType | default "default" }}"
 
-    {{- if eq $.Values.ingressType "istio" }}
+    {{- if eq ($ns.ingressType | default "default") "istio" }}
     istio-injection: enabled
     {{- end }}
 
