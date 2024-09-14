@@ -19,7 +19,7 @@ metadata:
   name: egressgateway-for-cnn
   namespace: istio-egress
 spec:
-  host: istio-egressgateway.istio-system.svc.cluster.local
+  host: egress-gateway.istio-egress.svc.cluster.local
   subsets:
   - name: cnn
 ---
@@ -33,7 +33,7 @@ spec:
   - edition.cnn.com
   gateways:
   - mesh
-  - istio-egressgateway
+  - egress-gateway
   tls:
   - match:
     - gateways:
@@ -43,13 +43,13 @@ spec:
       - edition.cnn.com
     route:
     - destination:
-        host: istio-egressgateway.istio-system.svc.cluster.local
+        host: egress-gateway.istio-egress.svc.cluster.local
         subset: cnn
         port:
           number: 443
   - match:
     - gateways:
-      - istio-egressgateway
+      - egress-gateway
       port: 443
       sniHosts:
       - edition.cnn.com
