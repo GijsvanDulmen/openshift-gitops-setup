@@ -19,7 +19,7 @@ spec:
     port: 80
     protocol: HTTP
 
-    # "*.cloud.ticq.org"
+    hostname: "*.cloud.ticq.org"
 
     # Q: Could this be more specific for team namespaces
     allowedRoutes:
@@ -31,6 +31,8 @@ spec:
   - name: https
     port: 443
     protocol: HTTPS
+
+    hostname: "*.cloud.ticq.org"
 
     tls:
       mode: Terminate # If protocol is `TLS`, `Passthrough` is a possible mode
