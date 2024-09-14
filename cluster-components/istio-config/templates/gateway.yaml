@@ -6,6 +6,7 @@ metadata:
   annotations:
     keepalived-operator.redhat-cop.io/keepalivedgroup: keepalived-operator/keepalivedgroup-router
     external-dns.alpha.kubernetes.io/target: "192.168.2.123"
+    external-dns.alpha.kubernetes.io/hostname: "*.cloud.ticq.org"
 spec:
   gatewayClassName: istio
 
@@ -17,6 +18,8 @@ spec:
   - name: default
     port: 80
     protocol: HTTP
+
+    # "*.cloud.ticq.org"
 
     # Q: Could this be more specific for team namespaces
     allowedRoutes:
