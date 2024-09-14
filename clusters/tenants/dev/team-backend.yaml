@@ -13,6 +13,9 @@ tenantProvisionedBranch: "main"
 
 assignEgressIp: "192.168.1.222"
 
+# Because we use Istio we can't use
+# egress firewall anymore because traphic in this example
+# runs through the egress gateway
 ingressType: "istio"
 
 namespaces:
@@ -41,11 +44,11 @@ namespaces:
       ephemeral-storage: "100Gi"
 
   # opens up 443 and 80 to this domain
-  allowedEgressWebDomains:
-  - tweakers.net
-  - "192.168.1.184" # laptop
-  - "egress-gateway-istio.istio-egress.svc.cluster.local"
-
+  # disable cause istio
+  # allowedEgressWebDomains:
+  # - tweakers.net
+  # - "192.168.1.184" # laptop
+  
   gitops:
     repository: https://github.com/GijsvanDulmen/openshift-gitops-tenants-setup
 
