@@ -30,7 +30,7 @@ metadata:
   namespace: istio-egress
 spec:
   hosts:
-  - tweakers-net
+  - tweakers.net
   gateways:
   - mesh
   - egress-gateway
@@ -40,7 +40,7 @@ spec:
       - mesh
       port: 443
       sniHosts:
-      - tweakers-net
+      - tweakers.net
     route:
     - destination:
         host: egress-gateway.istio-egress.svc.cluster.local
@@ -52,4 +52,10 @@ spec:
       - egress-gateway
       port: 443
       sniHosts:
-      - tweakers-net
+      - tweakers.net
+    route:
+    - destination:
+        host: tweakers.net
+        port:
+          number: 443
+      weight: 100
