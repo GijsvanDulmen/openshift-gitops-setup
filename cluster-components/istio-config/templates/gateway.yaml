@@ -8,6 +8,7 @@ metadata:
     external-dns.alpha.kubernetes.io/target: "192.168.2.101"
 spec:
   gatewayClassName: istio
+
   addresses:
   - value: 192.168.2.101
     type: IPAddress
@@ -20,7 +21,10 @@ spec:
     # Q: Could this be more specific for team namespaces
     allowedRoutes:
       namespaces:
-        from: All
+        selector:
+          matchLabels:
+            gitops.ticq.dev/ingress-type: "istio"
+
   - name: https
     port: 443
     protocol: HTTPS
@@ -32,26 +36,8 @@ spec:
         group: ""
         name: cloud-ticq-org
 
-    # Q: Could this be more specific for team namespaces
     allowedRoutes:
       namespaces:
-        from: All
-# ---
-# apiVersion: gateway.networking.k8s.io/v1
-# kind: HTTPRoute
-# metadata:
-#   name: application-a
-#   namespace: team-backend-accept
-# spec:
-#   parentRefs:
-#   - name: gateway
-#     namespace: istio-ingress
-#   # hostnames: ["httpbin.example.com"]
-#   rules:
-#   - matches:
-#     - path:
-#         type: PathPrefix
-#         value: /get
-#     backendRefs:
-#     - name: application-a
-#       port: 8080
+        selector:
+          matchLabels:
+            gitops.ticq.dev/ingress-type: "istio"
