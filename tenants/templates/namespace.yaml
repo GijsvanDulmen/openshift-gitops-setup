@@ -11,6 +11,10 @@ metadata:
 
     gitops.ticq.dev/ingress-type: "{{ $.Values.ingressType }}"
 
+    {{- if eq $.Values.ingressType "istio" }}
+    istio-injection: enabled
+    {{- end }}
+
     # pod security - default openshift
     pod-security.kubernetes.io/audit: restricted
     pod-security.kubernetes.io/audit-version: v1.24
