@@ -23,6 +23,12 @@ spec:
     action: "Allow"
     to:
     - namespaces:
-        # TODO: make more specific
         matchLabels:
           kubernetes.io/metadata.name: istio-system
+
+  - name: "allow-istio-egress"
+    action: "Allow"
+    to:
+    - namespaces:
+        matchLabels:
+          kubernetes.io/metadata.name: istio-egress
