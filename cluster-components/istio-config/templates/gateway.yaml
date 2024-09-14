@@ -5,12 +5,12 @@ metadata:
   namespace: istio-ingress
   annotations:
     keepalived-operator.redhat-cop.io/keepalivedgroup: keepalived-operator/keepalivedgroup-router
-    external-dns.alpha.kubernetes.io/target: "192.168.2.171"
+    external-dns.alpha.kubernetes.io/target: "192.168.2.123"
 spec:
   gatewayClassName: istio
 
   addresses:
-  - value: 192.168.2.171
+  - value: 192.168.2.123
     type: IPAddress
 
   listeners:
