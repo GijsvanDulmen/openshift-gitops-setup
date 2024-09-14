@@ -7,25 +7,26 @@ spec:
   podSelector: {}
   policyTypes:
   - Egress
-# ---
-# apiVersion: networking.k8s.io/v1
-# kind: NetworkPolicy
-# metadata:
-#   name: allow-from-the-world-but-not-cluster
-#   namespace: istio-ingress
-# spec:
-#   ingress:
-#   # allow everything outside of cluster
-#   - from:
-#       - ipBlock:
-#           cidr: 0.0.0.0/0
-#           except:
-#             # clusterNetwork (oc get networks.config.openshift.io cluster -o yaml)
-#             - 10.128.0.0/14
-#             # serviceNetwork (oc get networks.config.openshift.io cluster -o yaml)
-#             - 172.30.0.0/16
-#   policyTypes:
-#   - Ingress
+  - Ingress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-from-the-world-but-not-cluster
+  namespace: istio-ingress
+spec:
+  ingress:
+  # allow everything outside of cluster
+  - from:
+      - ipBlock:
+          cidr: 0.0.0.0/0
+          except:
+            # clusterNetwork (oc get networks.config.openshift.io cluster -o yaml)
+            - 10.128.0.0/14
+            # serviceNetwork (oc get networks.config.openshift.io cluster -o yaml)
+            - 172.30.0.0/16
+  policyTypes:
+  - Ingress
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
