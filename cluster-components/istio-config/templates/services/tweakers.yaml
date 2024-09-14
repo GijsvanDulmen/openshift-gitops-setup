@@ -25,8 +25,11 @@ spec:
     name: tweakers-net
   rules:
   - backendRefs:
-    - name: egress-gateway-istio
+    - group: ''	
+      kind: Service
+      name: egress-gateway-istio
       port: 443
+      weight: 1
 ---
 apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: TLSRoute
