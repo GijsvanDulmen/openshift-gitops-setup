@@ -7,10 +7,6 @@ spec:
   values:
     meshConfig:
       accessLogFile: /dev/stdout
-    components:
-      egressGateways:
-      - name: istio-egressgateway
-        enabled: true
   updateStrategy:
     type: InPlace
     inactiveRevisionDeletionGracePeriodSeconds: 30
