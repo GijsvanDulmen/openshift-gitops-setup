@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debugger
+  labels:
+    app: debugger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debugger
+  template:
+    metadata:
+      labels:
+        app: debugger
+    spec:
+      containers:
+      - image: alpine:3.2
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsUser: 0
+          capabilities:
+            add:
+             - NET_RAW
+        command: ["/bin/sh"]
+        args:
+        - -c
+        - >-
+          apk update &&
+          apk add nmap &&
+          nmap --script-updatedb &&
+          echo "container is ready" &&
+          sleep 365d
+        imagePullPolicy: IfNotPresent
+        name: debugger
