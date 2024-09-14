@@ -9,6 +9,8 @@ metadata:
     gitops.ticq.dev/type: "tenant"
     gitops.ticq.dev/tenant: "{{ $.Values.name }}"
 
+    gitops.ticq.dev/ingress-type: "{{ $.Values.ingressType }}"
+
     # pod security - default openshift
     pod-security.kubernetes.io/audit: restricted
     pod-security.kubernetes.io/audit-version: v1.24

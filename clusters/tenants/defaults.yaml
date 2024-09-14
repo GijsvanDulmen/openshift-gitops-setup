@@ -3,6 +3,8 @@ displayName: "None"
 
 namespaces: []
 
+ingressType: "default"
+
 # Auto provising by tenants
 ### Highly unsafe!!! ###
 # Not production proof
@@ -15,6 +17,7 @@ tenantProvisionedBranch: ""
 # needs to be within CIDR range of k8s.ovn.org/host-cidrs annotation on node
 # see: https://docs.openshift.com/container-platform/4.16/networking/ovn_kubernetes_network_provider/configuring-egress-ips-ovn.html#nw-egress-ips-considerations_configuring-egress-ips-ovn
 assignEgressIp: ""
+
 # type of quota used
 quotaType: "cluster"
 
