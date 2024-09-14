@@ -1,0 +1,11 @@
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: ingress-gateway
+  namespace: istio-ingress
+spec:
+  minAvailable: 50%
+  selector:
+    matchLabels:
+      istio.io/gateway-name: ingress-gateway
