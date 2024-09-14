@@ -4,12 +4,13 @@ metadata:
   name: gateway
   namespace: istio-ingress
   annotations:
-    keepalived-operator.redhat-cop.io/keepalivedgroup: keepalived-operator/keepalivedgroup-router
+    keepalived-operator.redhat-cop.io/keepalivedgroup: keepalived-operator/keepalivedgroup-istio
 spec:
   gatewayClassName: istio
   addresses:
-  - value: 192.168.2.100
+  - value: 192.168.2.101
     type: IPAddress
+
   listeners:
   - name: default
     port: 80

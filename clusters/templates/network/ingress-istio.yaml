@@ -9,7 +9,7 @@ spec:
       matchLabels:
         gitops.ticq.dev/ingress-type: "istio"
 
-  ingress: 
+  ingress:
   - name: "allow-from-istio-ingress" 
     action: "Allow"
     from:

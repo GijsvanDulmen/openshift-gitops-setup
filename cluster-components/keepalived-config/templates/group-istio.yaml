@@ -1,0 +1,13 @@
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: KeepalivedGroup
+metadata:
+  name: keepalivedgroup-istio
+  namespace: keepalived-operator
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  interface: "" # fake
+  interfaceFromIP: 192.168.1.5 # used for auto-detect which interface to use
+  nodeSelector:
+    node-role.kubernetes.io/worker: ""
