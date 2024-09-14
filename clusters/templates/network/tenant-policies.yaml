@@ -3,7 +3,7 @@ kind: AdminNetworkPolicy
 metadata:
   name: tenant-policies
 spec:
-  priority: 50 
+  priority: 50
   subject:
     namespaces:
       matchLabels:

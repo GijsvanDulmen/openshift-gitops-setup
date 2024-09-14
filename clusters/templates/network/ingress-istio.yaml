@@ -3,7 +3,7 @@ kind: AdminNetworkPolicy
 metadata:
   name: ingress-type-istio
 spec:
-  priority: 52
+  priority: 49
   subject:
     namespaces:
       matchLabels:
