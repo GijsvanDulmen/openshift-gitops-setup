@@ -8,6 +8,7 @@ spec:
     namespaces:
       matchLabels:
         gitops.ticq.dev/ingress-type: "istio"
+
   ingress: 
   - name: "allow-from-istio-ingress" 
     action: "Allow"
@@ -16,6 +17,7 @@ spec:
         matchLabels:
           kubernetes.io/metadata.name: istio-ingress
 
+  egress:
   # allow istio for certs for sidecars
   - name: "allow-istio-system"
     action: "Allow"
