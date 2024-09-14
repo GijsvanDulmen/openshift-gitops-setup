@@ -23,6 +23,7 @@ spec:
 
     allowedRoutes:
       namespaces:
+        from: Selector
         selector:
           matchLabels:
             gitops.ticq.dev/ingress-type: istio
@@ -42,6 +43,7 @@ spec:
 
     allowedRoutes:
       namespaces:
+        from: Selector
         selector:
           matchLabels:
             gitops.ticq.dev/ingress-type: istio
