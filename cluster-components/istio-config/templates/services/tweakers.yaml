@@ -2,11 +2,11 @@
 apiVersion: networking.istio.io/v1
 kind: ServiceEntry
 metadata:
-  name: cnn
+  name: tweakers-net
   namespace: istio-egress
 spec:
   hosts:
-  - edition.cnn.com
+  - tweakers.net
   ports:
   - number: 443
     name: tls
@@ -16,21 +16,21 @@ spec:
 apiVersion: networking.istio.io/v1
 kind: DestinationRule
 metadata:
-  name: egressgateway-for-cnn
+  name: egressgateway-for-tweakers-net
   namespace: istio-egress
 spec:
   host: egress-gateway.istio-egress.svc.cluster.local
   subsets:
-  - name: cnn
+  - name: tweakers
 ---
 apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
-  name: direct-cnn-through-egress-gateway
+  name: direct-tweakers-net-through-egress-gateway
   namespace: istio-egress
 spec:
   hosts:
-  - edition.cnn.com
+  - tweakers-net
   gateways:
   - mesh
   - egress-gateway
@@ -40,11 +40,11 @@ spec:
       - mesh
       port: 443
       sniHosts:
-      - edition.cnn.com
+      - tweakers-net
     route:
     - destination:
         host: egress-gateway.istio-egress.svc.cluster.local
-        subset: cnn
+        subset: tweakers
         port:
           number: 443
   - match:
@@ -52,4 +52,4 @@ spec:
       - egress-gateway
       port: 443
       sniHosts:
-      - edition.cnn.com
+      - tweakers-net
