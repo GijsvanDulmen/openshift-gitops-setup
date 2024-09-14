@@ -16,9 +16,9 @@ external-dns:
   - service
   - openshift-route
   - gateway-httproute
-  - gateway-tlsroute
-  - gateway-tcproute
-  - gateway-udproute
+  # - gateway-tlsroute
+  # - gateway-tcproute
+  # - gateway-udproute
 
   podSecurityContext:
     runAsNonRoot: true
