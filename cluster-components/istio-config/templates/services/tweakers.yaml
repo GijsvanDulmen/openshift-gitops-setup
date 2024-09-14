@@ -28,6 +28,7 @@ spec:
     - group: ''	
       kind: Service
       name: egress-gateway-istio
+      namespace: istio-egress
       port: 443
       weight: 1
 ---
@@ -38,7 +39,10 @@ metadata:
   namespace: team-backend-accept
 spec:
   parentRefs:
-  - name: egress-gateway
+  - group: gateway.networking.k8s.io	
+    kind: Gateway
+    name: egress-gateway
+    namespace: istio-egress
   hostnames:
   - tweakers.net
   rules:
@@ -47,6 +51,7 @@ spec:
       group: networking.istio.io
       name: tweakers.net
       port: 443
+      weight: 1
 ---
 # apiVersion: networking.istio.io/v1
 # kind: DestinationRule
