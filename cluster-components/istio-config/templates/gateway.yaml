@@ -35,6 +35,7 @@ spec:
       - kind: Secret
         group: ""
         name: cloud-ticq-org
+        namespace: openshift-ingress
 
     allowedRoutes:
       namespaces:
