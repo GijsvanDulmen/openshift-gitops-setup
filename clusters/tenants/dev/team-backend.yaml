@@ -44,6 +44,7 @@ namespaces:
   allowedEgressWebDomains:
   - tweakers.net
   - "192.168.1.184" # laptop
+  - "egress-gateway-istio.istio-egress.svc.cluster.local"
 
   gitops:
     repository: https://github.com/GijsvanDulmen/openshift-gitops-tenants-setup
