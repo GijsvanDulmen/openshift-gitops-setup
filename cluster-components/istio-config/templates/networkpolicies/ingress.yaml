@@ -12,8 +12,8 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-from-tenants
-  namespace: "istio-ingress"
+  name: allow-from-the-world-but-not-cluster
+  namespace: istio-ingress
 spec:
   ingress:
   # allow everything outside of cluster
@@ -25,6 +25,8 @@ spec:
             - 10.128.0.0/14
             # serviceNetwork (oc get networks.config.openshift.io cluster -o yaml)
             - 172.30.0.0/16
+  policyTypes:
+  - Ingress
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
