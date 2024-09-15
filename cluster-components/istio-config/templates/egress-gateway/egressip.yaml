@@ -1,0 +1,11 @@
+---
+apiVersion: k8s.ovn.org/v1
+kind: EgressIP
+metadata:
+  name: egress-gateway
+spec:
+  egressIPs:
+  - "{{ $.Values.egressGatewayIp }}"
+  namespaceSelector:
+    matchLabels:
+      kubernetes.io/metadata.name: istio-egress

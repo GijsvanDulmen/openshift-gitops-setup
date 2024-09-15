@@ -1,12 +1,13 @@
+{{- range $service := $.Values.egressServices }}
 ---
 apiVersion: networking.istio.io/v1
 kind: ServiceEntry
 metadata:
-  name: tweakers-net
-  namespace: team-backend-accept
+  name: "se-{{ $service.name }}"
+  namespace: "{{ $service.namespace | default "istio-egress" }}"
 spec:
   hosts:
-  - tweakers.net
+  - "{{ $service.host }}"
   ports:
   - number: 443
     name: tls
@@ -16,13 +17,13 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: TLSRoute
 metadata:
-  name: direct-to-tweakers-net
-  namespace: team-backend-accept
+  name: "direct-to-{{ $service.name }}"
+  namespace: "{{ $service.namespace | default "istio-egress" }}"
 spec:
   parentRefs:
   - kind: ServiceEntry
     group: networking.istio.io
-    name: tweakers-net
+    name: "se-{{ $service.name }}"
   rules:
   - backendRefs:
     - group: ''	
@@ -35,8 +36,8 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: TLSRoute
 metadata:
-  name: forward-tweakers-net-from-egress-gateway
-  namespace: team-backend-accept
+  name: "forward-{{ $service.name }}-from-egress-gateway"
+  namespace: "{{ $service.namespace | default "istio-egress" }}"
 spec:
   parentRefs:
   - group: gateway.networking.k8s.io	
@@ -44,12 +45,12 @@ spec:
     name: egress-gateway
     namespace: istio-egress
   hostnames:
-  - tweakers.net
+  - "{{ $service.host }}"
   rules:
   - backendRefs:
     - kind: Hostname
       group: networking.istio.io
-      name: tweakers.net
+      name: "{{ $service.host }}"
       port: 443
       weight: 1
 ---
@@ -99,3 +100,4 @@ spec:
 #         port:
 #           number: 443
 #       weight: 100
+{{- end }}

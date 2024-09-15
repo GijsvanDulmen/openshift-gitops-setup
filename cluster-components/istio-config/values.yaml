@@ -1,0 +1,12 @@
+istioIngressIp: "192.168.2.123"
+ingressHostname: "*.cloud.ticq.org"
+egressGatewayIp: "192.168.3.201"
+
+# service
+egressServices:
+- name: tweakers-net
+  host: "tweakers.net"
+  # namespace: team-backend-accept
+- name: external-test-service
+  host: "192.168.1.184"
+  # namespace: team-backend-accept

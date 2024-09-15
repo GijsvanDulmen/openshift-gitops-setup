@@ -5,13 +5,13 @@ metadata:
   namespace: istio-ingress
   annotations:
     keepalived-operator.redhat-cop.io/keepalivedgroup: keepalived-operator/keepalivedgroup-router
-    external-dns.alpha.kubernetes.io/target: "192.168.2.123"
-    external-dns.alpha.kubernetes.io/hostname: "*.cloud.ticq.org"
+    external-dns.alpha.kubernetes.io/target: "{{ $.Values.istioIngressIp }}"
+    external-dns.alpha.kubernetes.io/hostname: "{{ $.Values.ingressHostname }}"
 spec:
   gatewayClassName: istio
 
   addresses:
-  - value: 192.168.2.123
+  - value: "{{ $.Values.istioIngressIp }}"
     type: IPAddress
 
   listeners:
@@ -19,7 +19,7 @@ spec:
     port: 80
     protocol: HTTP
 
-    hostname: "*.cloud.ticq.org"
+    hostname: "{{ $.Values.ingressHostname }}"
 
     allowedRoutes:
       namespaces:
@@ -32,7 +32,7 @@ spec:
     port: 443
     protocol: HTTPS
 
-    hostname: "*.cloud.ticq.org"
+    hostname: "{{ $.Values.ingressHostname }}"
 
     tls:
       mode: Terminate # If protocol is `TLS`, `Passthrough` is a possible mode
