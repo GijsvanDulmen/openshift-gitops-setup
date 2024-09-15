@@ -18,6 +18,8 @@ namespaces:
     limits.cpu: "12"
     requests.cpu: "10"
 
+  ingressType: "istio"
+
   gitops:
     repository: https://github.com/GijsvanDulmen/openshift-gitops-other-tenants-setup
     pullRequestEnvironments: "no" # hits limit quit fast
