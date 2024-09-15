@@ -4,9 +4,20 @@ displayName: Super Team API frontends
 users:
 - name: GijsvanDulmen
 
-tenantProvisionedRepository: "https://github.com/GijsvanDulmen/openshift-gitops-other-tenants-setup"
-tenantProvisionedBranch: "main"
-
 clusterResourceQuota:
   requests.cpu: "5"
   limits.cpu: "10"
+
+namespaces:
+- name: test
+  containerLimits:
+    max:
+      cpu: "3"
+  
+  resourceQuota:
+    limits.cpu: "12"
+    requests.cpu: "10"
+
+  gitops:
+    repository: https://github.com/GijsvanDulmen/openshift-gitops-tenants-setup
+    pullRequestEnvironments: "no" # hits limit quit fast
