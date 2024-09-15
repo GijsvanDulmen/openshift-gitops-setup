@@ -19,5 +19,5 @@ namespaces:
     requests.cpu: "10"
 
   gitops:
-    repository: https://github.com/GijsvanDulmen/openshift-gitops-tenants-setup
+    repository: https://github.com/GijsvanDulmen/openshift-gitops-other-tenants-setup
     pullRequestEnvironments: "no" # hits limit quit fast
