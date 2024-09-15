@@ -8,6 +8,6 @@ egressServices:
   host: "tweakers.net"
   namespace: team-backend-accept
 - name: external-test-service
-  host: "192.168.1.184"
+  host: "laptop.ticq.org"
   namespace: team-backend-accept
   to: "http"
