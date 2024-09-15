@@ -1,26 +1,29 @@
-{{- range $component := $.Values.clusterComponents }}
+{{- range $operator := $.Values.operators }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: "{{ $component.name }}"
+  name: "{{ $operator.name }}"
   namespace: second-gitops
-  {{- if and (ne $.Values.disableFinalizers "yes") (ne ($component.disableFinalizers | default "no") "yes") }}
+  {{- if and (ne $.Values.disableFinalizers "yes") (ne ($operator.disableFinalizers | default "no") "yes") }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
   {{- end }}
 
-  {{- if $component.syncWave }} 
+  labels:
+    gitops.ticq.dev/operator: "true"
+
+  {{- if $operator.syncWave }} 
   annotations:
-    argocd.argoproj.io/sync-wave: "{{ $component.syncWave | default "0" }}"
+    argocd.argoproj.io/sync-wave: "{{ $operator.syncWave | default "-1" }}"
   {{- end }}
 spec:
   destination:
-    namespace: "{{ $component.namespace | default "default" }}"
+    namespace: "{{ $operator.namespace | default "default" }}"
     server: https://kubernetes.default.svc
   project: cluster
   source:
-    path: "cluster-components/{{ $component.name }}"
+    path: "operators/{{ $operator.name }}"
     repoURL: "{{ $.Values.gitRepo }}"
     targetRevision: "{{ $.Values.targetRevision }}"
     helm:
@@ -40,7 +43,7 @@ spec:
     - ServerSideApply=true
     - FailOnSharedResource=true
 
-    {{- if ne ($component.namespace | default "default") "default" }}
+    {{- if ne ($operator.namespace | default "default") "default" }}
     - CreateNamespace=true
     {{- end }}
 {{- end }}

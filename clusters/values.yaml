@@ -10,32 +10,23 @@
 # override per cluster!
 ingressDomain: "cloud.ticq.org"
 
-clusterComponents:
+operators:
 - name: namespace-configuration-operator
-  syncWave: "0"
-- name: user-sandbox
-  syncWave: "1"
 - name: descheduler
-  syncWave: "0"
 - name: vertical-pod-autoscaler
-  syncWave: "0"
 - name: keepalived-operator
-  syncWave: "0"
-- name: keepalived-config
-  syncWave: "1"
-- name: openshift-console-plugin
-  syncWave: "0"
-- name: external-dns
-  syncWave: "0"
-  namespace: "external-dns"
 - name: certmanager-operator
-  syncWave: "0"
-- name: certmanager-config
-  syncWave: "1"
 - name: istio-operator
-  syncWave: "0"
+- name: keepalived-operator
+
+clusterComponents:
+- name: user-sandbox
+- name: keepalived-config
+- name: openshift-console-plugin
+- name: external-dns
+  namespace: "external-dns"
+- name: certmanager-config
 - name: istio-config
-  syncWave: "2"
 
 # enable this for gitops cluster updates!
 # - name: cluster-version
