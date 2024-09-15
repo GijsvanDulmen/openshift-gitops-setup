@@ -35,7 +35,6 @@ spec:
   # there are also network policies set to specifically
   # configure if we want non-namespace wide access
   # or only tenant-wide access
-  # status: does not seem to work
   - name: "allow-from-tenants-by-default"
     action: "Pass"
     to:
