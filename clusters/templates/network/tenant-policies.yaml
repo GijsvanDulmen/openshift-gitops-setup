@@ -30,6 +30,18 @@ spec:
         matchLabels:
           kubernetes.io/metadata.name: openshift-dns
 
+  # allow from other tenant namespaces
+  # this seems insecure but on tenant namespaces
+  # there are also network policies set to specifically
+  # configure if we want non-namespace wide access
+  # or only tenant-wide access
+  - name: "allow-from-tenants-by-default"
+    action: "Allow"
+    to:
+    - namespaces:
+        matchLabels:
+          gitops.ticq.dev/type: "tenant"
+
   # networks (oc get networks.config.openshift.io cluster -o yaml)
   - name: "deny-cluster-network"
     action: "Deny"
