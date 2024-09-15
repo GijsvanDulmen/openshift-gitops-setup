@@ -9,15 +9,12 @@ spec:
   hosts:
   - "{{ $service.host }}"
   ports:
-  {{- if eq ($service.to | default "https") "https" }}
   - number: 443
     name: tls
     protocol: TLS
-  {{- else }}
   - number: 80
     name: http
     protocol: HTTP
-  {{- end }}
   resolution: DNS
 ---
 apiVersion: gateway.networking.k8s.io/v1alpha2
