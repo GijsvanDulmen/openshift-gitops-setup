@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: curl
+  annotations:
+    sidecar.istio.io/proxyCPU: "200m"
+    sidecar.istio.io/proxyCPULimit: "300m"
+    sidecar.istio.io/proxyMemory: "30Mi"
+    sidecar.istio.io/proxyMemoryLimit: "100Mi"
+spec:
+  containers:
+  - name: curl
+    image: alpine/curl
+    command:
+      - /bin/sh
+      - -c
+      - "sleep 365d"
+    securityContext:
+      allowPrivilegeEscalation: false
+      privileged: false
+      runAsNonRoot: true
+      capabilities:
+       drop:
+         - ALL
+      seccompProfile:
+        type: RuntimeDefault
+    resources:
+      limits:
+        cpu: "400m"
+        memory: "400Mi"
+      requests:
+        cpu: "50m"
+        memory: "100Mi"
