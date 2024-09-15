@@ -17,7 +17,6 @@ operators:
 - name: keepalived-operator
 - name: certmanager-operator
 - name: istio-operator
-- name: keepalived-operator
 
 clusterComponents:
 - name: user-sandbox
