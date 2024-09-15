@@ -14,90 +14,90 @@ spec:
     protocol: TLS
   resolution: DNS
 ---
-# apiVersion: gateway.networking.k8s.io/v1alpha2
-# kind: TLSRoute
-# metadata:
-#   name: "direct-to-{{ $service.name }}"
-#   namespace: "{{ $service.namespace | default "istio-egress" }}"
-# spec:
-#   parentRefs:
-#   - kind: ServiceEntry
-#     group: networking.istio.io
-#     name: "se-{{ $service.name }}"
-#   rules:
-#   - backendRefs:
-#     - group: ''	
-#       kind: Service
-#       name: egress-gateway-istio
-#       namespace: istio-egress
-#       port: 443
-#       weight: 1
-# ---
-# apiVersion: gateway.networking.k8s.io/v1alpha2
-# kind: TLSRoute
-# metadata:
-#   name: "forward-{{ $service.name }}-from-egress-gateway"
-#   namespace: "{{ $service.namespace | default "istio-egress" }}"
-# spec:
-#   parentRefs:
-#   - group: gateway.networking.k8s.io	
-#     kind: Gateway
-#     name: egress-gateway
-#     namespace: istio-egress
-#   hostnames:
-#   - "{{ $service.host }}"
-#   rules:
-#   - backendRefs:
-#     - kind: Hostname
-#       group: networking.istio.io
-#       name: "{{ $service.host }}"
-#       port: 443
-#       weight: 1
----
-apiVersion: networking.istio.io/v1
-kind: DestinationRule
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: TLSRoute
 metadata:
-  name: "egressgateway-for-{{ $service.name }}"
+  name: "direct-to-{{ $service.name }}"
   namespace: "{{ $service.namespace | default "istio-egress" }}"
 spec:
-  host: egress-gateway-istio.istio-egress.svc.cluster.local
-  subsets:
-  - name: "{{ $service.name }}"
+  parentRefs:
+  - kind: ServiceEntry
+    group: networking.istio.io
+    name: "se-{{ $service.name }}"
+  rules:
+  - backendRefs:
+    - group: ''	
+      kind: Service
+      name: egress-gateway-istio
+      namespace: istio-egress
+      port: 443
+      weight: 1
 ---
-apiVersion: networking.istio.io/v1
-kind: VirtualService
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: TLSRoute
 metadata:
-  name: "direct-{{ $service.name }}-through-eg"
+  name: "forward-{{ $service.name }}-from-egress-gateway"
   namespace: "{{ $service.namespace | default "istio-egress" }}"
 spec:
-  hosts:
+  parentRefs:
+  - group: gateway.networking.k8s.io	
+    kind: Gateway
+    name: egress-gateway
+    namespace: istio-egress
+  hostnames:
   - "{{ $service.host }}"
-  gateways:
-  - mesh
-  - istio-egress/egress-gateway
-  tls:
-  - match:
-    - gateways:
-      - mesh
+  rules:
+  - backendRefs:
+    - kind: Hostname
+      group: networking.istio.io
+      name: "{{ $service.host }}"
       port: 443
-      sniHosts:
-      - "{{ $service.host }}"
-    route:
-    - destination:
-        host: egress-gateway-istio.istio-egress.svc.cluster.local
-        subset: "{{ $service.name }}"
-        port:
-          number: 443
-  - match:
-    - gateways:
-      - istio-egress/egress-gateway
-      port: 443
-      sniHosts:
-      - "{{ $service.host }}"
-    route:
-    - destination:
-        host: "{{ $service.host }}"
-        port:
-          number: 443
-      weight: 100
+      weight: 1
+---
+# apiVersion: networking.istio.io/v1
+# kind: DestinationRule
+# metadata:
+#   name: "egressgateway-for-{{ $service.name }}"
+#   namespace: "{{ $service.namespace | default "istio-egress" }}"
+# spec:
+#   host: egress-gateway-istio.istio-egress.svc.cluster.local
+#   subsets:
+#   - name: "{{ $service.name }}"
+# ---
+# apiVersion: networking.istio.io/v1
+# kind: VirtualService
+# metadata:
+#   name: "direct-{{ $service.name }}-through-eg"
+#   namespace: "{{ $service.namespace | default "istio-egress" }}"
+# spec:
+#   hosts:
+#   - "{{ $service.host }}"
+#   gateways:
+#   - mesh
+#   - istio-egress/egress-gateway
+#   tls:
+#   - match:
+#     - gateways:
+#       - mesh
+#       port: 443
+#       sniHosts:
+#       - "{{ $service.host }}"
+#     route:
+#     - destination:
+#         host: egress-gateway-istio.istio-egress.svc.cluster.local
+#         subset: "{{ $service.name }}"
+#         port:
+#           number: 443
+#   - match:
+#     - gateways:
+#       - istio-egress/egress-gateway
+#       port: 443
+#       sniHosts:
+#       - "{{ $service.host }}"
+#     route:
+#     - destination:
+#         host: "{{ $service.host }}"
+#         port:
+#           number: 443
+#       weight: 100
 {{- end }}
