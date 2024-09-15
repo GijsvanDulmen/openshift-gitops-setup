@@ -11,6 +11,23 @@ spec:
   ingress:
   - from:
     - podSelector: {}
+{{- if eq $.Values.crossNamespaceNetwork "true" }}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-from-other-namespaces
+  namespace: "{{ $ns.namespaceName }}"
+spec:
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          gitops.ticq.dev/tenant: "{{ $.Values.name }}"
+  podSelector: {}
+  policyTypes:
+  - Ingress
+{{- end }}
 # ---
 # apiVersion: networking.k8s.io/v1
 # kind: NetworkPolicy

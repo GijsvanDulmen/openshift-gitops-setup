@@ -13,6 +13,10 @@ enableTenantNamespaceAutoProvisioning: "false"
 tenantProvisionedRepository: ""
 tenantProvisionedBranch: ""
 
+# If namespaces within a single tenant are able to access
+# each other
+crossNamespaceNetwork: "false"
+
 # ability to assign egress IP of all pods in the namespaces of the tenants
 # needs to be within CIDR range of k8s.ovn.org/host-cidrs annotation on node
 # see: https://docs.openshift.com/container-platform/4.16/networking/ovn_kubernetes_network_provider/configuring-egress-ips-ovn.html#nw-egress-ips-considerations_configuring-egress-ips-ovn
