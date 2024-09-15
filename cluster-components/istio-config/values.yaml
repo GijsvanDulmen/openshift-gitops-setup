@@ -6,7 +6,7 @@ egressGatewayIp: "192.168.3.201"
 egressServices:
 - name: tweakers-net
   host: "tweakers.net"
-  # namespace: team-backend-accept
+  namespace: team-backend-accept
 - name: external-test-service
   host: "192.168.1.184"
-  # namespace: team-backend-accept
+  namespace: team-backend-accept
