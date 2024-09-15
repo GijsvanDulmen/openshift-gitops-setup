@@ -57,7 +57,11 @@ spec:
     - kind: Hostname
       group: networking.istio.io
       name: "{{ $service.host }}"
+      {{- if eq ($service.to | default "https") "https" }}
       port: 443
+      {{- else }}
+      port: 80
+      {{- end }}
       weight: 1
 ---
 # apiVersion: networking.istio.io/v1
