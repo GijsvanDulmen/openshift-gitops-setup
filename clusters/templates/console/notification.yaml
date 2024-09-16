@@ -1,18 +1,5 @@
----
-apiVersion: console.openshift.io/v1
-kind: ConsoleNotification
-metadata:
-  name: example
-spec:
-  text: Hi! Welcome to this pretty nice cluster!
-  location: BannerTop 
-  link:
-    href: 'https://www.example.com'
-    text: Optional link text
-  color: '#fff'
-  backgroundColor: '#0088ce'
----
 {{- if ne $.Values.maintenanceMessage "" }}
+---
 apiVersion: console.openshift.io/v1
 kind: ConsoleNotification
 metadata:
