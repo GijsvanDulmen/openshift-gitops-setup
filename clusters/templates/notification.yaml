@@ -11,3 +11,18 @@ spec:
     text: Optional link text
   color: '#fff'
   backgroundColor: '#0088ce'
+---
+{{- if ne $.Values.maintenanceMessage "" }}
+apiVersion: console.openshift.io/v1
+kind: ConsoleNotification
+metadata:
+  name: maintenance
+spec:
+  text: "{{ $.Values.maintenanceMessage }}"
+  location: BannerTop 
+  link:
+    href: 'https://platform.internal.domain'
+    text: More information
+  color: '#fff'
+  backgroundColor: '#ff2c2c'
+{{- end }}

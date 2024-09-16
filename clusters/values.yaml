@@ -10,6 +10,8 @@
 # override per cluster!
 ingressDomain: "cloud.ticq.org"
 
+maintenanceMessage: "Maintenance at 19:00 at 16 september! Downtime to be expected"
+
 operators:
 - name: namespace-configuration-operator
 - name: descheduler
