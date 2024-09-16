@@ -1,0 +1,24 @@
+# Testing this out instead of the operators helm chart
+# Not visible in 4.16 UI yet
+---
+apiVersion: olm.operatorframework.io/v1alpha1
+kind: ClusterExtension
+metadata:
+  name: quay-operator
+spec:
+  packageName: quay-operator
+  channel: stable-3.12
+  installNamespace: quay-operator
+---
+apiVersion: catalogd.operatorframework.io/v1alpha1
+kind: Catalog
+metadata:
+  name: redhat-operators
+spec:
+  source:
+    image:
+      ref: registry.redhat.io/redhat/redhat-operator-index:v4.16 
+      pullSecret: pull-secret
+      pollInterval: 12h
+    type: image
+
