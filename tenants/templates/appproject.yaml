@@ -11,9 +11,31 @@ spec:
   destinations:
   {{- $namespaces := (include "tenants.namespaces" .) | fromYamlArray -}}
   {{- range $ns := $namespaces }}
-  - namespace: "{{ $ns.namespaceName }}"
+  - name: "{{ $ns.namespaceName }}"
+    namespace: "{{ $ns.namespaceName }}"
     server: https://kubernetes.default.svc
   {{- end }}
+  roles:
+    - description: Group for tenant
+      groups:
+        - tenant-{{ $.Values.name }}
+      name: tenant-{{ $.Values.name }}
+      policies:
+        # we use applicationsets!
+        # - p, proj:{{ $appProjectName }}:production-rollout, applications, create, {{ $appProjectName }}/*, allow
+        # - p, proj:{{ $appProjectName }}:production-rollout, applications, update, {{ $appProjectName }}/*, allow
+        # - p, proj:{{ $appProjectName }}:production-rollout, applications, delete, {{ $appProjectName }}/*, allow
+
+        - p, proj:{{ $appProjectName }}:production-rollout, applications, get, {{ $appProjectName }}/*, allow
+        - p, proj:{{ $appProjectName }}:production-rollout, applications, sync, {{ $appProjectName }}/*, allow
+        - p, proj:{{ $appProjectName }}:production-rollout, applications, override, {{ $appProjectName }}/*, allow
+        
+        # extra added
+        - p, proj:{{ $appProjectName }}:production-rollout, logs, get, {{ $appProjectName }}/*, allow
+        - p, proj:{{ $appProjectName }}:production-rollout, repositories, get, {{ $appProjectName }}/*, allow
+
+        # p, role:tenant-{{ $tenant.name }}, clusters, get, *, allow
+        
 # no cluster resource whitelist allowed
 #   clusterResourceWhitelist:
 #   - group: '*'
