@@ -6,6 +6,12 @@ metadata:
   name: "{{ $appProjectName }}"
   namespace: tenant-gitops
 spec:
+  # make this less obviously!
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  
+  # allow all because...
   sourceRepos:
   - '*'
   destinations:
@@ -22,17 +28,17 @@ spec:
       name: tenant-{{ $.Values.name }}
       policies:
         # we use applicationsets!
-        # - p, proj:{{ $appProjectName }}:production-rollout, applications, create, {{ $appProjectName }}/*, allow
-        # - p, proj:{{ $appProjectName }}:production-rollout, applications, update, {{ $appProjectName }}/*, allow
-        # - p, proj:{{ $appProjectName }}:production-rollout, applications, delete, {{ $appProjectName }}/*, allow
+        # - p, proj:{{ $appProjectName }}:tenant-{{ $.Values.name }}, applications, create, {{ $appProjectName }}/*, allow
+        # - p, proj:{{ $appProjectName }}:tenant-{{ $.Values.name }}, applications, update, {{ $appProjectName }}/*, allow
+        # - p, proj:{{ $appProjectName }}:tenant-{{ $.Values.name }}, applications, delete, {{ $appProjectName }}/*, allow
 
-        - p, proj:{{ $appProjectName }}:production-rollout, applications, get, {{ $appProjectName }}/*, allow
-        - p, proj:{{ $appProjectName }}:production-rollout, applications, sync, {{ $appProjectName }}/*, allow
-        - p, proj:{{ $appProjectName }}:production-rollout, applications, override, {{ $appProjectName }}/*, allow
+        - p, proj:{{ $appProjectName }}:tenant-{{ $.Values.name }}, applications, get, {{ $appProjectName }}/*, allow
+        - p, proj:{{ $appProjectName }}:tenant-{{ $.Values.name }}, applications, sync, {{ $appProjectName }}/*, allow
+        - p, proj:{{ $appProjectName }}:tenant-{{ $.Values.name }}, applications, override, {{ $appProjectName }}/*, allow
         
         # extra added
-        - p, proj:{{ $appProjectName }}:production-rollout, logs, get, {{ $appProjectName }}/*, allow
-        - p, proj:{{ $appProjectName }}:production-rollout, repositories, get, {{ $appProjectName }}/*, allow
+        - p, proj:{{ $appProjectName }}:tenant-{{ $.Values.name }}, logs, get, {{ $appProjectName }}/*, allow
+        - p, proj:{{ $appProjectName }}:tenant-{{ $.Values.name }}, repositories, get, {{ $appProjectName }}/*, allow
 
         # p, role:tenant-tenant-name, clusters, get, *, allow
         
