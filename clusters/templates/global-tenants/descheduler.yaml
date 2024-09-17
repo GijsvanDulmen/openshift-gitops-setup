@@ -17,6 +17,9 @@ spec:
     podLifetime: 1m
     namespaces:
       included:
+      # Unfortunately descheduler can not use matchLabels
+      # Or something similar
+      # We could opt for not using a whitelist and use a blacklist
       {{- range $tenant := $tenants }}
       {{- range $ns := $tenant.namespaces }}
       - "{{ $tenant.name }}-{{ $ns.name }}"
