@@ -34,7 +34,7 @@ spec:
         - p, proj:{{ $appProjectName }}:production-rollout, logs, get, {{ $appProjectName }}/*, allow
         - p, proj:{{ $appProjectName }}:production-rollout, repositories, get, {{ $appProjectName }}/*, allow
 
-        # p, role:tenant-{{ $tenant.name }}, clusters, get, *, allow
+        # p, role:tenant-tenant-name, clusters, get, *, allow
         
 # no cluster resource whitelist allowed
 #   clusterResourceWhitelist:
