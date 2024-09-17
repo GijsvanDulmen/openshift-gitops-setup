@@ -15,7 +15,7 @@ metadata:
 
   {{- if $operator.syncWave }} 
   annotations:
-    argocd.argoproj.io/sync-wave: "{{ $operator.syncWave | default "-1" }}"
+    argocd.argoproj.io/sync-wave: "{{ $operator.syncWave | default "-2" }}"
   {{- end }}
 spec:
   destination:

@@ -8,10 +8,6 @@ metadata:
   name: "{{ print $tenant.name "-tenant" }}"
   namespace: "{{ $.Values.gitopsNamespace }}"
 
-  # after cluster components
-  annotations:
-    argocd.argoproj.io/sync-wave: "3"
-
   {{- if ne $.Values.disableFinalizers "yes" }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io

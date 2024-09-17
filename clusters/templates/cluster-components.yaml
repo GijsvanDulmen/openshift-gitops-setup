@@ -12,7 +12,7 @@ metadata:
 
   {{- if $component.syncWave }} 
   annotations:
-    argocd.argoproj.io/sync-wave: "{{ $component.syncWave | default "0" }}"
+    argocd.argoproj.io/sync-wave: "{{ $component.syncWave | default "-1" }}"
   {{- end }}
 spec:
   destination:
