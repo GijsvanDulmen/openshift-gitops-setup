@@ -79,7 +79,6 @@ spec:
       g, cluster-admins, role:admin
       g, system:cluster-admins, role:admin
 
-      # improve this!
       g, system:authenticated, role:read-only-clusters
     scopes: "[groups]"
 
