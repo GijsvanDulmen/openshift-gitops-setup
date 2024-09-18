@@ -3,7 +3,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: tenant-edit
 rules:
-{{- $resources := (include "clusters.get-tenants" .) | fromYamlArray }}
+{{- $resources := (include "clusters.get-tenant-resources" .) | fromYamlArray }}
 {{- range $resource := $resources }}
 - verbs:
   {{- range $verb := $resource.verbs }}
