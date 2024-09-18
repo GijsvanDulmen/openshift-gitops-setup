@@ -8,8 +8,8 @@ metadata:
 spec:
   # make this less obviously!
   clusterResourceWhitelist:
-  - group: '*'
-    kind: '*'
+  - group: ''
+    kind: ''
   
   # allow all because...
   sourceRepos:
@@ -39,11 +39,4 @@ spec:
         # extra added
         - p, proj:{{ $appProjectName }}:tenant-{{ $.Values.name }}, logs, get, {{ $appProjectName }}/*, allow
         - p, proj:{{ $appProjectName }}:tenant-{{ $.Values.name }}, repositories, get, {{ $appProjectName }}/*, allow
-
-        # p, role:tenant-tenant-name, clusters, get, *, allow
-        
-# no cluster resource whitelist allowed
-#   clusterResourceWhitelist:
-#   - group: '*'
-#     kind: '*'
 
