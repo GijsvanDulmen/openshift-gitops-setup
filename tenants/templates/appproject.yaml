@@ -12,8 +12,7 @@ spec:
     kind: ''  
 
   namespaceResourceWhitelist:
-  {{- $resources := (include "clusters.get-tenant-resources" .) | fromYamlArray }}
-  {{- range $resource := $resources }}
+  {{- range $resource := $.Values.resources }}
   {{- if $resource.argoKinds }}
   {{- range $apiGroup := $resource.apiGroups }}
   {{- range $argoKind := $resource.argoKinds }}

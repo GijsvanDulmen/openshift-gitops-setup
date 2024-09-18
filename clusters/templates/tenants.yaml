@@ -33,6 +33,9 @@ spec:
           value: "{{ $.Values.disableFinalizers }}"
         - name: "overrideTenants"
           value: "{{ $.Values.overrideTenants }}"
+        fileParameters:
+        - name: resources
+          value: ../tenant-resources.yaml
   {{- if eq $tenant.enableTenantNamespaceAutoProvisioning "true" }}
   - repoURL: "{{ $tenant.tenantProvisionedRepository }}"
     targetRevision: "{{ $tenant.tenantProvisionedBranch }}"
