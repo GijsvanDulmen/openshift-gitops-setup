@@ -24,6 +24,23 @@ list:
       # - pods/eviction # ??
     argoKinds: ["Secret", "ServiceAccount", "Pod", "Service", "ConfigMap", "PersistentVolumeClaim"]
   - verbs:
+    - "*"
+    apiGroups:
+    - gateway.networking.k8s.io
+    resources:
+    - httproutes
+    - tlsroutes
+    argoKinds: ["HTTPRoute", "TLSRoute"]
+  - verbs:
+    - "*"
+    apiGroups:
+    - monitoring.coreos.com
+    resources:
+    - servicemonitors
+    - prometheusrules
+    - podmonitor
+    argoKinds: ["ServiceMonitor", "PrometheusRule", "PodMonitor"]
+  - verbs:
       - "*"
     apiGroups:
       - apps
