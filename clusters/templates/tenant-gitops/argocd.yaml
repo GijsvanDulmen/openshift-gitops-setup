@@ -62,8 +62,6 @@ spec:
     # default anyone should have zero policies applied
     # and therefore no access to anything - not even read-only
     defaultPolicy: ""
-
-{{- $tenants := (include "clusters.get-tenants" .) | fromYamlArray }}
     policy: |
       p, role:admin, applications, *, */*, allow
       p, role:admin, applicationsets, *, */*, allow
@@ -90,6 +88,23 @@ spec:
       requests:
         cpu: 50m
         memory: 256Mi
+
+  resourceInclusions: |
+    {{- $resources := (include "clusters.get-tenant-resources" .) | fromYamlArray }}
+    {{- range $resource := $resources }}
+    {{- if $resource.argoKinds }}
+    - apiGroups:
+      {{- range $apiGroup := $resource.apiGroups }}
+      - "{{ $apiGroup }}"
+      {{- end }}
+      kinds:
+      {{- range $argoKind := $resource.argoKinds }}
+      - "{{ $argoKind }}"
+      {{- end }}
+      clusters:
+      - '*'
+    {{- end }}
+    {{- end }}
 
   resourceExclusions: |
     - apiGroups:
