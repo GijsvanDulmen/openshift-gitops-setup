@@ -9,7 +9,20 @@ spec:
   # make this less obviously!
   clusterResourceWhitelist:
   - group: ''
-    kind: ''
+    kind: ''  
+
+  namespaceResourceWhitelist:
+  {{- $resources := (include "clusters.get-tenant-resources" .) | fromYamlArray }}
+  {{- range $resource := $resources }}
+  {{- if $resource.argoKinds }}
+  {{- range $apiGroup := $resource.apiGroups }}
+  {{- range $argoKind := $resource.argoKinds }}
+  - group: "{{ $apiGroup }}"
+    kind: "{{ $argoKind }}"
+  {{- end }}
+  {{- end }}
+  {{- end }}
+  {{- end }}
   
   # allow all because...
   sourceRepos:
