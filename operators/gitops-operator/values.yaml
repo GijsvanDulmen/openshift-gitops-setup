@@ -8,7 +8,7 @@ operators-installer:
       name: openshift-gitops-operator
       sourceNamespace: openshift-marketplace
       source: redhat-operators
-      csv: openshift-gitops-operator.v1.13.1
+      csv: openshift-gitops-operator.v1.14.0
       namespace: openshift-gitops-operator
       automaticIntermediateManualUpgrades: true
       config:
