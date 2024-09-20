@@ -20,7 +20,6 @@ operators:
 - name: certmanager-operator
 - name: istio-operator
 - name: gitops-operator
-  releaseName: release-name
 
 clusterComponents:
 - name: user-sandbox
