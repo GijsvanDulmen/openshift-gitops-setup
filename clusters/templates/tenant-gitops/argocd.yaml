@@ -90,8 +90,7 @@ spec:
         memory: 256Mi
 
   resourceInclusions: |
-    {{- $resources := (include "clusters.get-tenant-resources" .) | fromYamlArray }}
-    {{- range $resource := $resources }}
+    {{- range $resource := $.Values.tenantResources }}
     {{- if $resource.argoKinds }}
     - apiGroups:
       {{- range $apiGroup := $resource.apiGroups }}

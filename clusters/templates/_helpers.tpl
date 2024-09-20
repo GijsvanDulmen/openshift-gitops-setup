@@ -9,8 +9,3 @@
 {{- end -}}
 {{- $tenants | toYaml -}}
 {{- end -}}
-
-{{- define "clusters.get-tenant-resources" -}}
-{{- $resources := $.Files.Get "tenant-resources.yaml" | fromYaml }}
-{{- $resources.tenantResources | toYaml -}}
-{{- end -}}
