@@ -12,7 +12,7 @@ spec:
     kind: ''  
 
   namespaceResourceWhitelist:
-  {{- range $resource := $.Values.resources }}
+  {{- range $resource := $.Values.tenantResources }}
   {{- if $resource.argoKinds }}
   {{- range $apiGroup := $resource.apiGroups }}
   {{- range $argoKind := $resource.argoKinds }}

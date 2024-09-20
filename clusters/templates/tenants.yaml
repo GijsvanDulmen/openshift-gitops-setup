@@ -24,6 +24,7 @@ spec:
         - $values/namespaces.yaml
         {{- end }}
         - ../clusters/tenants/defaults.yaml
+        - ../clusters/tenant-resources.yaml
         - ../clusters/cluster-tenants/{{ $.Values.clusterName }}.yaml
         - ../clusters/tenants/{{ $.Values.clusterName }}/{{ $tenant.name }}.yaml
         parameters:
@@ -33,10 +34,6 @@ spec:
           value: "{{ $.Values.disableFinalizers }}"
         - name: "overrideTenants"
           value: "{{ $.Values.overrideTenants }}"
-        valuesObject:
-          resources:
-            {{- $resources := (include "clusters.get-tenant-resources" $) | fromYamlArray }}
-            {{- $resources | toYaml | nindent 12 }}
   {{- if eq $tenant.enableTenantNamespaceAutoProvisioning "true" }}
   - repoURL: "{{ $tenant.tenantProvisionedRepository }}"
     targetRevision: "{{ $tenant.tenantProvisionedBranch }}"

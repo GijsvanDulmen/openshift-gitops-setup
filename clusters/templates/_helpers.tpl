@@ -12,5 +12,5 @@
 
 {{- define "clusters.get-tenant-resources" -}}
 {{- $resources := $.Files.Get "tenant-resources.yaml" | fromYaml }}
-{{- $resources.list | toYaml -}}
+{{- $resources.tenantResources | toYaml -}}
 {{- end -}}

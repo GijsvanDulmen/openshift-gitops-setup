@@ -2,7 +2,7 @@
 # copied from OpenShift edit role
 # but does not contain aggregation to make sure
 # we don't by accident add rights to tenants
-list:
+tenantResources:
   - verbs:
       - "*"
     apiGroups:
