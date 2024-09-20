@@ -31,7 +31,9 @@ spec:
       - values.yaml
       - "clusters/{{ $.Values.clusterName }}.yaml"
       ignoreMissingValueFiles: true
-
+      {{- if $operator.releaseName }}
+      releaseName: "{{ $operator.releaseName }}"
+      {{- end }}
   syncPolicy:
     automated:
       prune: true
