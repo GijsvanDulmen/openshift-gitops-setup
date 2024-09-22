@@ -17,7 +17,7 @@ spec:
     helm:
       valueFiles:
       - clusters/{{ $.Values.cluster }}.yaml
-      - clusters/tenant-resources.yaml
+      - tenant-resources.yaml
       parameters:
       - name: "disableAutoSync"
         value: "{{ $.Values.disableAutoSync }}"

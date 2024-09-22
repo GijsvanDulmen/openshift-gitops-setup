@@ -12,9 +12,9 @@ kubectl get crd gateways.gateway.networking.k8s.io &> /dev/null || \
 # install gitops operators
 cd ../operators/gitops-operator
 helm dependency build
-helm template . -f ./values.yaml --release-name gitops-operator | kubectl apply -f -
+helm template . -f ./values.yaml --name-template gitops-operator | kubectl apply -f -
 
-cd ../bootstrap/
+cd ../../bootstrap/
 sleep 5
 
 source secrets.sh
