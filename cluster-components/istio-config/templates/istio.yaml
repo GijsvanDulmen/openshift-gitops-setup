@@ -8,6 +8,7 @@ spec:
     meshConfig:
       accessLogFile: /dev/stdout
     pilot:
+      autoscaleMin: 2
       replicaCount: 2
       env:
         # needed for egress TLSRoute functionality
