@@ -8,12 +8,29 @@ metadata:
 spec:
   replicas: 1 # should be more obviously
 
+  # only TLS 1.3
+  tlsSecurityProfile:
+    type: Modern
+
   tuningOptions:
     reloadInterval: 0s
     clientTimeout: 30s # = default
     serverTimeout: 30s # = default
     threadCount: 4 # = default
     maxConnections: 50000 # 50000 = default
+
+  tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/infra
+      value: reserved
+    - effect: NoExecute
+      key: node-role.kubernetes.io/infra
+      value: reserved
+
+  nodePlacement:
+    nodeSelector:
+      matchLabels:
+        node-role.kubernetes.io/infra: ""  
 
   # tenant namespaces cant use the default
   namespaceSelector:
