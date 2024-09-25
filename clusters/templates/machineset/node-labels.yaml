@@ -23,6 +23,7 @@ spec:
 #     value: ""
   taints: 
     - key: node-role.kubernetes.io/infra
+      value: reserved
       effect: NoSchedule
 ---
 apiVersion: v1
@@ -40,6 +41,7 @@ metadata:
 spec:
   taints: 
     - key: node-role.kubernetes.io/infra
+      value: reserved
       effect: NoSchedule
 ---
 apiVersion: v1
