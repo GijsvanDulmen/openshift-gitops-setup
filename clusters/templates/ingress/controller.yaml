@@ -23,13 +23,13 @@ spec:
       matchLabels:
         node-role.kubernetes.io/infra: ""  
     
-  tolerations:
-    - effect: NoSchedule
-      key: node-role.kubernetes.io/infra
-      value: reserved
-    - effect: NoExecute
-      key: node-role.kubernetes.io/infra
-      value: reserved
+    tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/infra
+        value: reserved
+      - effect: NoExecute
+        key: node-role.kubernetes.io/infra
+        value: reserved
 
   # VIP via keepalived operator
   endpointPublishingStrategy: 

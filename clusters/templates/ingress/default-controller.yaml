@@ -19,18 +19,18 @@ spec:
     threadCount: 4 # = default
     maxConnections: 50000 # 50000 = default
 
-  tolerations:
+  nodePlacement:
+    nodeSelector:
+      matchLabels:
+        node-role.kubernetes.io/infra: ""  
+
+    tolerations:
     - effect: NoSchedule
       key: node-role.kubernetes.io/infra
       value: reserved
     - effect: NoExecute
       key: node-role.kubernetes.io/infra
       value: reserved
-
-  nodePlacement:
-    nodeSelector:
-      matchLabels:
-        node-role.kubernetes.io/infra: ""  
 
   # tenant namespaces cant use the default
   namespaceSelector:
