@@ -1,0 +1,18 @@
+operators-installer:
+
+  installPlanApproverAndVerifyJobsImage: registry.redhat.io/openshift4/ose-cli:v4.15
+
+  operators:
+    - channel: stable
+      installPlanApproval: "Manual"
+      name: compliance-operator
+      sourceNamespace: openshift-marketplace
+      source: redhat-operators
+      csv: compliance-operator.v1.5.1
+      namespace: openshift-compliance
+      automaticIntermediateManualUpgrades: true
+
+  operatorGroups:
+  - name: openshift-compliance
+    createNamespace: true
+    targetOwnNamespace: false

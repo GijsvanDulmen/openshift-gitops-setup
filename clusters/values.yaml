@@ -20,6 +20,7 @@ operators:
 - name: certmanager-operator
 - name: istio-operator
 - name: gitops-operator
+- name: compliance-operator
 
 clusterComponents:
 - name: user-sandbox
