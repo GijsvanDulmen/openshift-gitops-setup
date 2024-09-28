@@ -1,0 +1,18 @@
+operators-installer:
+
+  installPlanApproverAndVerifyJobsImage: registry.redhat.io/openshift4/ose-cli:v4.15
+
+  operators:
+    - channel: stable
+      installPlanApproval: "Manual"
+      name: local-storage-operator-operator
+      sourceNamespace: openshift-marketplace
+      source: redhat-operators
+      csv: local-storage-operator.v4.16.0-202409051837
+      namespace: openshift-local-storage
+      automaticIntermediateManualUpgrades: true
+
+  operatorGroups:
+  - name: openshift-local-storage
+    createNamespace: true
+    targetOwnNamespace: false

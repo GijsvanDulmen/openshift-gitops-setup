@@ -21,6 +21,7 @@ operators:
 - name: istio-operator
 - name: gitops-operator
 - name: compliance-operator
+- name: local-storage-operator
 
 clusterComponents:
 - name: user-sandbox
