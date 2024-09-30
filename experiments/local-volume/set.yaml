@@ -1,0 +1,29 @@
+apiVersion: local.storage.openshift.io/v1alpha1
+kind: LocalVolumeSet
+metadata:
+  name: autodetect-extra-disks-on-workers
+  namespace: "openshift-local-storage"
+spec:
+  nodeSelector:
+    nodeSelectorTerms:
+      - matchExpressions:
+          - key: node-role.kubernetes.io/worker
+            operator: Exists
+  storageClassName: local-sc 
+  volumeMode: Filesystem
+  fsType: xfs
+  maxDeviceCount: 10
+  deviceInclusionSpec:
+    deviceTypes: 
+      - disk
+      - part
+    deviceMechanicalProperties:
+      - NonRotational
+    minSize: 10G
+    maxSize: 100G
+    models:
+      - QEMU HARDDISK
+    vendors:
+      - QEMU
+
+
