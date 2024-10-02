@@ -1,0 +1,18 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: master
+  name: 100-reboot
+spec:
+  config:
+    ignition:
+      version: 3.4.0
+    storage:
+      files:
+        - contents:
+            compression: ""
+            # update this to reboot the machines
+            source: data:111
+          mode: 420
+          path: /home/reboot
