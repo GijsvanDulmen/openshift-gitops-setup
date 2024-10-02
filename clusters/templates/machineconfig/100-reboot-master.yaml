@@ -13,6 +13,6 @@ spec:
         - contents:
             compression: ""
             # update this to reboot the machines
-            source: data:111
+            source: data:,111
           mode: 420
           path: /home/reboot
