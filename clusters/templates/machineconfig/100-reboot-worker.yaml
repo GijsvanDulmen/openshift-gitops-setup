@@ -3,7 +3,7 @@ kind: MachineConfig
 metadata:
   labels:
     machineconfiguration.openshift.io/role: worker
-  name: 100-reboot
+  name: 100-reboot-worker
 spec:
   config:
     ignition:
