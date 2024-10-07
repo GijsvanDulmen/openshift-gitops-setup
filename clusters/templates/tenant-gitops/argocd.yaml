@@ -162,6 +162,12 @@ spec:
     # loglevel
     # logLevel: "info" # could be set to debug if you want
 
+    # share load if you have multiple clusters
+    # because we have not - we really can't
+    # sharding:
+    #   enabled: true
+    #   replicas: 2
+
     # more time from repo server for large
     # helm charts and slow communication towards azure devops
     env:
