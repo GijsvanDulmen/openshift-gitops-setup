@@ -146,6 +146,7 @@ spec:
       requests:
         cpu: 50m
         memory: 50Mi
+
   controller:
     processors:
       # See https://argo-cd.readthedocs.io/en/stable/operator-manual/high_availability/#argocd-application-controller
@@ -173,6 +174,13 @@ spec:
     env:
       - name: ARGOCD_APPLICATION_CONTROLLER_REPO_SERVER_TIMEOUT_SECONDS
         value: "450"
+
+      # https://cnoe.io/blog/argo-cd-application-scalability
+      # https://aws.amazon.com/blogs/opensource/argo-cd-application-controller-scalability-testing-on-amazon-eks/
+      - name: "ARGOCD_K8S_CLIENT_QPS"
+        value: "100"
+      - name: "ARGOCD_K8S_CLIENT_BURST"
+        value: "200"
 
     resources:
       limits:
