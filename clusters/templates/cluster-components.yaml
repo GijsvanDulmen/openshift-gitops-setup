@@ -26,8 +26,8 @@ spec:
     helm:
       valueFiles:
       - values.yaml
-      - "cluster-type/{{ $.Values.clusterType }}.yaml"
-      - "cluster-instance/{{ $.Values.clusterInstance }}.yaml"
+      - config/{{ $.Values.clusterType }}/values.yaml
+      - config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/values.yaml
       ignoreMissingValueFiles: true
 
   syncPolicy:
