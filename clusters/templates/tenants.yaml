@@ -23,10 +23,11 @@ spec:
         {{- if eq $tenant.enableTenantNamespaceAutoProvisioning "true" }}
         - $values/namespaces.yaml
         {{- end }}
-        - ../clusters/tenants/defaults.yaml
-        - ../clusters/tenant-resources.yaml
-        - ../clusters/cluster-tenants/{{ $.Values.clusterInstance }}.yaml
-        - ../clusters/tenants/{{ $.Values.clusterInstance }}/{{ $tenant.name }}.yaml
+
+        - ../clusters/config/tenants-defaults.yaml
+        - ../clusters/config/tenant-resources.yaml
+        - ../clusters/config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/tenants/values.yaml
+        - ../clusters/config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/tenants/{{ $tenant.name }}/values.yaml
         parameters:
         - name: "disableAutoSync"
           value: "{{ $.Values.disableAutoSync }}"
