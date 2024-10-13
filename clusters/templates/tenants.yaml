@@ -25,8 +25,8 @@ spec:
         {{- end }}
         - ../clusters/tenants/defaults.yaml
         - ../clusters/tenant-resources.yaml
-        - ../clusters/cluster-tenants/{{ $.Values.clusterName }}.yaml
-        - ../clusters/tenants/{{ $.Values.clusterName }}/{{ $tenant.name }}.yaml
+        - ../clusters/cluster-tenants/{{ $.Values.clusterInstance }}.yaml
+        - ../clusters/tenants/{{ $.Values.clusterInstance }}/{{ $tenant.name }}.yaml
         parameters:
         - name: "disableAutoSync"
           value: "{{ $.Values.disableAutoSync }}"

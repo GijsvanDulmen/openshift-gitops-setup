@@ -29,8 +29,10 @@ spec:
     helm:
       valueFiles:
       - values.yaml
-      - "clusters/{{ $.Values.clusterName }}.yaml"
+      - "cluster-type/{{ $.Values.clusterType }}.yaml"
+      - "cluster-instance/{{ $.Values.clusterInstance }}.yaml"
       ignoreMissingValueFiles: true
+      
       {{- if $operator.releaseName }}
       releaseName: "{{ $operator.releaseName }}"
       {{- end }}
