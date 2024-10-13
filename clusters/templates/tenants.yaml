@@ -24,7 +24,7 @@ spec:
         - $values/namespaces.yaml
         {{- end }}
 
-        - ../clusters/config/tenants-defaults.yaml
+        - ../clusters/config/tenant-defaults.yaml
         - ../clusters/config/tenant-resources.yaml
         - ../clusters/config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/tenants/values.yaml
         - ../clusters/config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/tenants/{{ $tenant.name }}/values.yaml
