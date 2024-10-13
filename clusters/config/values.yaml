@@ -7,10 +7,8 @@
 # disableAutoSync: "no"
 # overrideTenants: "no"
 
-# override per cluster!
-ingressDomain: "cloud.ticq.org"
-
-maintenanceMessage: "Maintenance at 19:00 at 16 september! Downtime to be expected"
+# override to create a maintenance message
+maintenanceMessage: ""
 
 operators:
 - name: namespace-configuration-operator

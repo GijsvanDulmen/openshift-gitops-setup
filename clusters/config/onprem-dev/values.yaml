@@ -1,1 +1,5 @@
 clusterType: onprem-dev
+
+ingressDomain: "cloud.ticq.org"
+
+maintenanceMessage: "Maintenance at 19:00 at 16 september! Downtime to be expected"
