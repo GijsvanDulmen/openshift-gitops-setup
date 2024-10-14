@@ -4,6 +4,8 @@ kind: ArgoCD
 metadata:
   name: second-gitops
   namespace: second-gitops
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   # keep this disabled for security reasons
   disableAdmin: true

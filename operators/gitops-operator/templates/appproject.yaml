@@ -4,6 +4,8 @@ kind: AppProject
 metadata:
   name: cluster
   namespace: second-gitops
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   clusterResourceWhitelist:
     - group: '*'
