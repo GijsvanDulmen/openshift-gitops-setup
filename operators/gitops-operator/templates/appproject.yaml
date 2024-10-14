@@ -3,9 +3,10 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   name: cluster
-  namespace: second-gitops
+  namespace: "{{ $.Values.gitopsNamespace }}"
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-options: Delete=false
 spec:
   clusterResourceWhitelist:
     - group: '*'
@@ -15,3 +16,10 @@ spec:
       server: '*'
   sourceRepos:
     - '*'
+  {{- if eq $.Values.disableAutoSync "yes" }}
+  syncWindows:
+  - kind: deny
+    schedule: '5 0 * * *'
+    duration: 24h
+    manualSync: true
+  {{- end }}
