@@ -2,8 +2,8 @@
 apiVersion: argoproj.io/v1beta1
 kind: ArgoCD
 metadata:
-  name: second-gitops
-  namespace: second-gitops
+  name: "{{ $.Values.gitopsNamespace }}"
+  namespace: "{{ $.Values.gitopsNamespace }}"
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:

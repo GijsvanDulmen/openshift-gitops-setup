@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: cluster-resources
-  namespace: second-gitops
+  namespace: "{{ $.Values.gitopsNamespace }}"
   finalizers:
   - resources-finalizer.argocd.argoproj.io
   annotations:
@@ -31,7 +31,7 @@ spec:
       - name: gitRepo
         value: $ARGOCD_APP_SOURCE_REPO_URL
       - name: gitopsNamespace
-        value: "second-gitops"
+        value: "{{ $.Values.gitopsNamespace }}"
       - name: "disableFinalizers"
         value: "no"
       - name: "overrideTenants"

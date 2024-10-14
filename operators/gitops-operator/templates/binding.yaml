@@ -2,11 +2,11 @@
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: second-gitops-argocd-application-controller-allow-list
+  name: "{{ $.Values.gitopsNamespace }}-argocd-application-controller-allow-list"
 subjects:
   - kind: ServiceAccount
-    name: second-gitops-argocd-application-controller
-    namespace: second-gitops
+    name: "{{ $.Values.gitopsNamespace }}-argocd-application-controller"
+    namespace: "{{ $.Values.gitopsNamespace }}"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
