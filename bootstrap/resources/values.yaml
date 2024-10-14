@@ -1,6 +1,0 @@
-# to bootstrap
-clusterInstance: onprem-dev-1
-clusterType: onprem-dev
-
-# defaults
-disableAutoSync: "no"
