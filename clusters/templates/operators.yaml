@@ -22,20 +22,23 @@ spec:
     namespace: "{{ $operator.namespace | default "default" }}"
     server: https://kubernetes.default.svc
   project: cluster
-  source:
-    path: "operators/{{ $operator.name }}"
-    repoURL: "{{ $.Values.gitRepo }}"
-    targetRevision: "{{ $.Values.targetRevision }}"
-    helm:
-      valueFiles:
-      - values.yaml
-      - config/{{ $.Values.clusterType }}/values.yaml
-      - config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/values.yaml
-      ignoreMissingValueFiles: true
+  sources:
+    - path: "operators/{{ $operator.name }}"
+      repoURL: "{{ $.Values.gitRepo }}"
+      targetRevision: "{{ $.Values.targetRevision }}"
+      helm:
+        valueFiles:
+        - values.yaml
+        - $values/config/{{ $.Values.clusterType }}/values.yaml
+        - $values/config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/values.yaml
+        ignoreMissingValueFiles: true
 
-      {{- if $operator.releaseName }}
-      releaseName: "{{ $operator.releaseName }}"
-      {{- end }}
+        {{- if $operator.releaseName }}
+        releaseName: "{{ $operator.releaseName }}"
+        {{- end }}
+    - repoURL: https://github.com/GijsvanDulmen/openshift-gitops-config
+      targetRevision: "{{ $.Values.targetRevision }}"
+      ref: values
   syncPolicy:
     automated:
       prune: true

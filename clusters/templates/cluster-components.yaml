@@ -19,16 +19,19 @@ spec:
     namespace: "{{ $component.namespace | default "default" }}"
     server: https://kubernetes.default.svc
   project: cluster
-  source:
-    path: "cluster-components/{{ $component.name }}"
-    repoURL: "{{ $.Values.gitRepo }}"
-    targetRevision: "{{ $.Values.targetRevision }}"
-    helm:
-      valueFiles:
-      - values.yaml
-      - config/{{ $.Values.clusterType }}/values.yaml
-      - config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/values.yaml
-      ignoreMissingValueFiles: true
+  sources:
+    - path: "cluster-components/{{ $component.name }}"
+      repoURL: "{{ $.Values.gitRepo }}"
+      targetRevision: "{{ $.Values.targetRevision }}"
+      helm:
+        valueFiles:
+        - values.yaml
+        - $values/config/{{ $.Values.clusterType }}/values.yaml
+        - $values/config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/values.yaml
+        ignoreMissingValueFiles: true
+    - repoURL: https://github.com/GijsvanDulmen/openshift-gitops-config
+      targetRevision: "{{ $.Values.targetRevision }}"
+      ref: values
 
   syncPolicy:
     automated:

@@ -20,13 +20,13 @@ spec:
     helm:
         valueFiles:
         {{- if eq $tenant.enableTenantNamespaceAutoProvisioning "true" }}
-        - $values/namespaces.yaml
+        - $tenants/namespaces.yaml
         {{- end }}
 
-        - ../clusters/config/tenant-defaults.yaml
-        - ../clusters/config/tenant-resources.yaml
-        - ../clusters/config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/tenants/values.yaml
-        - ../clusters/config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/tenants/{{ $name }}/values.yaml
+        - $values/config/tenant-defaults.yaml
+        - $values/config/tenant-resources.yaml
+        - $values/config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/tenants/values.yaml
+        - $values/config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/tenants/{{ $name }}/values.yaml
         parameters:
         - name: "disableAutoSync"
           value: "{{ $.Values.disableAutoSync }}"
@@ -37,8 +37,11 @@ spec:
   {{- if eq $tenant.enableTenantNamespaceAutoProvisioning "true" }}
   - repoURL: "{{ $tenant.tenantProvisionedRepository }}"
     targetRevision: "{{ $tenant.tenantProvisionedBranch }}"
-    ref: values
+    ref: tenants
   {{- end }}
+  - repoURL: https://github.com/GijsvanDulmen/openshift-gitops-config
+    targetRevision: "{{ $.Values.targetRevision }}"
+    ref: values
 
   destination:
     server: 'https://kubernetes.default.svc'

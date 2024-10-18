@@ -13,8 +13,8 @@ kubectl get crd gateways.gateway.networking.k8s.io &> /dev/null || \
 cd ../operators/gitops-operator
 helm dependency build
 helm template . \
-    -f config/onprem-dev/values.yaml \
-    -f config/onprem-dev/onprem-dev-1/values.yaml \
+    -f ../../openshift-gitops-config/config/onprem-dev/values.yaml \
+    -f ../../openshift-gitops-config/config/onprem-dev/onprem-dev-1/values.yaml \
     --name-template gitops-operator | kubectl apply -f -
 
 cd ../../bootstrap/

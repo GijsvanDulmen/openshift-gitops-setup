@@ -12,31 +12,34 @@ spec:
     namespace: default
     server: https://kubernetes.default.svc
   project: cluster
-  source:
-    path: clusters
-    repoURL: https://github.com/GijsvanDulmen/openshift-gitops-setup
-    targetRevision: HEAD
-    helm:
-      valueFiles:
-      - config/values.yaml
-      - config/{{ $.Values.clusterType }}/values.yaml
-      - config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/values.yaml
-      - config/tenant-resources.yaml
-      parameters:
-      - name: "disableAutoSync"
-        value: "{{ $.Values.disableAutoSync }}"
-      - name: appRevision
-        value: $ARGOCD_APP_REVISION
-      - name: targetRevision
-        value: $ARGOCD_APP_SOURCE_TARGET_REVISION
-      - name: gitRepo
-        value: $ARGOCD_APP_SOURCE_REPO_URL
-      - name: gitopsNamespace
-        value: "{{ $.Values.gitopsNamespace }}"
-      - name: "disableFinalizers"
-        value: "no"
-      - name: "overrideTenants"
-        value: "no"
+  sources:
+    - path: clusters
+      repoURL: https://github.com/GijsvanDulmen/openshift-gitops-setup
+      targetRevision: HEAD
+      helm:
+        valueFiles:
+        - $values/config/values.yaml
+        - $values/config/{{ $.Values.clusterType }}/values.yaml
+        - $values/config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/values.yaml
+        - $values/config/tenant-resources.yaml
+        parameters:
+        - name: "disableAutoSync"
+          value: "{{ $.Values.disableAutoSync }}"
+        - name: appRevision
+          value: $ARGOCD_APP_REVISION
+        - name: targetRevision
+          value: $ARGOCD_APP_SOURCE_TARGET_REVISION
+        - name: gitRepo
+          value: $ARGOCD_APP_SOURCE_REPO_URL
+        - name: gitopsNamespace
+          value: "{{ $.Values.gitopsNamespace }}"
+        - name: "disableFinalizers"
+          value: "no"
+        - name: "overrideTenants"
+          value: "no"
+    - repoURL: https://github.com/GijsvanDulmen/openshift-gitops-config
+      targetRevision: HEAD
+      ref: values
 
   # test this
   ignoreDifferences:
