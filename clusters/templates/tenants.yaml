@@ -1,6 +1,5 @@
 
-{{- $tenants := (include "clusters.get-tenants" .) | fromYamlArray }}
-{{- range $tenant := $tenants }}
+{{- range $tenant := $.Values.tenants }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application

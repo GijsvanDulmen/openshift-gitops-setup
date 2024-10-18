@@ -1,4 +1,3 @@
-{{- $tenants := (include "clusters.get-tenants" .) | fromYamlArray -}}
 ---
 apiVersion: operator.openshift.io/v1
 kind: KubeDescheduler
@@ -15,13 +14,17 @@ spec:
   # - LifecycleAndUtilization
   profileCustomizations:
     podLifetime: 1m
+    # Sets the included/excluded namespaces for all strategies
+    # (included namespaces are not allowed to include protected
+    # namespaces which consist of kube-system, hypershift and all openshift- prefixed namespaces)
     namespaces:
-      included:
+      excluded: []
+      # included:
       # Unfortunately descheduler can not use matchLabels
       # Or something similar
       # We could opt for not using a whitelist and use a blacklist
-      {{- range $tenant := $tenants }}
-      {{- range $ns := $tenant.namespaces }}
-      - "{{ $tenant.name }}-{{ $ns.name }}"
-      {{- end }}
-      {{- end }}
+      # {{- range $tenant := $tenants }}
+      # {{- range $ns := $tenant.namespaces }}
+      # - "{{ $tenant.name }}-{{ $ns.name }}"
+      # {{- end }}
+      # {{- end }}
