@@ -23,8 +23,8 @@ spec:
       # Unfortunately descheduler can not use matchLabels
       # Or something similar
       # We could opt for not using a whitelist and use a blacklist
-      # {{- range $tenant := $tenants }}
-      # {{- range $ns := $tenant.namespaces }}
-      # - "{{ $tenant.name }}-{{ $ns.name }}"
-      # {{- end }}
-      # {{- end }}
+      # { {- range $tenant := $tenants }}
+      # { {- range $ns := $tenant.namespaces }}
+      # - "{ { $tenant.name }}-{ { $ns.name }}"
+      # { {- end }}
+      # { {- end }}

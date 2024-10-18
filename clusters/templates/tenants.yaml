@@ -1,10 +1,10 @@
 
-{{- range $tenant := $.Values.tenants }}
+{{- range $name, $tenant := $.Values.tenants }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: "{{ print $tenant.name "-tenant" }}"
+  name: "{{ print $name "-tenant" }}"
   namespace: "{{ $.Values.gitopsNamespace }}"
 
   {{- if ne $.Values.disableFinalizers "yes" }}
@@ -26,7 +26,7 @@ spec:
         - ../clusters/config/tenant-defaults.yaml
         - ../clusters/config/tenant-resources.yaml
         - ../clusters/config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/tenants/values.yaml
-        - ../clusters/config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/tenants/{{ $tenant.name }}/values.yaml
+        - ../clusters/config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/tenants/{{ $name }}/values.yaml
         parameters:
         - name: "disableAutoSync"
           value: "{{ $.Values.disableAutoSync }}"
