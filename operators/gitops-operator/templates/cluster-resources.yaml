@@ -51,6 +51,10 @@ spec:
     kind: "Service"
     jsonPointers:
     - /spec/externalIPs
+  - group: ""
+    kind: Node
+    jsonPointers:
+    - /spec/taints
 
   syncPolicy:
     automated:
