@@ -8,7 +8,7 @@ metadata:
   name: second-controller
   namespace: openshift-ingress-operator
 spec:
-  replicas: 1
+  replicas: 2
   routeSelector:
     matchLabels:
       type: custom-second-domain
