@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: custom-error-code-pages
+  namespace: openshift-config
+data:
+  error-page-503.http: |
+    503 - Sorry!!
+  error-page-404.http: |
+    Nothing here... move along
