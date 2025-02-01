@@ -39,7 +39,7 @@ spec:
       response:
       - name: Server
         action:
-          type: Replace
+          type: Set
           set:
             value: WebserverX
     
