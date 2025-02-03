@@ -1,7 +1,5 @@
 operators-installer:
 
-  installPlanApproverAndVerifyJobsImage: registry.redhat.io/openshift4/ose-cli:v4.15
-
   operators:
     - channel: stable
       installPlanApproval: "Manual"
