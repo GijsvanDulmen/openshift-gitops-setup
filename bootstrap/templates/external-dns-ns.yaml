@@ -16,7 +16,7 @@ rules:
   - anyuid
   resources:
   - securitycontextconstraints 
-  verbs: 
+  verbs:
   - use
 ---
 kind: RoleBinding
