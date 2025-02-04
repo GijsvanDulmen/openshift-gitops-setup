@@ -1,9 +1,6 @@
 external-dns:
   provider: 
     name: cloudflare
-    webhook:
-      securityContext:
-        fsGroup: 1000720000
 
   env:
   - name: CF_API_TOKEN
@@ -22,7 +19,6 @@ external-dns:
 
   podSecurityContext:
     runAsNonRoot: true
-    fsGroup: 1000720000
     seccompProfile:
       type: RuntimeDefault
 
@@ -31,8 +27,6 @@ external-dns:
     allowPrivilegeEscalation: false
     readOnlyRootFilesystem: true
     runAsNonRoot: true
-    runAsUser: 1000720000
-    runAsGroup: 1000720000
     capabilities:
       drop: ["ALL"]
     
