@@ -6,7 +6,7 @@ operators-installer:
       name: local-storage-operator-operator
       sourceNamespace: openshift-marketplace
       source: redhat-operators
-      csv: local-storage-operator.v4.16.0-202409051837
+      csv: local-storage-operator.v4.17.0-202501220934
       namespace: openshift-local-storage
       automaticIntermediateManualUpgrades: true
 
