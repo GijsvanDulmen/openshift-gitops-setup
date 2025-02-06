@@ -4,6 +4,7 @@ metadata:
   name: self-provisioners
   annotations:
     argocd.argoproj.io/sync-options: "Delete=false"
+    rbac.authorization.kubernetes.io/autoupdate: "false"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
