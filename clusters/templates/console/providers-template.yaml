@@ -1,0 +1,17 @@
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: providers-template
+  namespace: openshift-config
+data:
+{{- $fileData := .Files.Get "files/providers.html" }}
+{{- $fileData = $fileData | replace "${environment}" $.Values.clusterInstance }}
+{{- $fileData = $fileData | replace "${environment-color}" "red" }}
+{{- $fileData = $fileData | replace "${openshift-logo}" (.Files.Get "files/openshift-logo.png" | b64enc) }}
+{{- $fileData = $fileData | replace "${redhattext-regular}" (.Files.Get "files/redhattext-regular.woff" | b64enc) }}
+{{- $fileData = $fileData | replace "${redhattext-medium}" (.Files.Get "files/redhattext-medium.woff" | b64enc) }}
+{{- $fileData = $fileData | replace "${openshift-background}" (.Files.Get "files/openshift-background.svg" | b64enc) }}
+{{- $fileData = $fileData | replace "${company-background}" (.Files.Get "files/company-background.png" | b64enc) }}
+  providers.html: {{ $fileData | b64enc }}
+type: Opaque

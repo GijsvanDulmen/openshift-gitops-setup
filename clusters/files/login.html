@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en-us" data-test-id="login">
+
+<head>
+    <title>Login - Cluster ${environment}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon"
+        href="data:image/x-icon;base64,${openshift-logo}">
+
+    <style>
+        @font-face {
+            font-family: 'RedHatText';
+            src: url(data:application/x-font-woff;charset=utf-8;base64,${redhattext-regular}) format("woff");
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'RedHatText';
+            src: url(data:application/x-font-woff;charset=utf-8;base64,${redhattext-medium}) format("woff");
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        .pf-c-form-control {
+            --pf-global--Color--100: var(--pf-global--Color--dark-100);
+            --pf-global--Color--200: var(--pf-global--Color--dark-200);
+            --pf-global--BorderColor--100: var(--pf-global--BorderColor--dark-100);
+            --pf-global--primary-color--100: var(--pf-global--primary-color--dark-100);
+            --pf-global--link--Color: var(--pf-global--link--Color--dark);
+            --pf-global--link--Color--hover: var(--pf-global--link--Color--dark--hover);
+            --pf-global--BackgroundColor--100: var(--pf-global--BackgroundColor--light-100);
+        }
+
+        .pf-c-login__header,
+        .pf-c-login__footer {
+            --pf-global--Color--100: var(--pf-global--Color--light-100);
+            --pf-global--Color--200: var(--pf-global--Color--light-200);
+            --pf-global--BorderColor--100: var(--pf-global--BorderColor--light-100);
+            --pf-global--primary-color--100: var(--pf-global--primary-color--light-100);
+            --pf-global--link--Color: var(--pf-global--link--Color--light);
+            --pf-global--link--Color--hover: var(--pf-global--link--Color--light);
+            --pf-global--BackgroundColor--100: var(--pf-global--BackgroundColor--dark-100);
+        }
+
+        .pf-c-login__header .pf-c-card,
+        .pf-c-login__footer .pf-c-card {
+            --pf-c-card--BackgroundColor: var(--pf-global--BackgroundColor--dark-transparent-200);
+        }
+
+        .pf-c-login__header .pf-c-button,
+        .pf-c-login__footer .pf-c-button {
+            --pf-c-button--m-primary--Color: var(--pf-global--primary-color--dark-100);
+            --pf-c-button--m-primary--hover--Color: var(--pf-global--primary-color--dark-100);
+            --pf-c-button--m-primary--focus--Color: var(--pf-global--primary-color--dark-100);
+            --pf-c-button--m-primary--active--Color: var(--pf-global--primary-color--dark-100);
+            --pf-c-button--m-primary--BackgroundColor: var(--pf-global--BackgroundColor--light-100);
+            --pf-c-button--m-primary--hover--BackgroundColor: var(--pf-global--BackgroundColor--light-300);
+            --pf-c-button--m-primary--focus--BackgroundColor: var(--pf-global--BackgroundColor--light-300);
+            --pf-c-button--m-primary--active--BackgroundColor: var(--pf-global--BackgroundColor--light-300);
+            --pf-c-button--m-secondary--Color: var(--pf-global--Color--light-100);
+            --pf-c-button--m-secondary--hover--Color: var(--pf-global--Color--light-100);
+            --pf-c-button--m-secondary--focus--Color: var(--pf-global--Color--light-100);
+            --pf-c-button--m-secondary--active--Color: var(--pf-global--Color--light-100);
+            --pf-c-button--m-secondary--BorderColor: var(--pf-global--Color--light-100);
+            --pf-c-button--m-secondary--hover--BorderColor: var(--pf-global--Color--light-100);
+            --pf-c-button--m-secondary--focus--BorderColor: var(--pf-global--Color--light-100);
+            --pf-c-button--m-secondary--active--BorderColor: var(--pf-global--Color--light-100);
+        }
+
+        :root {
+            --pf-global--palette--black-100: #fafafa;
+            --pf-global--palette--black-150: #f5f5f5;
+            --pf-global--palette--black-200: #ededed;
+            --pf-global--palette--black-300: #d2d2d2;
+            --pf-global--palette--black-400: #b8bbbe;
+            --pf-global--palette--black-500: #8a8d90;
+            --pf-global--palette--black-600: #737679;
+            --pf-global--palette--black-700: #4f5255;
+            --pf-global--palette--black-800: #3c3f42;
+            --pf-global--palette--black-850: #212427;
+            --pf-global--palette--black-900: #151515;
+            --pf-global--palette--black-1000: #030303;
+            --pf-global--palette--blue-50: #def3ff;
+            --pf-global--palette--blue-100: #bee1f4;
+            --pf-global--palette--blue-200: #73bcf7;
+            --pf-global--palette--blue-300: #2b9af3;
+            --pf-global--palette--blue-400: #06c;
+            --pf-global--palette--blue-500: #004080;
+            --pf-global--palette--blue-600: #004368;
+            --pf-global--palette--blue-700: #002235;
+            --pf-global--palette--cyan-100: #a2d9d9;
+            --pf-global--palette--cyan-200: #73c5c5;
+            --pf-global--palette--cyan-300: #009596;
+            --pf-global--palette--cyan-400: #005f60;
+            --pf-global--palette--cyan-500: #003737;
+            --pf-global--palette--cyan-600: #003d44;
+            --pf-global--palette--cyan-700: #001f22;
+            --pf-global--palette--gold-100: #f9e0a2;
+            --pf-global--palette--gold-200: #f6d173;
+            --pf-global--palette--gold-300: #f4c145;
+            --pf-global--palette--gold-400: #f0ab00;
+            --pf-global--palette--gold-500: #c58c00;
+            --pf-global--palette--gold-600: #795600;
+            --pf-global--palette--gold-700: #3d2c00;
+            --pf-global--palette--green-100: #bde5b8;
+            --pf-global--palette--green-200: #95d58e;
+            --pf-global--palette--green-300: #6ec664;
+            --pf-global--palette--green-400: #5ba352;
+            --pf-global--palette--green-500: #467f40;
+            --pf-global--palette--green-600: #1e4f18;
+            --pf-global--palette--green-700: #0f280d;
+            --pf-global--palette--light-blue-100: #beedf9;
+            --pf-global--palette--light-blue-200: #7cdbf3;
+            --pf-global--palette--light-blue-300: #35caed;
+            --pf-global--palette--light-blue-400: #00b9e4;
+            --pf-global--palette--light-blue-500: #008bad;
+            --pf-global--palette--light-blue-600: #005c73;
+            --pf-global--palette--light-blue-700: #002d39;
+            --pf-global--palette--light-green-100: #e4f5bc;
+            --pf-global--palette--light-green-200: #c8eb79;
+            --pf-global--palette--light-green-300: #ace12e;
+            --pf-global--palette--light-green-400: #92d400;
+            --pf-global--palette--light-green-500: #6ca100;
+            --pf-global--palette--light-green-600: #486b00;
+            --pf-global--palette--light-green-700: #253600;
+            --pf-global--palette--orange-100: #f4b678;
+            --pf-global--palette--orange-200: #ef9234;
+            --pf-global--palette--orange-300: #ec7a08;
+            --pf-global--palette--orange-400: #c46100;
+            --pf-global--palette--orange-500: #8f4700;
+            --pf-global--palette--orange-600: #773d00;
+            --pf-global--palette--orange-700: #3b1f00;
+            --pf-global--palette--purple-100: #cbc1ff;
+            --pf-global--palette--purple-200: #b2a3ff;
+            --pf-global--palette--purple-300: #a18fff;
+            --pf-global--palette--purple-400: #8476d1;
+            --pf-global--palette--purple-500: #6753ac;
+            --pf-global--palette--purple-600: #40199a;
+            --pf-global--palette--purple-700: #1f0066;
+            --pf-global--palette--red-100: #c9190b;
+            --pf-global--palette--red-200: #a30000;
+            --pf-global--palette--red-300: #7d1007;
+            --pf-global--palette--red-400: #470000;
+            --pf-global--palette--red-500: #2c0000;
+            --pf-global--palette--white: #fff;
+            --pf-global--BackgroundColor--100: #fff;
+            --pf-global--BackgroundColor--150: #f5f5f5;
+            --pf-global--BackgroundColor--200: #fafafa;
+            --pf-global--BackgroundColor--300: #ededed;
+            --pf-global--BackgroundColor--light-100: #fff;
+            --pf-global--BackgroundColor--light-200: #fafafa;
+            --pf-global--BackgroundColor--light-300: #ededed;
+            --pf-global--BackgroundColor--dark-100: #141251;
+            --pf-global--BackgroundColor--dark-200: #3c3f42;
+            --pf-global--BackgroundColor--dark-300: #212427;
+            --pf-global--BackgroundColor--dark-400: #4f5255;
+            --pf-global--BackgroundColor--dark-transparent-100: rgba(3, 3, 3, 0.62);
+            --pf-global--BackgroundColor--dark-transparent-200: rgba(3, 3, 3, 0.32);
+            --pf-global--Color--100: #151515;
+            --pf-global--Color--200: #737679;
+            --pf-global--Color--300: #3c3f42;
+            --pf-global--Color--400: #8a8d90;
+            --pf-global--Color--light-100: #fff;
+            --pf-global--Color--light-200: #ededed;
+            --pf-global--Color--light-300: #d2d2d2;
+            --pf-global--Color--dark-100: #151515;
+            --pf-global--Color--dark-200: #737679;
+            --pf-global--active-color--100: #06c;
+            --pf-global--active-color--200: #bee1f4;
+            --pf-global--active-color--300: #73bcf7;
+            --pf-global--active-color--400: #2b9af3;
+            --pf-global--disabled-color--100: #737679;
+            --pf-global--disabled-color--200: #d2d2d2;
+            --pf-global--disabled-color--300: #ededed;
+            --pf-global--primary-color--100: #06c;
+            --pf-global--primary-color--200: #004080;
+            --pf-global--primary-color--light-100: #73bcf7;
+            --pf-global--primary-color--dark-100: #06c;
+            --pf-global--secondary-color--100: #737679;
+            --pf-global--default-color--100: #73c5c5;
+            --pf-global--default-color--200: #009596;
+            --pf-global--default-color--300: #003737;
+            --pf-global--success-color--100: #92d400;
+            --pf-global--success-color--200: #486b00;
+            --pf-global--info-color--100: #73bcf7;
+            --pf-global--info-color--200: #004368;
+            --pf-global--warning-color--100: #f0ab00;
+            --pf-global--warning-color--200: #795600;
+            --pf-global--danger-color--100: #c9190b;
+            --pf-global--danger-color--200: #a30000;
+            --pf-global--danger-color--300: #470000;
+            --pf-global--BoxShadow--sm: 0 0.0625rem 0.125rem 0 rgba(3, 3, 3, 0.2);
+            --pf-global--BoxShadow--sm-right: 0.25rem 0 0.625rem -0.25rem rgba(3, 3, 3, 0.12);
+            --pf-global--BoxShadow--sm-left: -0.25rem 0 0.625rem -0.25rem rgba(3, 3, 3, 0.12);
+            --pf-global--BoxShadow--sm-bottom: 0 0.25rem 0.625rem -0.25rem rgba(3, 3, 3, 0.12);
+            --pf-global--BoxShadow--sm-top: 0 -0.25rem 0.625rem -0.25rem rgba(3, 3, 3, 0.12);
+            --pf-global--BoxShadow--md: 0 0.0625rem 0.0625rem 0rem rgba(3, 3, 3, 0.05), 0 0.25rem 0.5rem 0.25rem rgba(3, 3, 3, 0.06);
+            --pf-global--BoxShadow--md-right: 0.3125rem 0 0.625rem -0.25rem rgba(3, 3, 3, 0.25);
+            --pf-global--BoxShadow--md-left: -0.3125rem 0 0.625rem -0.25rem rgba(3, 3, 3, 0.25);
+            --pf-global--BoxShadow--md-bottom: 0 0.3125rem 0.625rem -0.25rem rgba(3, 3, 3, 0.25);
+            --pf-global--BoxShadow--md-top: 0 -0.3125rem 0.625rem -0.25rem rgba(3, 3, 3, 0.25);
+            --pf-global--BoxShadow--lg: 0 0.1875rem 0.4375rem 0.1875rem rgba(3, 3, 3, 0.13), 0 0.6875rem 1.5rem 1rem rgba(3, 3, 3, 0.12);
+            --pf-global--BoxShadow--lg-right: 0.75rem 0 0.625rem -0.25rem rgba(3, 3, 3, 0.07);
+            --pf-global--BoxShadow--lg-left: -0.75rem 0 0.625rem -0.25rem rgba(3, 3, 3, 0.07);
+            --pf-global--BoxShadow--lg-bottom: 0 0.75rem 0.625rem -0.25rem rgba(3, 3, 3, 0.07);
+            --pf-global--BoxShadow--lg-top: 0 -0.75rem 0.625rem -0.25rem rgba(3, 3, 3, 0.07);
+            --pf-global--BoxShadow--inset: inset 0 0 0.625rem 0 rgba(3, 3, 3, 0.25);
+            --pf-global--font-path: ./assets/fonts;
+            --pf-global--fonticon-path: ./assets/pficon;
+            --pf-global--spacer--xs: 0.25rem;
+            --pf-global--spacer--sm: 0.5rem;
+            --pf-global--spacer--md: 1rem;
+            --pf-global--spacer--lg: 1.5rem;
+            --pf-global--spacer--xl: 2rem;
+            --pf-global--spacer--2xl: 3rem;
+            --pf-global--spacer--3xl: 4rem;
+            --pf-global--spacer--form-element: 0.375rem;
+            --pf-global--gutter: 1.5rem;
+            --pf-global--gutter--md: 1rem;
+            --pf-global--golden-ratio: 1.681;
+            --pf-global--ZIndex--xs: 100;
+            --pf-global--ZIndex--sm: 200;
+            --pf-global--ZIndex--md: 300;
+            --pf-global--ZIndex--lg: 400;
+            --pf-global--ZIndex--xl: 500;
+            --pf-global--ZIndex--2xl: 600;
+            --pf-global--breakpoint--xs: 0;
+            --pf-global--breakpoint--sm: 576px;
+            --pf-global--breakpoint--md: 768px;
+            --pf-global--breakpoint--lg: 992px;
+            --pf-global--breakpoint--xl: 1200px;
+            --pf-global--breakpoint--2xl: 1450px;
+            --pf-global--link--Color: #06c;
+            --pf-global--link--Color--hover: #004080;
+            --pf-global--link--Color--light: #73bcf7;
+            --pf-global--link--Color--light--hover: #2b9af3;
+            --pf-global--link--Color--dark: #06c;
+            --pf-global--link--Color--dark--hover: #004080;
+            --pf-global--link--FontWeight: 500;
+            --pf-global--link--TextDecoration: none;
+            --pf-global--link--TextDecoration--hover: underline;
+            --pf-global--BorderWidth--sm: 1px;
+            --pf-global--BorderWidth--md: 2px;
+            --pf-global--BorderWidth--lg: 3px;
+            --pf-global--BorderColor--100: #d2d2d2;
+            --pf-global--BorderColor--200: #8a8d90;
+            --pf-global--BorderColor--300: #ededed;
+            --pf-global--BorderColor--dark-100: #d2d2d2;
+            --pf-global--BorderColor--light-100: #b8bbbe;
+            --pf-global--BorderRadius--sm: 3px;
+            --pf-global--BorderRadius--lg: 30em;
+            --pf-global--icon--Color--light: #737679;
+            --pf-global--icon--Color--dark: #151515;
+            --pf-global--icon--FontSize--sm: 0.625rem;
+            --pf-global--icon--FontSize--md: 1.125rem;
+            --pf-global--icon--FontSize--lg: 1.5rem;
+            --pf-global--icon--FontSize--xl: 3.375rem;
+            --pf-global--FontFamily--sans-serif: overpass, overpass, open sans, -apple-system, blinkmacsystemfont, Segoe UI, roboto, Helvetica Neue, arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+            --pf-global--FontFamily--heading--sans-serif: overpass, overpass, open sans, -apple-system, blinkmacsystemfont, Segoe UI, roboto, Helvetica Neue, arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+            --pf-global--FontFamily--monospace: overpass-mono, overpass-mono, SFMono-Regular, menlo, monaco, consolas, Liberation Mono, Courier New, monospace;
+            --pf-global--FontFamily--redhatfont--sans-serif: RedHatText, Overpass, overpass, helvetica, arial, sans-serif;
+            --pf-global--FontFamily--redhatfont--heading--sans-serif: RedHatDisplay, Overpass, overpass, helvetica, arial, sans-serif;
+            --pf-global--FontFamily--redhatfont--monospace: Liberation Mono, consolas, SFMono-Regular, menlo, monaco, Courier New, monospace;
+            --pf-global--FontSize--4xl: 2.25rem;
+            --pf-global--FontSize--3xl: 1.75rem;
+            --pf-global--FontSize--2xl: 1.5rem;
+            --pf-global--FontSize--xl: 1.25rem;
+            --pf-global--FontSize--lg: 1.125rem;
+            --pf-global--FontSize--md: 1rem;
+            --pf-global--FontSize--sm: 0.875rem;
+            --pf-global--FontSize--xs: 0.75rem;
+            --pf-global--FontWeight--light: 300;
+            --pf-global--FontWeight--normal: 400;
+            --pf-global--FontWeight--semi-bold: 500;
+            --pf-global--FontWeight--bold: 600;
+            --pf-global--FontWeight--redhatfont--bold: 700;
+            --pf-global--LineHeight--sm: 1.3;
+            --pf-global--LineHeight--md: 1.5;
+            --pf-global--ListStyle: disc outside;
+            --pf-global--Transition: all 250ms cubic-bezier(0.42, 0, 0.58, 1);
+            --pf-global--TimingFunction: cubic-bezier(0.645, 0.045, 0.355, 1);
+            --pf-global--TransitionDuration: 250ms;
+            --pf-global--arrow--width: 0.9375rem;
+            --pf-global--arrow--width-lg: 1.5625rem;
+            --pf-global--target-size--MinWidth: 44px;
+            --pf-global--target-size--MinHeight: 44px;
+        }
+
+        .pf-m-redhat-font {
+            --pf-global--FontFamily--sans-serif: var(--pf-global--FontFamily--redhatfont--sans-serif);
+            --pf-global--FontFamily--heading--sans-serif: var(--pf-global--FontFamily--redhatfont--heading--sans-serif);
+            --pf-global--FontFamily--monospace: var(--pf-global--FontFamily--redhatfont--monospace);
+            --pf-global--FontWeight--semi-bold: var(--pf-global--FontWeight--redhatfont--bold);
+            --pf-global--FontWeight--bold: var(--pf-global--FontWeight--redhatfont--bold);
+            --pf-global--link--FontWeight: var(--pf-global--FontWeight--normal);
+        }
+
+        html,
+        body,
+        p,
+        ol,
+        ul,
+        li,
+        dl,
+        dt,
+        dd,
+        blockquote,
+        figure,
+        fieldset,
+        legend,
+        textarea,
+        pre,
+        iframe,
+        hr,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body {
+              height: 100%;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-size: 100%;
+            font-weight: var(--pf-global--FontWeight--normal);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button,
+        input,
+        optgroup,
+        select,
+        textarea {
+            margin: 0;
+            font-family: inherit;
+            font-size: 100%;
+            line-height: var(--pf-global--LineHeight--md);
+            color: var(--pf-global--Color--100);
+        }
+
+        img,
+        embed,
+        iframe,
+        object,
+        audio,
+        video {
+            max-width: 100%;
+            height: auto;
+        }
+
+        iframe {
+            border: 0;
+        }
+
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+
+        td,
+        th {
+            padding: 0;
+            text-align: left;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: sans-serif;
+            line-height: 1.15;
+        }
+
+        body {
+            font-family: var(--pf-global--FontFamily--sans-serif);
+            font-size: var(--pf-global--FontSize--md);
+            font-weight: var(--pf-global--FontWeight--normal);
+            line-height: var(--pf-global--LineHeight--md);
+            text-align: left;
+            background-color: ${environment-color};
+        }
+
+        a {
+            font-weight: var(--pf-global--link--FontWeight);
+            color: var(--pf-global--link--Color);
+            text-decoration: var(--pf-global--link--TextDecoration);
+        }
+
+        a:hover {
+            --pf-global--link--Color: var(--pf-global--link--Color--hover);
+            --pf-global--link--TextDecoration: var(--pf-global--link--TextDecoration--hover);
+        }
+
+        button,
+        a {
+            cursor: pointer;
+        }
+
+        button::-moz-focus-inner,
+        [type="button"]::-moz-focus-inner,
+        [type="reset"]::-moz-focus-inner,
+        [type="submit"]::-moz-focus-inner {
+            padding: 0;
+            border-style: none;
+        }
+
+        button:-moz-focusring,
+        [type="button"]:-moz-focusring,
+        [type="reset"]:-moz-focusring,
+        [type="submit"]:-moz-focusring {
+            outline: 1px dotted ButtonText;
+        }
+
+        .pf-c-login {
+            --pf-c-login--PaddingTop: var(--pf-global--spacer--lg);
+            --pf-c-login--PaddingBottom: var(--pf-global--spacer--lg);
+            --pf-c-login--xl--BackgroundImage: none;
+            --pf-c-login__container--xl--GridColumnGap: var(--pf-global--spacer--3xl);
+            --pf-c-login__container--MaxWidth: 31.25rem;
+            --pf-c-login__container--xl--MaxWidth: none;
+            --pf-c-login__container--PaddingLeft: 6.125rem;
+            --pf-c-login__container--PaddingRight: 6.125rem;
+            --pf-c-login__container--xl--GridTemplateColumns: 34rem minmax(auto, 34rem);
+            --pf-c-login__header--MarginBottom: var(--pf-global--spacer--md);
+            --pf-c-login__header--sm--PaddingLeft: var(--pf-global--spacer--md);
+            --pf-c-login__header--sm--PaddingRight: var(--pf-global--spacer--md);
+            --pf-c-login__header--xl--MarginBottom: var(--pf-global--spacer--2xl);
+            --pf-c-login__header--xl--MarginTop: var(--pf-global--spacer--3xl);
+            --pf-c-login__header--c-brand--MarginBottom: var(--pf-global--spacer--lg);
+            --pf-c-login__header--c-brand--xl--MarginBottom: var(--pf-global--spacer--2xl);
+            --pf-c-login__main--BackgroundColor: var(--pf-global--BackgroundColor--light-100);
+            --pf-c-login__main--xl--MarginBottom: var(--pf-global--spacer--lg);
+            --pf-c-login__main-header--PaddingTop: var(--pf-global--spacer--2xl);
+            --pf-c-login__main-header--PaddingRight: var(--pf-global--spacer--xl);
+            --pf-c-login__main-header--PaddingBottom: var(--pf-global--spacer--md);
+            --pf-c-login__main-header--PaddingLeft: var(--pf-global--spacer--xl);
+            --pf-c-login__main-header--md--PaddingRight: var(--pf-global--spacer--2xl);
+            --pf-c-login__main-header--md--PaddingLeft: var(--pf-global--spacer--2xl);
+            --pf-c-login__main-header--ColumnGap: var(--pf-global--spacer--md);
+            --pf-c-login__main-header--RowGap: var(--pf-global--spacer--md);
+            --pf-c-login__main-header-desc--MarginBottom: var(--pf-global--spacer--sm);
+            --pf-c-login__main-header-desc--md--MarginBottom: 0;
+            --pf-c-login__main-header-desc--FontSize: var(--pf-global--FontSize--sm);
+            --pf-c-login__main-body--PaddingRight: var(--pf-global--spacer--xl);
+            --pf-c-login__main-body--PaddingBottom: var(--pf-global--spacer--xl);
+            --pf-c-login__main-body--PaddingLeft: var(--pf-global--spacer--xl);
+            --pf-c-login__main-body--md--PaddingRight: var(--pf-global--spacer--2xl);
+            --pf-c-login__main-body--md--PaddingLeft: var(--pf-global--spacer--2xl);
+            --pf-c-login__main-body--c-form__helper-text-icon--FontSize: var(--pf-global--icon--FontSize--md);
+            --pf-c-login__main-body--c-form__helper-text-icon--MarginRight: var(--pf-global--spacer--sm);
+            --pf-c-login__main-footer--PaddingBottom: var(--pf-global--spacer--3xl);
+            --pf-c-login__main-footer--c-title--MarginBottom: var(--pf-global--spacer--md);
+            --pf-c-login__main-footer-links--PaddingTop: var(--pf-global--spacer--sm);
+            --pf-c-login__main-footer-links--PaddingRight: var(--pf-global--spacer--3xl);
+            --pf-c-login__main-footer-links--PaddingBottom: var(--pf-global--spacer--xl);
+            --pf-c-login__main-footer-links--PaddingLeft: var(--pf-global--spacer--3xl);
+            --pf-c-login__main-footer-links-item--PaddingRight: var(--pf-global--spacer--md);
+            --pf-c-login__main-footer-links-item--PaddingLeft: var(--pf-global--spacer--md);
+            --pf-c-login__main-footer-links-item--MarginBottom: var(--pf-global--spacer--sm);
+            --pf-c-login__main-footer-links-item-link-svg--Fill: var(--pf-global--icon--Color--light);
+            --pf-c-login__main-footer-links-item-link-svg--Width: var(--pf-global--icon--FontSize--lg);
+            --pf-c-login__main-footer-links-item-link-svg--Height: var(--pf-global--icon--FontSize--lg);
+            --pf-c-login__main-footer-links-item-link-svg--hover--Fill: var(--pf-global--icon--Color--dark);
+            --pf-c-login__main-footer-band--PaddingTop: var(--pf-global--spacer--lg);
+            --pf-c-login__main-footer-band--PaddingRight: var(--pf-global--spacer--md);
+            --pf-c-login__main-footer-band--PaddingBottom: var(--pf-global--spacer--lg);
+            --pf-c-login__main-footer-band--PaddingLeft: var(--pf-global--spacer--md);
+            --pf-c-login__main-footer-band--BackgroundColor: var(--pf-global--BackgroundColor--300);
+            --pf-c-login__main-footer-band-item--PaddingTop: var(--pf-global--spacer--md);
+            --pf-c-login__footer--sm--PaddingLeft: var(--pf-global--spacer--md);
+            --pf-c-login__footer--sm--PaddingRight: var(--pf-global--spacer--md);
+            --pf-c-login__footer--c-list--PaddingTop: var(--pf-global--spacer--md);
+            --pf-c-login__footer--c-list--xl--PaddingTop: var(--pf-global--spacer--2xl);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding-top: var(--pf-c-login--PaddingTop);
+            padding-bottom: var(--pf-c-login--PaddingBottom);
+        }
+
+        @media (min-width: 1200px) {
+            .pf-c-login {
+                --pf-c-login__container--MaxWidth: var(--pf-c-login__container--xl--MaxWidth);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .pf-c-login {
+                --pf-c-login__header--MarginBottom: var(--pf-c-login__header--xl--MarginBottom);
+                --pf-c-login__header--c-brand--MarginBottom: var(--pf-c-login__header--c-brand--xl--MarginBottom);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .pf-c-login {
+                --pf-c-login__main-header--PaddingRight: var(--pf-c-login__main-header--md--PaddingRight);
+                --pf-c-login__main-header--PaddingLeft: var(--pf-c-login__main-header--md--PaddingLeft);
+                --pf-c-login__main-header-desc--MarginBottom: var(--pf-c-login__main-header-desc--md--MarginBottom);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .pf-c-login {
+                --pf-c-login__main-body--PaddingRight: var(--pf-c-login__main-body--md--PaddingRight);
+                --pf-c-login__main-body--PaddingLeft: var(--pf-c-login__main-body--md--PaddingLeft);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .pf-c-login {
+                --pf-c-login__footer--c-list--PaddingTop: var(--pf-c-login__footer--c-list--xl--PaddingTop);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .pf-c-login {
+                background-image: var(--pf-c-login--xl--BackgroundImage);
+            }
+        }
+
+        @media (min-width: 576px) {
+            .pf-c-login {
+                align-items: center;
+            }
+        }
+
+        .pf-c-login__container {
+            max-width: var(--pf-c-login__container--MaxWidth);
+        }
+
+        @media (min-width: 1200px) {
+            .pf-c-login__container {
+                display: grid;
+                grid-column-gap: var(--pf-c-login__container--xl--GridColumnGap);
+                grid-template-columns: var(--pf-c-login__container--xl--GridTemplateColumns);
+                grid-template-areas: "main header""main footer""main .";
+                padding-right: var(--pf-c-login__container--PaddingRight);
+                padding-left: var(--pf-c-login__container--PaddingLeft);
+            }
+        }
+
+        .pf-c-login__header {
+            color: var(--pf-global--Color--100);
+            grid-area: header;
+        }
+
+        @media (max-width: 576px) {
+            .pf-c-login__header {
+                padding-right: var(--pf-c-login__header--sm--PaddingRight);
+                padding-left: var(--pf-c-login__header--sm--PaddingLeft);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .pf-c-login__header {
+                margin-top: var(--pf-c-login__header--xl--MarginTop);
+            }
+        }
+
+        .pf-c-login__header .pf-c-brand {
+            margin-bottom: var(--pf-c-login__header--c-brand--MarginBottom);
+        }
+
+        .pf-c-login__main {
+            grid-area: main;
+            background-color: White;
+        }
+
+        .pf-c-login__main> :first-child:not(.pf-c-login__main-header) {
+            padding-top: var(--pf-c-login__main-header--PaddingTop);
+        }
+
+        .pf-c-login__main> :last-child:not(.pf-c-login__main-footer) {
+            padding-bottom: var(--pf-c-login__main-footer--PaddingBottom);
+        }
+
+        @media (max-width: 1200px) {
+            .pf-c-login__main {
+                margin-bottom: var(--pf-c-login__main--xl--MarginBottom);
+            }
+        }
+
+        .pf-c-login__main-header {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            column-gap: var(--pf-c-login__main-header--ColumnGap);
+            row-gap: var(--pf-c-login__main-header--RowGap);
+            align-items: center;
+            padding: var(--pf-c-login__main-header--PaddingTop) var(--pf-c-login__main-header--PaddingRight) var(--pf-c-login__main-header--PaddingBottom) var(--pf-c-login__main-header--PaddingLeft);
+        }
+
+        @media (max-width: 768px) {
+            .pf-c-login__main-header {
+                grid-template-columns: 100%;
+            }
+        }
+
+        .pf-c-login__main-header .pf-c-dropdown {
+            grid-column: 2 / 3;
+            grid-row: 1;
+        }
+
+        @media (max-width: 768px) {
+            .pf-c-login__main-header .pf-c-dropdown {
+                grid-column: auto;
+                grid-row: auto;
+            }
+        }
+
+        .pf-c-login__main-header-desc {
+            margin-bottom: var(--pf-c-login__main-header-desc--MarginBottom);
+            font-size: var(--pf-c-login__main-header-desc--FontSize);
+            grid-column: 1 / -1;
+        }
+
+        .pf-c-login__main-body {
+            padding-right: var(--pf-c-login__main-body--PaddingRight);
+            padding-bottom: var(--pf-c-login__main-body--PaddingBottom);
+            padding-left: var(--pf-c-login__main-body--PaddingLeft);
+        }
+
+        .pf-c-login__main-body .pf-c-form__helper-text {
+            display: flex;
+            align-items: center;
+        }
+
+        .pf-c-login__main-body .pf-c-form__helper-text .pf-c-form__helper-text-icon {
+            margin-right: var(--pf-c-login__main-body--c-form__helper-text-icon--MarginRight);
+            font-size: var(--pf-c-login__main-body--c-form__helper-text-icon--FontSize);
+        }
+
+        .pf-c-login__main-footer {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .pf-c-login__main-footer .pf-c-title {
+            margin-bottom: var(--pf-c-login__main-footer--c-title--MarginBottom);
+            text-align: center;
+        }
+
+        .pf-c-login__main-footer>* {
+            flex-basis: 100%;
+        }
+
+        .pf-c-login__main-footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: var(--pf-c-login__main-footer-links--PaddingTop) var(--pf-c-login__main-footer-links--PaddingRight) var(--pf-c-login__main-footer-links--PaddingBottom) var(--pf-c-login__main-footer-links--PaddingLeft);
+        }
+
+        .pf-c-login__main-footer-links-item {
+            padding-right: var(--pf-c-login__main-footer-links-item--PaddingRight);
+            padding-left: var(--pf-c-login__main-footer-links-item--PaddingLeft);
+            margin-bottom: var(--pf-c-login__main-footer-links-item--MarginBottom);
+        }
+
+        .pf-c-login__main-footer-links-item-link svg {
+            fill: var(--pf-c-login__main-footer-links-item-link-svg--Fill);
+            width: 100%;
+            max-width: var(--pf-c-login__main-footer-links-item-link-svg--Width);
+            height: 100%;
+            max-height: var(--pf-c-login__main-footer-links-item-link-svg--Height);
+        }
+
+        .pf-c-login__main-footer-links-item-link:hover svg {
+            fill: var(--pf-c-login__main-footer-links-item-link-svg--hover--Fill);
+        }
+
+        .pf-c-login__main-footer-band {
+            padding: var(--pf-c-login__main-footer-band--PaddingTop) var(--pf-c-login__main-footer-band--PaddingRight) var(--pf-c-login__main-footer-band--PaddingBottom) var(--pf-c-login__main-footer-band--PaddingLeft);
+            text-align: center;
+            background-color: ${environment-color};
+        }
+
+        .pf-c-login__main-footer-band>*+* {
+            padding-top: var(--pf-c-login__main-footer-band-item--PaddingTop);
+        }
+
+        .pf-c-login__footer {
+            color: var(--pf-global--Color--100);
+            grid-area: footer;
+        }
+
+        @media (max-width: 576px) {
+            .pf-c-login__footer {
+                padding-right: var(--pf-c-login__footer--sm--PaddingRight);
+                padding-left: var(--pf-c-login__footer--sm--PaddingLeft);
+            }
+        }
+
+        .pf-c-login__footer .pf-c-list a {
+            color: unset;
+        }
+
+        .pf-c-login__footer .pf-c-list:not(:only-child) {
+            padding-top: var(--pf-c-login__footer--c-list--PaddingTop);
+        }
+
+        body {
+            background-color: ${environment-color};
+            background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgaWQ9IkxheWVyXzEiCiAgIHZpZXdCb3g9IjAgMCAxMDcxLjkzMiA5ODQuMTU0MTMiCiAgIHZlcnNpb249IjEuMSIKICAgc29kaXBvZGk6ZG9jbmFtZT0ib3BlbnNoaWZ0LWxvZ28uc3ZnIgogICB3aWR0aD0iMTA3MS45MzIiCiAgIGhlaWdodD0iOTg0LjE1NDExIgogICBpbmtzY2FwZTp2ZXJzaW9uPSIxLjEgKGM2OGUyMmMzODcsIDIwMjEtMDUtMjMpIgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQvRFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxkZWZzCiAgICAgaWQ9ImRlZnMxOSI+CiAgICA8ZmlsdGVyCiAgICAgICBzdHlsZT0iY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzOnNSR0I7IgogICAgICAgaW5rc2NhcGU6bGFiZWw9IkNvbG9yIFNoaWZ0IgogICAgICAgaWQ9ImZpbHRlcjE0MDkiCiAgICAgICB4PSIwIgogICAgICAgeT0iMCIKICAgICAgIHdpZHRoPSIxIgogICAgICAgaGVpZ2h0PSIxIj4KICAgICAgPGZlQ29sb3JNYXRyaXgKICAgICAgICAgdHlwZT0iaHVlUm90YXRlIgogICAgICAgICB2YWx1ZXM9IjI0MCIKICAgICAgICAgcmVzdWx0PSJjb2xvcjEiCiAgICAgICAgIGlkPSJmZUNvbG9yTWF0cml4MTQwNSIgLz4KICAgICAgPGZlQ29sb3JNYXRyaXgKICAgICAgICAgdHlwZT0ic2F0dXJhdGUiCiAgICAgICAgIHZhbHVlcz0iMC4xOTE5MjkiCiAgICAgICAgIHJlc3VsdD0iY29sb3IyIgogICAgICAgICBpZD0iZmVDb2xvck1hdHJpeDE0MDciIC8+CiAgICA8L2ZpbHRlcj4KICAgIDxmaWx0ZXIKICAgICAgIHN0eWxlPSJjb2xvci1pbnRlcnBvbGF0aW9uLWZpbHRlcnM6c1JHQjsiCiAgICAgICBpbmtzY2FwZTpsYWJlbD0iQ29sb3IgU2hpZnQiCiAgICAgICBpZD0iZmlsdGVyMTQxNSIKICAgICAgIHg9IjAiCiAgICAgICB5PSIwIgogICAgICAgd2lkdGg9IjEiCiAgICAgICBoZWlnaHQ9IjEiPgogICAgICA8ZmVDb2xvck1hdHJpeAogICAgICAgICB0eXBlPSJodWVSb3RhdGUiCiAgICAgICAgIHZhbHVlcz0iMjQwIgogICAgICAgICByZXN1bHQ9ImNvbG9yMSIKICAgICAgICAgaWQ9ImZlQ29sb3JNYXRyaXgxNDExIiAvPgogICAgICA8ZmVDb2xvck1hdHJpeAogICAgICAgICB0eXBlPSJzYXR1cmF0ZSIKICAgICAgICAgdmFsdWVzPSIwLjE5MTkyOSIKICAgICAgICAgcmVzdWx0PSJjb2xvcjIiCiAgICAgICAgIGlkPSJmZUNvbG9yTWF0cml4MTQxMyIgLz4KICAgIDwvZmlsdGVyPgogICAgPGZpbHRlcgogICAgICAgc3R5bGU9ImNvbG9yLWludGVycG9sYXRpb24tZmlsdGVyczpzUkdCOyIKICAgICAgIGlua3NjYXBlOmxhYmVsPSJDb2xvciBTaGlmdCIKICAgICAgIGlkPSJmaWx0ZXIxNDIxIgogICAgICAgeD0iMCIKICAgICAgIHk9IjAiCiAgICAgICB3aWR0aD0iMSIKICAgICAgIGhlaWdodD0iMSI+CiAgICAgIDxmZUNvbG9yTWF0cml4CiAgICAgICAgIHR5cGU9Imh1ZVJvdGF0ZSIKICAgICAgICAgdmFsdWVzPSIyNDAiCiAgICAgICAgIHJlc3VsdD0iY29sb3IxIgogICAgICAgICBpZD0iZmVDb2xvck1hdHJpeDE0MTciIC8+CiAgICAgIDxmZUNvbG9yTWF0cml4CiAgICAgICAgIHR5cGU9InNhdHVyYXRlIgogICAgICAgICB2YWx1ZXM9IjAuMTkxOTI5IgogICAgICAgICByZXN1bHQ9ImNvbG9yMiIKICAgICAgICAgaWQ9ImZlQ29sb3JNYXRyaXgxNDE5IiAvPgogICAgPC9maWx0ZXI+CiAgICA8ZmlsdGVyCiAgICAgICBzdHlsZT0iY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzOnNSR0I7IgogICAgICAgaW5rc2NhcGU6bGFiZWw9IkNvbG9yIFNoaWZ0IgogICAgICAgaWQ9ImZpbHRlcjE0MjciCiAgICAgICB4PSIwIgogICAgICAgeT0iMCIKICAgICAgIHdpZHRoPSIxIgogICAgICAgaGVpZ2h0PSIxIj4KICAgICAgPGZlQ29sb3JNYXRyaXgKICAgICAgICAgdHlwZT0iaHVlUm90YXRlIgogICAgICAgICB2YWx1ZXM9IjI0MCIKICAgICAgICAgcmVzdWx0PSJjb2xvcjEiCiAgICAgICAgIGlkPSJmZUNvbG9yTWF0cml4MTQyMyIgLz4KICAgICAgPGZlQ29sb3JNYXRyaXgKICAgICAgICAgdHlwZT0ic2F0dXJhdGUiCiAgICAgICAgIHZhbHVlcz0iMC4xOTE5MjkiCiAgICAgICAgIHJlc3VsdD0iY29sb3IyIgogICAgICAgICBpZD0iZmVDb2xvck1hdHJpeDE0MjUiIC8+CiAgICA8L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIGlkPSJuYW1lZHZpZXcxNyIKICAgICBwYWdlY29sb3I9IiNmZmZmZmYiCiAgICAgYm9yZGVyY29sb3I9IiM2NjY2NjYiCiAgICAgYm9yZGVyb3BhY2l0eT0iMS4wIgogICAgIGlua3NjYXBlOnBhZ2VzaGFkb3c9IjIiCiAgICAgaW5rc2NhcGU6cGFnZW9wYWNpdHk9IjAuMCIKICAgICBpbmtzY2FwZTpwYWdlY2hlY2tlcmJvYXJkPSIwIgogICAgIHNob3dncmlkPSJmYWxzZSIKICAgICBsb2NrLW1hcmdpbnM9ImZhbHNlIgogICAgIGZpdC1tYXJnaW4tdG9wPSIwIgogICAgIGZpdC1tYXJnaW4tbGVmdD0iMCIKICAgICBmaXQtbWFyZ2luLXJpZ2h0PSIwIgogICAgIGZpdC1tYXJnaW4tYm90dG9tPSIwIgogICAgIGlua3NjYXBlOnpvb209IjEiCiAgICAgaW5rc2NhcGU6Y3g9IjczNy41IgogICAgIGlua3NjYXBlOmN5PSI3MTIuNSIKICAgICBpbmtzY2FwZTp3aW5kb3ctd2lkdGg9IjM4NDAiCiAgICAgaW5rc2NhcGU6d2luZG93LWhlaWdodD0iMjA4OSIKICAgICBpbmtzY2FwZTp3aW5kb3cteD0iMCIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iMzQiCiAgICAgaW5rc2NhcGU6d2luZG93LW1heGltaXplZD0iMSIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJnMTQiIC8+CiAgPHN0eWxlCiAgICAgaWQ9InN0eWxlMiI+LnN0MHtmaWxsOiNiYjFjMjl9LnN0MXtmaWxsOiNlMTI0MzR9LnN0MntmaWxsOiM5NjBmMWJ9PC9zdHlsZT4KICA8ZwogICAgIGlkPSJnMTQiCiAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNzQ4LjM0MjQ0LDcwNC41OTAyNSkiPgogICAgPHBhdGgKICAgICAgIGNsYXNzPSJzdDAiCiAgICAgICBkPSJtIC00MzcuMDg4NDIsLTI2My4zOTgzOCAtMTcyLjM0MTE0LDYyLjM5OTM1IGMgMi4yMjg1NiwyNy40ODU0NiA2LjY4NTY1LDU0Ljk3MDg4IDEzLjM3MTI5LDgxLjcxMzQ5IGwgMTYzLjQyNjkxLC01OS40Mjc5OCBjIC01LjE5OTk0LC0yNy40ODU0NSAtNi42ODU2MywtNTUuNzEzNzUgLTQuNDU3MDYsLTg0LjY4NDg2IG0gNzYwLjY3OCwtMTkwLjE2OTUyIGMgLTExLjg4NTU4LC0yNC41MTQwNSAtMjUuOTk5NzQsLTQ5LjAyODA4IC00Mi4zNDI0MSwtNzEuMzEzNTcgbCAtMTcyLjM0MTEzLDYyLjM5OTM3IGMgMjAuMDU2OTQsMjAuNzk5OCAzNy4xNDI1MSw0My44MjgxNCA1MC41MTM3Nyw2OC4zNDIxNyB6IgogICAgICAgaWQ9InBhdGg2IgogICAgICAgc3R5bGU9InN0cm9rZS13aWR0aDo3LjQyODQ5O2ZpbHRlcjp1cmwoI2ZpbHRlcjE0MjcpIiAvPgogICAgPHBhdGgKICAgICAgIGNsYXNzPSJzdDEiCiAgICAgICBkPSJtIC01NS4yNjM3NDMsLTUwMi41OTU5OCBjIDM1LjY1Njc4MSwxNi4zNDI3IDY2Ljg1NjUwNiwzOS4zNzEwMiA5Mi44NTYyMjQsNjYuMTEzNjIgTCAyMDkuOTMzNiwtNDk4Ljg4MTcyIEMgMTYyLjM5MTIyLC01NjUuNzM4MiA5Ny4wMjA0NjIsLTYyMS40NTE5MiAxNy41MzU1NDMsLTY1OC41OTQ0MSAtMjI4LjM0NzcxLC03NzIuOTkzMjUgLTUyMS43NzMzLC02NjYuNzY1NzQgLTYzNi45MTUsLTQyMC4xMzk2NyBjIC0zNy4xNDI0OSw3OS40ODQ5MiAtNTEuMjU2NjMsMTY0LjE2OTc3IC00NC41NzA5NywyNDUuODgzMjIgbCAxNzIuMzQxMTIsLTYyLjM5OTM1IGMgMi45NzEzOSwtMzcuMTQyNSAxMS44ODU1OSwtNzQuMjg0OTcgMjguOTcxMTMsLTExMC42ODQ1OSA3NC4yODQ5NywtMTU5LjcxMjY4IDI2NS4xOTczMiwtMjI5LjU0MDU0IDQyNC45MDk5NzcsLTE1NS4yNTU1OSBtIC01MjkuNjUxNzg3LDM3OS41OTYxOCAtMTYzLjQyNjkxLDU5LjQyNzk3NyBjIDE0Ljg1Njk5LDU5LjQyNzk2MTUgNDAuODU2NzMsMTE2LjYyNzM2NiA3Ni41MTM1MSwxNjYuMzk4MzAzIEwgLTUwMC4yMzA2Niw0MC40MjcxMjkgQyAtNTQ0LjA1ODgsLTQuMTQzODYxNSAtNTczLjc3Mjc4LC02Mi4wODYxMzggLTU4NC45MTU1MywtMTIyLjk5OTggbSA3MTMuMTM1NjYsLTY0LjYyNzkyIEMgMTI1LjI0ODc2LC0xNTAuNDg1MjUgMTE2LjMzNDU1LC0xMTMuMzQyNzUgOTkuMjQ5LC03Ni45NDMxMzIgMjQuOTY0MDI5LDgyLjc2OTU0MyAtMTY1Ljk0ODMyLDE1Mi41OTc0IC0zMjUuNjYwOTksNzcuNTY5NTk1IC0zNjEuMzE3NzcsNjAuNDg0MDY3IC0zOTIuNTE3NDgsMzguMTk4NTUyIC00MTguNTE3MjEsMTEuNDU1OTgxIGwgLTE3MS41OTgyNiw2Mi4zOTkzNTIgYyA0Ny41NDIzOCw2Ni44NTY0ODcgMTEyLjE3MDMsMTIyLjU3MDIwNyAxOTEuNjU1MiwxNTkuNzEyNjY3IDI0NS44ODMyNSwxMTQuMzk4ODUgNTM5LjMwODg3LDguMTcxMzYgNjU0LjQ1MDU1LC0yMzguNDU0Njk0NSAzNy4xNDI0NywtNzkuNDg0OTE2NSA1MC41MTM3NywtMTY0LjE2OTc3NTUgNDQuNTcwOTksLTI0NS44ODMyNTU1IHogbSA0Mi4zNDI0NSwtMjEwLjIyNjQ1IC0xNjMuNDI2OTMxOSw1OS40Mjc5OCBjIDMwLjQ1NjgzMjksNTQuMjI3OTkgNDQuNTcwOTkwOSwxMTcuMzcwMjMgNDAuMTEzODc1OSwxNzkuNzY5NjEgbCAxNzEuNTk4MjU2LC02Mi4zOTkzOCBjIC01LjE5OTk1LC02MS42NTY1MSAtMjEuNTQyNjMsLTEyMS44MjczMyAtNDguMjg1MiwtMTc2Ljc5ODIxIgogICAgICAgaWQ9InBhdGg4IgogICAgICAgc3R5bGU9InN0cm9rZS13aWR0aDo3LjQyODQ5O2ZpbHRlcjp1cmwoI2ZpbHRlcjE0MjEpIiAvPgogICAgPHBhdGgKICAgICAgIGNsYXNzPSJzdDIiCiAgICAgICBkPSJtIC00MzcuODMxMywtMjI4LjQ4NDQ0IGMgLTAuNzQyODUsLTExLjE0Mjc3IDAsLTIzLjAyODM2IDAuNzQyODgsLTM0LjkxMzk0IGwgLTE3Mi4zNDExNCw2Mi4zOTkzNSBjIDAuNzQyODUsMTEuMTQyNzQgMi4yMjg1NiwyMi4yODU1MSAzLjcxNDI0LDMyLjY4NTQgeiBtIDczNi4xNjM5OSwtMjcwLjM5NzI4IGMgLTUuMTk5OTQsLTguOTE0MjEgLTExLjE0MjcyLC0xNy44Mjg0IC0xNy4wODU1MiwtMjUuOTk5NzUgbCAtMTcyLjM0MTEzLDYyLjM5OTM3IGMgNy40Mjg1MSw3LjQyODUgMTQuODU2OTksMTUuNTk5ODUgMjEuNTQyNjcsMjQuNTE0MDQgeiIKICAgICAgIGlkPSJwYXRoMTAiCiAgICAgICBzdHlsZT0ic3Ryb2tlLXdpZHRoOjcuNDI4NDk7ZmlsdGVyOnVybCgjZmlsdGVyMTQxNSkiIC8+CiAgICA8cGF0aAogICAgICAgY2xhc3M9InN0MCIKICAgICAgIGQ9Im0gLTU5MC44NTgzMyw3My44NTUzMzMgYyAxMy4zNzEzMSwxOC41NzEyNTMgMjguMjI4MywzNi4zOTk2NTcgNDMuODI4MTQsNTMuNDg1MTc3IGwgMTg3LjE5ODExLC02OC4zNDIxNjcgYyAtMjEuNTQyNjMsLTEzLjM3MTI2NiAtNDEuNTk5NTcsLTI5LjcxMzk4MSAtNTguNjg1MTMsLTQ3LjU0MjM2MiB6IG0gODkwLjY3Njc1LC0zMjMuODgyNDQzIC0xNzEuNTk4MjksNjIuMzk5MzkgYyAtMS40ODU2OSwyNC41MTQwNCAtNi42ODU2Myw0OS43NzA5MyAtMTQuODU2OTksNzQuMjg0OTcgbCAxODcuMTk4MTMsLTY4LjM0MjE4IGMgMS40ODU2OSwtMjMuMDI4MzUgMS40ODU2OSwtNDYuMDU2NjcgLTAuNzQyODUsLTY4LjM0MjE4IgogICAgICAgaWQ9InBhdGgxMiIKICAgICAgIHN0eWxlPSJzdHJva2Utd2lkdGg6Ny40Mjg0OTtmaWx0ZXI6dXJsKCNmaWx0ZXIxNDA5KSIgLz4KICA8L2c+Cjwvc3ZnPgo=);
+            background-position: 110% 105%;
+            background-repeat: no-repeat;
+            background-size: 90%;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                background-size: 80%;
+            }
+        }
+
+        @media (min-width: 1000px) {
+            body {
+                background-position: 110% 100%;
+                background-size: 70%;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            body {
+                background-position: 100% 70%;
+                background-size: 70%;
+            }
+        }
+
+        @media (min-width: 1400px) {
+            body {
+                background-size: 75%;
+            }
+        }
+
+        @media (min-width: 1800px) {
+            body {
+                background-size: 70%;
+            }
+        }
+
+        @media (min-width: 1800px) {
+            body {
+                background-position: 75% 80%;
+                background-size: 60%;
+            }
+        }
+
+        @media (min-width: 2200px) {
+            body {
+                background-size: 50%;
+            }
+        }
+
+        @media (max-width: 1199px) {
+            .pf-c-login__container {
+                width: 100%;
+            }
+        }
+
+        .pf-c-login__main-body {
+            padding-bottom: var(--pf-global--spacer--2xl) !important;
+        }
+
+        @media (min-width: 1200px) {
+            .pf-c-brand {
+                height: 180px;
+            }
+        }
+
+        .pf-c-form {
+            --pf-c-form--GridGap: var(--pf-global--gutter);
+            --pf-c-form__label--Color: var(--pf-global--Color--100);
+            --pf-c-form__label--FontWeight: var(--pf-global--FontWeight--normal);
+            --pf-c-form__label--FontSize: var(--pf-global--FontSize--sm);
+            --pf-c-form__label--LineHeight: var(--pf-global--LineHeight--sm);
+            --pf-c-form__label--PaddingTop: var(--pf-global--spacer--sm);
+            --pf-c-form__label--PaddingBottom: var(--pf-global--spacer--sm);
+            --pf-c-form__label--m-disabled--Color: var(--pf-global--disabled-color--100);
+            --pf-c-form__label-text--FontWeight: var(--pf-global--FontWeight--bold);
+            --pf-c-form__label-required--MarginLeft: var(--pf-global--spacer--xs);
+            --pf-c-form__label-required--FontSize: var(--pf-global--FontSize--sm);
+            --pf-c-form__label-required--Color: var(--pf-global--danger-color--100);
+            --pf-c-form__group--MarginLeft: var(--pf-global--spacer--sm);
+            --pf-c-form--m-horizontal--md__group--GridTemplateColumns: 150px 1fr;
+            --pf-c-form__group--m-action--MarginTop: var(--pf-global--spacer--xl);
+            --pf-c-form__actions--child--MarginTop: var(--pf-global--spacer--sm);
+            --pf-c-form__actions--child--MarginRight: var(--pf-global--spacer--sm);
+            --pf-c-form__actions--child--MarginBottom: var(--pf-global--spacer--sm);
+            --pf-c-form__actions--child--MarginLeft: var(--pf-global--spacer--sm);
+            --pf-c-form__actions--MarginTop: calc(var(--pf-c-form__actions--child--MarginTop) * -1);
+            --pf-c-form__actions--MarginRight: calc(var(--pf-c-form__actions--child--MarginRight) * -1);
+            --pf-c-form__actions--MarginBottom: calc(var(--pf-c-form__actions--child--MarginBottom) * -1);
+            --pf-c-form__actions--MarginLeft: calc(var(--pf-c-form__actions--child--MarginLeft) * -1);
+            --pf-c-form__helper-text--MarginTop: var(--pf-global--spacer--xs);
+            --pf-c-form__helper-text--FontSize: var(--pf-global--FontSize--sm);
+            --pf-c-form__helper-text--Color: var(--pf-global--Color--100);
+            --pf-c-form--m-inline--MarginRight: var(--pf-global--spacer--lg);
+            --pf-c-form--m-error--Color: var(--pf-global--danger-color--100);
+            --pf-c-form--m-success--Color: var(--pf-global--success-color--200);
+            display: grid;
+            grid-gap: var(--pf-c-form--GridGap);
+        }
+
+        .pf-c-form.pf-m-horizontal.pf-m-align-right .pf-c-form__label {
+            text-align: right;
+        }
+
+        .pf-c-form.pf-m-horizontal .pf-c-form__group {
+            display: grid;
+            grid-column-gap: var(--pf-c-form--GridGap);
+        }
+
+        .pf-c-form.pf-m-horizontal .pf-c-form__group .pf-c-form-control {
+            align-self: start;
+        }
+
+        @media (min-width: 768px) {
+            .pf-c-form.pf-m-horizontal .pf-c-form__group {
+                grid-template-columns: var(--pf-c-form--m-horizontal--md__group--GridTemplateColumns);
+            }
+
+            .pf-c-form.pf-m-horizontal .pf-c-form__group .pf-c-form__label {
+                padding-top: var(--pf-c-form__label--PaddingTop);
+                padding-bottom: 0;
+            }
+
+            .pf-c-form.pf-m-horizontal .pf-c-form__group .pf-c-form__label.pf-m-no-padding-top {
+                --pf-c-form__label--PaddingTop: 0;
+            }
+
+            .pf-c-form.pf-m-horizontal .pf-c-form-control,
+            .pf-c-form.pf-m-horizontal .pf-c-form__horizontal-group,
+            .pf-c-form.pf-m-horizontal .pf-c-form__helper-text,
+            .pf-c-form.pf-m-horizontal .pf-c-check {
+                grid-column-start: 2;
+            }
+        }
+
+        .pf-c-form__group.pf-m-action {
+            margin-top: var(--pf-c-form__group--m-action--MarginTop);
+        }
+
+        .pf-c-form__group.pf-m-inline {
+            display: flex;
+            flex-flow: row wrap;
+        }
+
+        .pf-c-form__group.pf-m-inline .pf-c-form__label {
+            flex-basis: 100%;
+        }
+
+        .pf-c-form__group.pf-m-inline>*:not(.pf-c-form__label) {
+            flex: auto 0;
+            margin-right: var(--pf-c-form--m-inline--MarginRight);
+        }
+
+        .pf-c-form__group .pf-c-form__label {
+            padding-bottom: var(--pf-c-form__label--PaddingBottom);
+        }
+
+        .pf-c-form__group .pf-c-form__helper-text {
+            margin-top: var(--pf-c-form__helper-text--MarginTop);
+        }
+
+        .pf-c-form__label {
+            display: inline-block;
+            font-size: var(--pf-c-form__label--FontSize);
+            font-weight: var(--pf-c-form__label--FontWeight);
+            line-height: var(--pf-c-form__label--LineHeight);
+            color: var(--pf-c-form__label--Color);
+        }
+
+        .pf-c-form__label::selection {
+            background-color: none;
+        }
+
+        .pf-c-form__label:not(.pf-m-disabled):hover {
+            cursor: pointer;
+        }
+
+        .pf-c-form__label.pf-m-disabled {
+            --pf-c-form__label--Color: var(--pf-c-form__label--m-disabled--Color);
+        }
+
+        .pf-c-form__label.pf-m-disabled:hover {
+            cursor: not-allowed;
+        }
+
+        .pf-c-form__label-text {
+            font-weight: var(--pf-c-form__label-text--FontWeight);
+        }
+
+        .pf-c-form__label-required {
+            margin-left: var(--pf-c-form__label-required--MarginLeft);
+            font-size: var(--pf-c-form__label-required--FontSize);
+            color: var(--pf-c-form__label-required--Color);
+        }
+
+        .pf-c-form__helper-text {
+            font-size: var(--pf-c-form__helper-text--FontSize);
+            color: var(--pf-c-form__helper-text--Color);
+        }
+
+        .pf-c-form__helper-text.pf-m-error {
+            --pf-c-form__helper-text--Color: var(--pf-c-form--m-error--Color);
+        }
+
+        .pf-c-form__helper-text.pf-m-success {
+            --pf-c-form__helper-text--Color: var(--pf-c-form--m-success--Color);
+        }
+
+        .pf-c-form__helper-text.pf-m-inactive {
+            display: none;
+            visibility: hidden;
+        }
+
+        .pf-c-form__helper-text.pf-m-hidden {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .pf-c-form__fieldset {
+            border: 0;
+        }
+
+        .pf-c-form__actions {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: var(--pf-c-form__actions--MarginTop);
+            margin-right: var(--pf-c-form__actions--MarginRight);
+            margin-bottom: var(--pf-c-form__actions--MarginBottom);
+            margin-left: var(--pf-c-form__actions--MarginLeft);
+            overflow: hidden;
+        }
+
+        .pf-c-form__actions>* {
+            margin-top: var(--pf-c-form__actions--child--MarginTop);
+            margin-right: var(--pf-c-form__actions--child--MarginRight);
+            margin-bottom: var(--pf-c-form__actions--child--MarginBottom);
+            margin-left: var(--pf-c-form__actions--child--MarginLeft);
+        }
+
+        .pf-c-form-control {
+            --pf-c-form-control--FontSize: var(--pf-global--FontSize--md);
+            --pf-c-form-control--LineHeight: var(--pf-global--LineHeight--md);
+            --pf-c-form-control--BorderWidth: var(--pf-global--BorderWidth--sm);
+            --pf-c-form-control--BorderTopColor: var(--pf-global--BorderColor--300);
+            --pf-c-form-control--BorderRightColor: var(--pf-global--BorderColor--300);
+            --pf-c-form-control--BorderBottomColor: var(--pf-global--BorderColor--200);
+            --pf-c-form-control--BorderLeftColor: var(--pf-global--BorderColor--300);
+            --pf-c-form-control--BorderRadius: 0;
+            --pf-c-form-control--BackgroundColor: var(--pf-global--BackgroundColor--100);
+            --pf-c-form-control--Height: calc(var(--pf-c-form-control--FontSize) * var(--pf-c-form-control--LineHeight) + var(--pf-c-form-control--BorderWidth) * 2 + var(--pf-c-form-control--PaddingTop) + var(--pf-c-form-control--PaddingBottom));
+            --pf-c-form-control--PaddingTop: calc(var(--pf-global--spacer--form-element) - var(--pf-global--BorderWidth--sm));
+            --pf-c-form-control--PaddingBottom: calc(var(--pf-global--spacer--form-element) - var(--pf-global--BorderWidth--sm));
+            --pf-c-form-control--PaddingRight: var(--pf-global--spacer--sm);
+            --pf-c-form-control--PaddingLeft: var(--pf-global--spacer--sm);
+            --pf-c-form-control--hover--BorderBottomColor: var(--pf-global--primary-color--100);
+            --pf-c-form-control--focus--BorderBottomWidth: var(--pf-global--BorderWidth--md);
+            --pf-c-form-control--focus--PaddingBottom: calc(var(--pf-global--spacer--form-element) - var(--pf-c-form-control--focus--BorderBottomWidth));
+            --pf-c-form-control--focus--BorderBottomColor: var(--pf-global--primary-color--100);
+            --pf-c-form-control--placeholder--Color: var(--pf-global--Color--dark-200);
+            --pf-c-form-control--disabled--Color: var(--pf-global--disabled-color--100);
+            --pf-c-form-control--disabled--BackgroundColor: var(--pf-global--disabled-color--300);
+            --pf-c-form-control--disabled--BorderColor: transparent;
+            --pf-c-form-control--readonly--focus--BackgroundColor: var(--pf-global--disabled-color--300);
+            --pf-c-form-control--readonly--focus--PaddingBottom: var(--pf-c-form-control--PaddingBottom);
+            --pf-c-form-control--readonly--focus--BorderBottomWidth: var(--pf-global--BorderWidth--sm);
+            --pf-c-form-control--readonly--focus--BorderBottomColor: var(--pf-global--disabled-color--100);
+            --pf-c-form-control--invalid--BorderBottomWidth: var(--pf-global--BorderWidth--md);
+            --pf-c-form-control--invalid--PaddingBottom: calc(var(--pf-global--spacer--form-element) - var(--pf-c-form-control--invalid--BorderBottomWidth));
+            --pf-c-form-control--invalid--BorderBottomColor: var(--pf-global--danger-color--100);
+            --pf-c-form-control--invalid--PaddingRight: var(--pf-global--spacer--xl);
+            --pf-c-form-control--invalid--BackgroundPosition: calc(100% - var(--pf-c-form-control--PaddingLeft)) var(--pf-c-form-control--PaddingLeft);
+            --pf-c-form-control--invalid--BackgroundSize: var(--pf-c-form-control--FontSize) var(--pf-c-form-control--FontSize);
+            --pf-c-form-control--invalid--BackgroundUrl: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23c9190b' d='M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zm-248 50c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z'/%3E%3C/svg%3E");
+            --pf-c-form-control--invalid--exclamation--Background: var(--pf-c-form-control--invalid--BackgroundUrl) var(--pf-c-form-control--invalid--BackgroundPosition) / var(--pf-c-form-control--invalid--BackgroundSize) no-repeat;
+            --pf-c-form-control--invalid--Background: var(--pf-c-form-control--BackgroundColor) var(--pf-c-form-control--invalid--exclamation--Background);
+            --pf-c-form-control--success--BorderBottomWidth: var(--pf-global--BorderWidth--md);
+            --pf-c-form-control--success--PaddingBottom: calc(var(--pf-global--spacer--form-element) - var(--pf-c-form-control--success--BorderBottomWidth));
+            --pf-c-form-control--success--BorderBottomColor: var(--pf-global--success-color--100);
+            --pf-c-form-control--success--PaddingRight: var(--pf-global--spacer--xl);
+            --pf-c-form-control--success--BackgroundPosition: calc(100% - var(--pf-c-form-control--PaddingLeft)) var(--pf-c-form-control--PaddingLeft);
+            --pf-c-form-control--success--BackgroundSize: var(--pf-c-form-control--FontSize) var(--pf-c-form-control--FontSize);
+            --pf-c-form-control--success--BackgroundUrl: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%2392d400' d='M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z'/%3E%3C/svg%3E");
+            --pf-c-form-control--success--check--Background: var(--pf-c-form-control--success--BackgroundUrl) var(--pf-c-form-control--success--BackgroundPosition) / var(--pf-c-form-control--success--BackgroundSize) no-repeat;
+            --pf-c-form-control--success--Background: var(--pf-c-form-control--BackgroundColor) var(--pf-c-form-control--success--check--Background);
+            --pf-c-form-control--m-search--PaddingLeft: var(--pf-global--spacer--xl);
+            --pf-c-form-control--m-search--BackgroundPosition: var(--pf-c-form-control--PaddingLeft);
+            --pf-c-form-control--m-search--BackgroundSize: var(--pf-c-form-control--FontSize) var(--pf-c-form-control--FontSize);
+            --pf-c-form-control--m-search--BackgroundUrl: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23737679' d='M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z'/%3E%3C/svg%3E");
+            --pf-c-form-control--m-search--Background: var(--pf-c-form-control--m-search--BackgroundUrl) var(--pf-c-form-control--m-search--BackgroundPosition) / var(--pf-c-form-control--m-search--BackgroundSize) no-repeat;
+            --pf-c-form-control__select--PaddingRight: var(--pf-global--spacer--lg);
+            --pf-c-form-control__select--BackgroundUrl: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3Cpath fill='%23urrentColor' d='M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z'/%3E%3C/svg%3E");
+            --pf-c-form-control__select--BackgroundSize: 0.875rem;
+            --pf-c-form-control__select--BackgroundPosition: calc(100% - var(--pf-global--spacer--sm)) center;
+            --pf-c-form-control__select--arrow--Background: var(--pf-c-form-control--BackgroundColor) var(--pf-c-form-control__select--BackgroundUrl) var(--pf-c-form-control__select--BackgroundPosition) / var(--pf-c-form-control__select--BackgroundSize) no-repeat;
+            --pf-c-form-control__select--Background: var(--pf-c-form-control__select--arrow--Background);
+            --pf-c-form-control__select--invalid--Background: var(--pf-c-form-control--invalid--exclamation--Background), var(--pf-c-form-control__select--arrow--Background);
+            --pf-c-form-control__select--invalid--PaddingRight: calc(var(--pf-global--spacer--sm) + var(--pf-global--spacer--2xl));
+            --pf-c-form-control__select--success--Background: var(--pf-c-form-control--success--check--Background), var(--pf-c-form-control__select--arrow--Background);
+            --pf-c-form-control__select--success--PaddingRight: calc(var(--pf-global--spacer--sm) + var(--pf-global--spacer--2xl));
+            color: var(--pf-global--Color--100);
+            width: 100%;
+            padding: var(--pf-c-form-control--PaddingTop) var(--pf-c-form-control--PaddingRight) var(--pf-c-form-control--PaddingBottom) var(--pf-c-form-control--PaddingLeft);
+            font-size: var(--pf-c-form-control--FontSize);
+            line-height: var(--pf-c-form-control--LineHeight);
+            background-color: ${environment-color};
+            border: var(--pf-c-form-control--BorderWidth) solid;
+            border-color: var(--pf-c-form-control--BorderTopColor) var(--pf-c-form-control--BorderRightColor) var(--pf-c-form-control--BorderBottomColor) var(--pf-c-form-control--BorderLeftColor);
+            border-radius: var(--pf-c-form-control--BorderRadius);
+            -moz-appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .pf-c-form-control::placeholder {
+            --pf-c-form-control--Color: var(--pf-c-form-control--placeholder--Color);
+        }
+
+        .pf-c-form-control:not(textarea) {
+            height: var(--pf-c-form-control--Height);
+            text-overflow: ellipsis;
+        }
+
+        .pf-c-form-control[readonly],
+        .pf-c-form-control[readonly].pf-m-hover,
+        .pf-c-form-control[readonly]:hover,
+        .pf-c-form-control[readonly].pf-m-focus,
+        .pf-c-form-control[readonly]:focus {
+            --pf-c-form-control--BorderBottomColor: var(--pf-c-form-control--readonly--focus--BorderBottomColor);
+            padding-bottom: var(--pf-c-form-control--readonly--focus--PaddingBottom);
+            background-color: ${environment-color};
+            border-bottom-width: var(--pf-c-form-control--readonly--focus--BorderBottomWidth);
+        }
+
+        .pf-c-form-control.pf-m-hover,
+        .pf-c-form-control:hover {
+            --pf-c-form-control--BorderBottomColor: var(--pf-c-form-control--hover--BorderBottomColor);
+        }
+
+        .pf-c-form-control.pf-m-focus,
+        .pf-c-form-control:focus {
+            --pf-c-form-control--BorderBottomColor: var(--pf-c-form-control--focus--BorderBottomColor);
+            padding-bottom: var(--pf-c-form-control--focus--PaddingBottom);
+            border-bottom-width: var(--pf-c-form-control--focus--BorderBottomWidth);
+        }
+
+        .pf-c-form-control:disabled {
+            --pf-c-form-control--Color: var(--pf-c-form-control--disabled--Color);
+            --pf-c-form-control--BackgroundColor: var(--pf-c-form-control--disabled--BackgroundColor);
+            cursor: not-allowed;
+            border-color: var(--pf-c-form-control--disabled--BorderColor);
+        }
+
+        .pf-c-form-control[aria-invalid="true"] {
+            --pf-c-form-control--PaddingRight: var(--pf-c-form-control--invalid--PaddingRight);
+            --pf-c-form-control--BorderBottomColor: var(--pf-c-form-control--invalid--BorderBottomColor);
+            padding-bottom: var(--pf-c-form-control--invalid--PaddingBottom);
+            background: var(--pf-c-form-control--invalid--Background);
+            border-bottom-width: var(--pf-c-form-control--invalid--BorderBottomWidth);
+        }
+
+        .pf-c-form-control.pf-m-success {
+            --pf-c-form-control--PaddingRight: var(--pf-c-form-control--success--PaddingRight);
+            --pf-c-form-control--BorderBottomColor: var(--pf-c-form-control--success--BorderBottomColor);
+            padding-bottom: var(--pf-c-form-control--success--PaddingBottom);
+            background: var(--pf-c-form-control--success--Background);
+            border-bottom-width: var(--pf-c-form-control--success--BorderBottomWidth);
+        }
+
+        .pf-c-form-control.pf-m-search {
+            padding-left: var(--pf-c-form-control--m-search--PaddingLeft);
+            background: var(--pf-c-form-control--m-search--Background);
+        }
+
+        select.pf-c-form-control {
+            --pf-c-form-control--PaddingRight: var(--pf-c-form-control__select--PaddingRight);
+            background: var(--pf-c-form-control__select--Background);
+        }
+
+        select.pf-c-form-control[aria-invalid="true"] {
+            --pf-c-form-control--PaddingRight: var(--pf-c-form-control__select--invalid--PaddingRight);
+            --pf-c-form-control--invalid--BackgroundPosition: calc(100% - var(--pf-global--spacer--sm) - var(--pf-global--spacer--lg));
+            --pf-c-form-control--invalid--Background: var(--pf-c-form-control__select--invalid--Background);
+        }
+
+        select.pf-c-form-control.pf-m-success {
+            --pf-c-form-control--PaddingRight: var(--pf-c-form-control__select--success--PaddingRight);
+            --pf-c-form-control--success--BackgroundPosition: calc(100% - var(--pf-global--spacer--sm) - var(--pf-global--spacer--lg));
+            --pf-c-form-control--success--Background: var(--pf-c-form-control__select--success--Background);
+        }
+
+        .pf-c-form-control.pf-m-resize-vertical {
+            resize: vertical;
+        }
+
+        .pf-c-form-control.pf-m-resize-horizontal {
+            resize: horizontal;
+        }
+
+        .error-placeholder {
+            min-height: 21px;
+        }
+
+        .pf-m-error__icon {
+            margin-right: 5px;
+        }
+
+        .pf-c-form__helper-text.pf-m-error {
+            color: var(--pf-global--danger-color--100);
+        }
+
+        .pf-c-button {
+            --pf-c-button--PaddingTop: var(--pf-global--spacer--form-element);
+            --pf-c-button--PaddingRight: var(--pf-global--spacer--md);
+            --pf-c-button--PaddingBottom: var(--pf-global--spacer--form-element);
+            --pf-c-button--PaddingLeft: var(--pf-global--spacer--md);
+            --pf-c-button--LineHeight: var(--pf-global--LineHeight--md);
+            --pf-c-button--FontWeight: var(--pf-global--FontWeight--semi-bold);
+            --pf-c-button--FontSize: var(--pf-global--FontSize--md);
+            --pf-c-button--BorderRadius: var(--pf-global--BorderRadius--sm);
+            --pf-c-button--BorderColor: transparent;
+            --pf-c-button--BorderWidth: var(--pf-global--BorderWidth--sm);
+            --pf-c-button--hover--BorderWidth: var(--pf-global--BorderWidth--md);
+            --pf-c-button--focus--BorderWidth: var(--pf-global--BorderWidth--md);
+            --pf-c-button--active--BorderWidth: var(--pf-global--BorderWidth--md);
+            --pf-c-button--disabled--Color: var(--pf-global--disabled-color--100);
+            --pf-c-button--disabled--BackgroundColor: var(--pf-global--disabled-color--200);
+            --pf-c-button--disabled--BorderColor: transparent;
+            --pf-c-button--m-primary--BackgroundColor: var(--pf-global--primary-color--100);
+            --pf-c-button--m-primary--Color: var(--pf-global--Color--light-100);
+            --pf-c-button--m-primary--hover--BackgroundColor: var(--pf-global--primary-color--200);
+            --pf-c-button--m-primary--hover--Color: var(--pf-global--Color--light-100);
+            --pf-c-button--m-primary--focus--BackgroundColor: var(--pf-global--primary-color--200);
+            --pf-c-button--m-primary--focus--Color: var(--pf-global--Color--light-100);
+            --pf-c-button--m-primary--active--BackgroundColor: var(--pf-global--primary-color--200);
+            --pf-c-button--m-primary--active--Color: var(--pf-global--Color--light-100);
+            --pf-c-button--m-secondary--BackgroundColor: transparent;
+            --pf-c-button--m-secondary--BorderColor: var(--pf-global--primary-color--100);
+            --pf-c-button--m-secondary--Color: var(--pf-global--primary-color--100);
+            --pf-c-button--m-secondary--hover--BackgroundColor: transparent;
+            --pf-c-button--m-secondary--hover--BorderColor: var(--pf-global--primary-color--100);
+            --pf-c-button--m-secondary--hover--Color: var(--pf-global--primary-color--100);
+            --pf-c-button--m-secondary--focus--BackgroundColor: transparent;
+            --pf-c-button--m-secondary--focus--BorderColor: var(--pf-global--primary-color--100);
+            --pf-c-button--m-secondary--focus--Color: var(--pf-global--primary-color--100);
+            --pf-c-button--m-secondary--active--BackgroundColor: transparent;
+            --pf-c-button--m-secondary--active--BorderColor: var(--pf-global--primary-color--100);
+            --pf-c-button--m-secondary--active--Color: var(--pf-global--primary-color--100);
+            --pf-c-button--m-tertiary--BackgroundColor: transparent;
+            --pf-c-button--m-tertiary--BorderColor: var(--pf-global--Color--100);
+            --pf-c-button--m-tertiary--Color: var(--pf-global--Color--100);
+            --pf-c-button--m-tertiary--hover--BackgroundColor: transparent;
+            --pf-c-button--m-tertiary--hover--BorderColor: var(--pf-global--Color--100);
+            --pf-c-button--m-tertiary--hover--Color: var(--pf-global--Color--100);
+            --pf-c-button--m-tertiary--focus--BackgroundColor: transparent;
+            --pf-c-button--m-tertiary--focus--BorderColor: var(--pf-global--Color--100);
+            --pf-c-button--m-tertiary--focus--Color: var(--pf-global--Color--100);
+            --pf-c-button--m-tertiary--active--BackgroundColor: transparent;
+            --pf-c-button--m-tertiary--active--BorderColor: var(--pf-global--Color--100);
+            --pf-c-button--m-tertiary--active--Color: var(--pf-global--Color--100);
+            --pf-c-button--m-danger--BackgroundColor: var(--pf-global--danger-color--100);
+            --pf-c-button--m-danger--Color: var(--pf-global--Color--light-100);
+            --pf-c-button--m-danger--hover--BackgroundColor: var(--pf-global--danger-color--200);
+            --pf-c-button--m-danger--hover--Color: var(--pf-global--Color--light-100);
+            --pf-c-button--m-danger--focus--BackgroundColor: var(--pf-global--danger-color--200);
+            --pf-c-button--m-danger--focus--Color: var(--pf-global--Color--light-100);
+            --pf-c-button--m-danger--active--BackgroundColor: var(--pf-global--danger-color--200);
+            --pf-c-button--m-danger--active--Color: var(--pf-global--Color--light-100);
+            --pf-c-button--m-link--Color: var(--pf-global--link--Color);
+            --pf-c-button--m-link--hover--Color: var(--pf-global--link--Color--hover);
+            --pf-c-button--m-link--focus--Color: var(--pf-global--link--Color--hover);
+            --pf-c-button--m-link--active--Color: var(--pf-global--link--Color--hover);
+            --pf-c-button--m-link--disabled--BackgroundColor: transparent;
+            --pf-c-button--m-link--m-inline--hover--TextDecoration: var(--pf-global--link--TextDecoration--hover);
+            --pf-c-button--m-link--m-inline--hover--Color: var(--pf-global--link--Color--hover);
+            --pf-c-button--m-plain--Color: var(--pf-global--Color--200);
+            --pf-c-button--m-plain--hover--Color: var(--pf-global--Color--100);
+            --pf-c-button--m-plain--focus--Color: var(--pf-global--Color--100);
+            --pf-c-button--m-plain--active--Color: var(--pf-global--Color--100);
+            --pf-c-button--m-plain--disabled--Color: var(--pf-global--disabled-color--200);
+            --pf-c-button--m-plain--disabled--BackgroundColor: transparent;
+            --pf-c-button--m-control--after--BorderWidth: var(--pf-global--BorderWidth--sm);
+            --pf-c-button--m-control--after--BorderTopColor: var(--pf-global--BorderColor--300);
+            --pf-c-button--m-control--after--BorderRightColor: var(--pf-global--BorderColor--300);
+            --pf-c-button--m-control--after--BorderBottomColor: var(--pf-global--BorderColor--200);
+            --pf-c-button--m-control--after--BorderLeftColor: var(--pf-global--BorderColor--300);
+            --pf-c-button--m-control--hover--after--BorderBottomWidth: var(--pf-global--BorderWidth--md);
+            --pf-c-button--m-control--hover--after--BorderBottomColor: var(--pf-global--active-color--100);
+            --pf-c-button--m-control--active--after--BorderBottomWidth: var(--pf-global--BorderWidth--md);
+            --pf-c-button--m-control--active--after--BorderBottomColor: var(--pf-global--active-color--100);
+            --pf-c-button--m-control--focus--after--BorderBottomWidth: var(--pf-global--BorderWidth--md);
+            --pf-c-button--m-control--focus--after--BorderBottomColor: var(--pf-global--active-color--100);
+            --pf-c-button--m-control--m-expanded--after--BorderBottomWidth: var(--pf-global--BorderWidth--md);
+            --pf-c-button--m-control--m-expanded--after--BorderBottomColor: var(--pf-global--active-color--100);
+            --pf-c-button--m-control--disabled--after--BorderBottomColor: var(--pf-global--BorderColor--300);
+            --pf-c-button--m-control--disabled--BackgroundColor: transparent;
+            --pf-c-button__icon--MarginRight: var(--pf-global--spacer--xs);
+            --pf-c-button__text--icon--MarginLeft: var(--pf-global--spacer--xs);
+            position: relative;
+            display: inline-block;
+            padding: var(--pf-c-button--PaddingTop) var(--pf-c-button--PaddingRight) var(--pf-c-button--PaddingBottom) var(--pf-c-button--PaddingLeft);
+            font-size: var(--pf-c-button--FontSize);
+            font-weight: var(--pf-c-button--FontWeight);
+            line-height: var(--pf-c-button--LineHeight);
+            text-align: center;
+            white-space: nowrap;
+            user-select: none;
+            border: 0;
+            border-radius: var(--pf-c-button--BorderRadius);
+        }
+
+        .pf-c-button .pf-c-button__icon {
+            margin-right: var(--pf-c-button__icon--MarginRight);
+        }
+
+        .pf-c-button .pf-c-button__text+.pf-c-button__icon {
+            margin-right: 0;
+            margin-left: var(--pf-c-button__text--icon--MarginLeft);
+        }
+
+        .pf-c-button::after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            content: "";
+            border: var(--pf-c-button--BorderWidth) solid;
+            border-color: var(--pf-c-button--BorderColor);
+            border-radius: var(--pf-c-button--BorderRadius);
+        }
+
+        .pf-c-button:hover,
+        .pf-c-button.pf-m-hover {
+            text-decoration: none;
+        }
+
+        .pf-c-button:hover::after,
+        .pf-c-button.pf-m-hover::after {
+            --pf-c-button--BorderWidth: var(--pf-c-button--hover--BorderWidth);
+        }
+
+        .pf-c-button:active::after,
+        .pf-c-button.pf-m-active::after {
+            --pf-c-button--BorderWidth: var(--pf-c-button--active--BorderWidth);
+        }
+
+        .pf-c-button:focus::after,
+        .pf-c-button.pf-m-focus::after {
+            --pf-c-button--BorderWidth: var(--pf-c-button--focus--BorderWidth);
+        }
+
+        .pf-c-button.pf-m-block {
+            display: block;
+            width: 100%;
+        }
+
+        .pf-c-button.pf-m-primary {
+            color: var(--pf-c-button--m-primary--Color);
+            background-color: White;
+        }
+
+        .pf-c-button.pf-m-primary:hover,
+        .pf-c-button.pf-m-primary.pf-m-hover {
+            --pf-c-button--m-primary--Color: var(--pf-c-button--m-primary--hover--Color);
+            --pf-c-button--m-primary--BackgroundColor: var(--pf-c-button--m-primary--hover--BackgroundColor);
+        }
+
+        .pf-c-button.pf-m-primary:active,
+        .pf-c-button.pf-m-primary.pf-m-active {
+            --pf-c-button--m-primary--Color: var(--pf-c-button--m-primary--active--Color);
+            --pf-c-button--m-primary--BackgroundColor: var(--pf-c-button--m-primary--active--BackgroundColor);
+        }
+
+        .pf-c-button.pf-m-primary:focus,
+        .pf-c-button.pf-m-primary.pf-m-focus {
+            --pf-c-button--m-primary--Color: var(--pf-c-button--m-primary--focus--Color);
+            --pf-c-button--m-primary--BackgroundColor: var(--pf-c-button--m-primary--focus--BackgroundColor);
+        }
+
+        .pf-c-button.pf-m-secondary {
+            color: var(--pf-c-button--m-secondary--Color);
+            background-color: White;
+        }
+
+        .pf-c-button.pf-m-secondary::after {
+            --pf-c-button--BorderColor: var(--pf-c-button--m-secondary--BorderColor);
+        }
+
+        .pf-c-button.pf-m-secondary:hover,
+        .pf-c-button.pf-m-secondary.pf-m-hover {
+            --pf-c-button--m-secondary--Color: var(--pf-c-button--m-secondary--hover--Color);
+            --pf-c-button--m-secondary--BackgroundColor: var(--pf-c-button--m-secondary--hover--BackgroundColor);
+        }
+
+        .pf-c-button.pf-m-secondary:hover::after,
+        .pf-c-button.pf-m-secondary.pf-m-hover::after {
+            --pf-c-button--BorderColor: var(--pf-c-button--m-secondary--hover--BorderColor);
+        }
+
+        .pf-c-button.pf-m-secondary:active,
+        .pf-c-button.pf-m-secondary.pf-m-active {
+            --pf-c-button--m-secondary--Color: var(--pf-c-button--m-secondary--active--Color);
+            --pf-c-button--m-secondary--BackgroundColor: var(--pf-c-button--m-secondary--active--BackgroundColor);
+        }
+
+        .pf-c-button.pf-m-secondary:active::after,
+        .pf-c-button.pf-m-secondary.pf-m-active::after {
+            --pf-c-button--BorderColor: var(--pf-c-button--m-secondary--active--BorderColor);
+        }
+
+        .pf-c-button.pf-m-secondary:focus,
+        .pf-c-button.pf-m-secondary.pf-m-focus {
+            --pf-c-button--m-secondary--Color: var(--pf-c-button--m-secondary--focus--Color);
+            --pf-c-button--m-secondary--BackgroundColor: var(--pf-c-button--m-secondary--focus--BackgroundColor);
+        }
+
+        .pf-c-button.pf-m-secondary:focus::after,
+        .pf-c-button.pf-m-secondary.pf-m-focus::after {
+            --pf-c-button--BorderColor: var(--pf-c-button--m-secondary--focus--BorderColor);
+        }
+
+        .pf-c-button.pf-m-tertiary {
+            color: var(--pf-c-button--m-tertiary--Color);
+            background-color: White;
+        }
+
+        .pf-c-button.pf-m-tertiary::after {
+            --pf-c-button--BorderColor: var(--pf-c-button--m-tertiary--BorderColor);
+        }
+
+        .pf-c-button.pf-m-tertiary:hover,
+        .pf-c-button.pf-m-tertiary.pf-m-hover {
+            --pf-c-button--m-tertiary--Color: var(--pf-c-button--m-tertiary--hover--Color);
+            --pf-c-button--m-tertiary--BackgroundColor: var(--pf-c-button--m-tertiary--hover--BackgroundColor);
+        }
+
+        .pf-c-button.pf-m-tertiary:hover::after,
+        .pf-c-button.pf-m-tertiary.pf-m-hover::after {
+            --pf-c-button--BorderColor: var(--pf-c-button--m-tertiary--hover--BorderColor);
+        }
+
+        .pf-c-button.pf-m-tertiary:active,
+        .pf-c-button.pf-m-tertiary.pf-m-active {
+            --pf-c-button--m-tertiary--Color: var(--pf-c-button--m-tertiary--active--Color);
+            --pf-c-button--m-tertiary--BackgroundColor: var(--pf-c-button--m-tertiary--active--BackgroundColor);
+        }
+
+        .pf-c-button.pf-m-tertiary:active::after,
+        .pf-c-button.pf-m-tertiary.pf-m-active::after {
+            --pf-c-button--BorderColor: var(--pf-c-button--m-tertiary--active--BorderColor);
+        }
+
+        .pf-c-button.pf-m-tertiary:focus,
+        .pf-c-button.pf-m-tertiary.pf-m-focus {
+            --pf-c-button--m-tertiary--Color: var(--pf-c-button--m-tertiary--focus--Color);
+            --pf-c-button--m-tertiary--BackgroundColor: var(--pf-c-button--m-tertiary--focus--BackgroundColor);
+        }
+
+        .pf-c-button.pf-m-tertiary:focus::after,
+        .pf-c-button.pf-m-tertiary.pf-m-focus::after {
+            --pf-c-button--BorderColor: var(--pf-c-button--m-tertiary--focus--BorderColor);
+        }
+
+        .pf-c-button.pf-m-danger {
+            color: var(--pf-c-button--m-danger--Color);
+            background-color: ${environment-color};
+        }
+
+        .pf-c-button.pf-m-danger:hover,
+        .pf-c-button.pf-m-danger.pf-m-hover {
+            --pf-c-button--m-danger--Color: var(--pf-c-button--m-danger--hover--Color);
+            --pf-c-button--m-danger--BackgroundColor: var(--pf-c-button--m-danger--hover--BackgroundColor);
+        }
+
+        .pf-c-button.pf-m-danger:active,
+        .pf-c-button.pf-m-danger.pf-m-active {
+            --pf-c-button--m-danger--Color: var(--pf-c-button--m-danger--active--Color);
+            --pf-c-button--m-danger--BackgroundColor: var(--pf-c-button--m-danger--active--BackgroundColor);
+        }
+
+        .pf-c-button.pf-m-danger:focus,
+        .pf-c-button.pf-m-danger.pf-m-focus {
+            --pf-c-button--m-danger--Color: var(--pf-c-button--m-danger--focus--Color);
+            --pf-c-button--m-danger--BackgroundColor: var(--pf-c-button--m-danger--focus--BackgroundColor);
+        }
+
+        .pf-c-button.pf-m-link {
+            color: var(--pf-c-button--m-link--Color);
+        }
+
+        .pf-c-button.pf-m-link:not(.pf-m-inline):hover,
+        .pf-c-button.pf-m-link:not(.pf-m-inline).pf-m-hover {
+            --pf-c-button--m-link--Color: var(--pf-c-button--m-link--hover--Color);
+        }
+
+        .pf-c-button.pf-m-link:not(.pf-m-inline):active,
+        .pf-c-button.pf-m-link:not(.pf-m-inline).pf-m-active {
+            --pf-c-button--m-link--Color: var(--pf-c-button--m-link--active--Color);
+        }
+
+        .pf-c-button.pf-m-link:not(.pf-m-inline):focus,
+        .pf-c-button.pf-m-link:not(.pf-m-inline).pf-m-focus {
+            --pf-c-button--m-link--Color: var(--pf-c-button--m-link--focus--Color);
+        }
+
+        .pf-c-button.pf-m-link:disabled,
+        .pf-c-button.pf-m-link.pf-m-disabled {
+            background-color: ${environment-color};
+        }
+
+        .pf-c-button.pf-m-link.pf-m-inline {
+            display: inline;
+            padding: 0;
+        }
+
+        .pf-c-button.pf-m-link.pf-m-inline:hover {
+            --pf-c-button--m-link--Color: var(--pf-c-button--m-link--m-inline--hover--Color);
+            text-decoration: var(--pf-c-button--m-link--m-inline--hover--TextDecoration);
+        }
+
+        .pf-c-button.pf-m-control::after {
+            --pf-c-button--BorderWidth: var(--pf-c-button--m-control--after--BorderWidth);
+            --pf-c-button--BorderColor: var(--pf-c-button--m-control--after--BorderTopColor) var(--pf-c-button--m-control--after--BorderRightColor) var(--pf-c-button--m-control--after--BorderBottomColor) var(--pf-c-button--m-control--after--BorderLeftColor);
+            border-radius: initial;
+        }
+
+        .pf-c-button.pf-m-control:hover::after,
+        .pf-c-button.pf-m-control.pf-m-hover::after {
+            --pf-c-button--m-control--after--BorderBottomColor: var(--pf-c-button--m-control--hover--after--BorderBottomColor);
+            border-bottom-width: var(--pf-c-button--m-control--hover--after--BorderBottomWidth);
+        }
+
+        .pf-c-button.pf-m-control:active::after,
+        .pf-c-button.pf-m-control.pf-m-active::after {
+            --pf-c-button--m-control--after--BorderBottomColor: var(--pf-c-button--m-control--active--after--BorderBottomColor);
+            border-bottom-width: var(--pf-c-button--m-control--active--after--BorderBottomWidth);
+        }
+
+        .pf-c-button.pf-m-control:focus::after,
+        .pf-c-button.pf-m-control.pf-m-focus::after {
+            --pf-c-button--m-control--after--BorderBottomColor: var(--pf-c-button--m-control--focus--after--BorderBottomColor);
+            border-bottom-width: var(--pf-c-button--m-control--focus--after--BorderBottomWidth);
+        }
+
+        .pf-c-button.pf-m-control.pf-m-expanded::after {
+            --pf-c-button--m-control--after--BorderBottomColor: var(--pf-c-button--m-control--m-expanded--after--BorderBottomColor);
+            border-bottom-width: var(--pf-c-button--m-control--m-expanded--after--BorderBottomWidth);
+        }
+
+        .pf-c-button.pf-m-control:disabled,
+        .pf-c-button.pf-m-control.pf-m-disabled {
+            background-color: ${environment-color};
+        }
+
+        .pf-c-button.pf-m-control:disabled::after,
+        .pf-c-button.pf-m-control.pf-m-disabled::after {
+            --pf-c-button--m-control--after--BorderBottomColor: var(--pf-c-button--m-control--disabled--after--BorderBottomColor);
+        }
+
+        .pf-c-button:disabled,
+        .pf-c-button.pf-m-disabled {
+            color: var(--pf-c-button--disabled--Color);
+            pointer-events: none;
+            background-color: ${environment-color};
+        }
+
+        .pf-c-button:disabled::after,
+        .pf-c-button.pf-m-disabled::after {
+            --pf-c-button--BorderColor: var(--pf-c-button--disabled--BorderColor);
+        }
+
+        .pf-c-button.pf-m-plain {
+            color: var(--pf-c-button--m-plain--Color);
+        }
+
+        .pf-c-button.pf-m-plain:hover,
+        .pf-c-button.pf-m-plain.pf-m-hover {
+            --pf-c-button--m-plain--Color: var(--pf-c-button--m-plain--hover--Color);
+        }
+
+        .pf-c-button.pf-m-plain:active,
+        .pf-c-button.pf-m-plain.pf-m-active {
+            --pf-c-button--m-plain--Color: var(--pf-c-button--m-plain--active--Color);
+        }
+
+        .pf-c-button.pf-m-plain:focus,
+        .pf-c-button.pf-m-plain.pf-m-focus {
+            --pf-c-button--m-plain--Color: var(--pf-c-button--m-plain--focus--Color);
+        }
+
+        .pf-c-button.pf-m-plain:disabled,
+        .pf-c-button.pf-m-plain.pf-m-disabled {
+            --pf-c-button--m-plain--Color: var(--pf-c-button--m-plain--disabled--Color);
+            background-color: ${environment-color};
+        }
+
+        .pf-m-redhat-font .pf-c-button {
+            --pf-c-button--FontWeight: var(--pf-global--FontWeight--normal);
+        }
+
+        .pf-c-title.pf-m-3xl {
+            font-size: 28px;
+            line-height: 36.4px;
+        }
+    </style>
+</head>
+
+<body class="pf-m-redhat-font">
+    <div class="pf-c-login">
+        <div class="pf-c-login__container">
+            <header class="pf-c-login__header">
+                    <img src="data:image/png;base64,${company-background}"
+                        alt="company logo" class="pf-c-brand" />
+
+            </header>
+            <main class="pf-c-login__main">
+                <header class="pf-c-login__main-header">
+                    <h1 class="pf-c-title pf-m-3xl">Log in to your account</h1>
+                </header>
+                <div class="pf-c-login__main-body">
+                    <form class="pf-c-form" role="form" action="{{ .Action }}" method="POST">
+                        <input type="hidden" name="{{ .Names.Then }}" value="{{ .Values.Then }}">
+                        <input type="hidden" name="{{ .Names.CSRF }}" value="{{ .Values.CSRF }}">
+                        <div class="error-placeholder">
+                            {{ if .Error }}
+                            <p class="pf-c-form__helper-text pf-m-error">
+                                <svg style="vertical-align:-0.125em" fill="currentColor" height="1em" width="1em"
+                                    viewBox="0 0 512 512" aria-hidden="true" role="img" class="pf-m-error__icon">
+                                    <path
+                                        d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zm-248 50c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"
+                                        transform=""></path>
+                                </svg>
+                                {{ .Error }}
+                            </p>
+                            {{ end }}
+                        </div>
+                        <div class="pf-c-form__group">
+                            <label class="pf-c-form__label" for="inputUsername">
+                                <span class="pf-c-form__label-text">Username</span>
+                                <span class="pf-c-form__label-required" aria-hidden="true">*</span>
+                            </label>
+                            <input type="text" class="pf-c-form-control" id="inputUsername" placeholder="" tabindex="1"
+                                autofocus="autofocus" type="text" name="{{ .Names.Username }}"
+                                value="{{ .Values.Username }}">
+                        </div>
+                        <div class="pf-c-form__group">
+                            <label class="pf-c-form__label" for="inputPassword">
+                                <span class="pf-c-form__label-text">Password</span>
+                                <span class="pf-c-form__label-required" aria-hidden="true">*</span>
+                            </label>
+                            <input type="password" class="pf-c-form-control" id="inputPassword" placeholder=""
+                                tabindex="2" type="password" name="{{ .Names.Password }}" value="">
+                        </div>
+                        <div class="pf-c-form__group pf-m-action">
+                            <button class="pf-c-button pf-m-primary pf-m-block" type="submit" tabindex="3">Log
+                                in</button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+            <footer class="pf-c-login__footer">
+                <p><h1 style="font-size:20px;color:#141251">Welcome to ${environment}</h1></p>
+            </footer>
+        </div>
+    </div>
+</body>
+
+</html>
