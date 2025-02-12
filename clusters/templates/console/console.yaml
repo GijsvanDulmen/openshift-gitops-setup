@@ -4,9 +4,4 @@ metadata:
   name: cluster
 spec:
   customization:
-    customProductName: "Console of {{ $.Values.clusterInstance }}"
-    customLogoFile:
-      key: custom-logo.png
-      name: console-custom-logo
-  logLevel: Normal
-  operatorLogLevel: Normal
+    customProductName: Console of Gijs

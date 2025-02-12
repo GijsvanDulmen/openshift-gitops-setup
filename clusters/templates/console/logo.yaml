@@ -1,8 +1,0 @@
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: console-custom-logo
-  namespace: openshift-config
-binaryData:
-  custom-logo.png: {{ .Files.Get (print "files/openshift-logo-black-and-white.png") | b64enc }}
