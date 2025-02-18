@@ -13,4 +13,4 @@ operators-installer:
   operatorGroups:
   - name: openshift-local-storage
     createNamespace: true
-    targetOwnNamespace: false
+    targetOwnNamespace: true
