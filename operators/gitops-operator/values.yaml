@@ -8,7 +8,10 @@ operators-installer:
       installPlanApproval: "Manual"
       name: openshift-gitops-operator
       sourceNamespace: openshift-marketplace
-      source: redhat-operators
+      
+      # source: redhat-operators # use this for non disconnected
+      source: "cs-redhat-operator-index"
+
       csv: openshift-gitops-operator.v1.15.0-0.1738074324.p
       namespace: openshift-gitops-operator
       automaticIntermediateManualUpgrades: true
