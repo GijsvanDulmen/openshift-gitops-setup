@@ -33,6 +33,16 @@ spec:
         - $values/config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/values.yaml
         ignoreMissingValueFiles: true
 
+        {{- if eq $.Values.enableDisconnected "true" }}
+        # is disconnected
+        {{- end}}
+
+        {{- if and (eq $.Values.enableDisconnected "true") (ne ($operator.disconnectedSource | default "") "") }}
+        parameters:
+        - name: "operators-installer.operators[0].source"
+          value: "{{ $operator.disconnectedSource }}"
+        {{- end }}
+
         {{- if $operator.releaseName }}
         releaseName: "{{ $operator.releaseName }}"
         {{- end }}
