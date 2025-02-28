@@ -1,0 +1,16 @@
+operators-installer:
+
+  operators:
+    - channel: stable-4.17
+      installPlanApproval: "Manual"
+      name: lvms-operator
+      sourceNamespace: openshift-marketplace
+      source: redhat-operators
+      csv: lvms-operator.v4.17.5
+      namespace: openshift-storage
+      automaticIntermediateManualUpgrades: true
+
+  operatorGroups:
+  - name: openshift-storage
+    createNamespace: true
+    targetOwnNamespace: true
