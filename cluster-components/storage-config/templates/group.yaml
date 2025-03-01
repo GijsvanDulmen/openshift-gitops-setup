@@ -1,27 +1,29 @@
-# apiVersion: lvm.topolvm.io/v1alpha1
-# kind: LVMCluster
-# metadata:
-#   name: test-lvmcluster
-#   namespace: openshift-storage
-# spec:
-#   storage:
-#     deviceClasses:
-#       - deviceSelector:
-#           paths:
-#             - /dev/sdb
-#         fstype: xfs
-#         name: vg1
-#         thinPoolConfig:
-#           chunkSizeCalculationPolicy: Static
-#           name: thin-pool-1
-#           overprovisionRatio: 10
-#           sizePercent: 90
-#         nodeSelector: 
-#           nodeSelectorTerms:
-#           - matchExpressions:
-#               - key: node-role.kubernetes.io/worker
-#                 operator: Exists
-#               - key: node-role.kubernetes.io/infra
-#                 operator: DoesNotExist
-#               - key: node-role.kubernetes.io/master
-#                 operator: DoesNotExist
+---
+apiVersion: lvm.topolvm.io/v1alpha1
+kind: LVMCluster
+metadata:
+  name: test-lvmcluster
+  namespace: openshift-storage
+spec:
+  storage:
+    deviceClasses:
+      - deviceSelector:
+          paths:
+            - /dev/disk/by-path/pci-0000:00:05.0-scsi-0:0:0:1
+          forceWipeDevicesAndDestroyAllData: false # do not wipe when disk found
+        fstype: xfs
+        name: vg1
+        thinPoolConfig:
+          chunkSizeCalculationPolicy: Static
+          name: thin-pool-1
+          overprovisionRatio: 10
+          sizePercent: 90
+        nodeSelector: 
+          nodeSelectorTerms:
+          - matchExpressions:
+              - key: node-role.kubernetes.io/worker
+                operator: Exists
+              - key: node-role.kubernetes.io/infra
+                operator: DoesNotExist
+              - key: node-role.kubernetes.io/master
+                operator: DoesNotExist
