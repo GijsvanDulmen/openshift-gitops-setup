@@ -1,5 +1,6 @@
 {{- if eq $.Values.enableDisconnected "true" }}
----
+# old
+# ---
 # apiVersion: operator.openshift.io/v1alpha1
 # kind: ImageContentSourcePolicy
 # metadata:
@@ -15,7 +16,7 @@
 #   - mirrors:
 #     - cr.ticq.org/ocp4/openshift4/rhel9
 #     source: registry.redhat.io/rhel9
----
+# ---
 # apiVersion: operator.openshift.io/v1alpha1
 # kind: ImageContentSourcePolicy
 # metadata:
