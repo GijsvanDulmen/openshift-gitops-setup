@@ -21,9 +21,6 @@ spec:
         nodeSelector: 
           nodeSelectorTerms:
           - matchExpressions:
-              - key: node-role.kubernetes.io/worker
+              - key: lvm-storage
                 operator: Exists
-              # - key: node-role.kubernetes.io/infra
-              #   operator: DoesNotExist
-              - key: node-role.kubernetes.io/master
-                operator: DoesNotExist
+              
