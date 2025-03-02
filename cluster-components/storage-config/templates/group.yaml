@@ -17,6 +17,10 @@ spec:
       - deviceSelector:
           paths:
             - /dev/disk/by-path/pci-0000:00:05.0-scsi-0:0:0:1
+
+          # can be used when disks are added later to expand node
+          optionalPaths:
+            - /dev/disk/by-path/pci-0000:00:05.0-scsi-0:0:0:2
           forceWipeDevicesAndDestroyAllData: false # do not wipe when disk found
         fstype: xfs
         name: vg1
