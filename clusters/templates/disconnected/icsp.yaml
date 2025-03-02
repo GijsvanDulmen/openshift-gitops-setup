@@ -16,45 +16,45 @@ spec:
     - cr.ticq.org/ocp4/openshift4/rhel9
     source: registry.redhat.io/rhel9
 ---
-apiVersion: operator.openshift.io/v1alpha1
-kind: ImageContentSourcePolicy
-metadata:
-  labels:
-    operators.openshift.org/catalog: "true"
-  name: operator-0
-spec:
-  repositoryDigestMirrors:
-  - mirrors:
-    - cr.ticq.org/ocp4/openshift4/openshift-service-mesh-tech-preview
-    source: registry.redhat.io/openshift-service-mesh-tech-preview
-  - mirrors:
-    - cr.ticq.org/ocp4/openshift4/openshift4
-    source: registry.redhat.io/openshift4
-  - mirrors:
-    - cr.ticq.org/ocp4/openshift4/compliance
-    source: registry.redhat.io/compliance
-  - mirrors:
-    - cr.ticq.org/ocp4/openshift4/openshift-gitops-1
-    source: registry.redhat.io/openshift-gitops-1
-  - mirrors:
-    - cr.ticq.org/ocp4/openshift4/redhat-cop
-    source: quay.io/redhat-cop
-  - mirrors:
-    - cr.ticq.org/ocp4/openshift4/cert-manager
-    source: registry.redhat.io/cert-manager
-  - mirrors:
-    - cr.ticq.org/ocp4/openshift4/kube-descheduler-operator
-    source: registry.redhat.io/kube-descheduler-operator
-  - mirrors:
-    - cr.ticq.org/ocp4/openshift4/lvms4
-    source: registry.redhat.io/lvms4
-  - mirrors:
-    - cr.ticq.org/ocp4/openshift4/rhel8
-    source: registry.redhat.io/rhel8
-  - mirrors:
-    - cr.ticq.org/ocp4/openshift4/rh-sso-7
-    source: registry.redhat.io/rh-sso-7
-  - mirrors:
-    - cr.ticq.org/ocp4/openshift4/openshift-community-operators
-    source: quay.io/openshift-community-operators
+# apiVersion: operator.openshift.io/v1alpha1
+# kind: ImageContentSourcePolicy
+# metadata:
+#   labels:
+#     operators.openshift.org/catalog: "true"
+#   name: operator-0
+# spec:
+#   repositoryDigestMirrors:
+#   - mirrors:
+#     - cr.ticq.org/ocp4/openshift4/openshift-service-mesh-tech-preview
+#     source: registry.redhat.io/openshift-service-mesh-tech-preview
+#   - mirrors:
+#     - cr.ticq.org/ocp4/openshift4/openshift4
+#     source: registry.redhat.io/openshift4
+#   - mirrors:
+#     - cr.ticq.org/ocp4/openshift4/compliance
+#     source: registry.redhat.io/compliance
+#   - mirrors:
+#     - cr.ticq.org/ocp4/openshift4/openshift-gitops-1
+#     source: registry.redhat.io/openshift-gitops-1
+#   - mirrors:
+#     - cr.ticq.org/ocp4/openshift4/redhat-cop
+#     source: quay.io/redhat-cop
+#   - mirrors:
+#     - cr.ticq.org/ocp4/openshift4/cert-manager
+#     source: registry.redhat.io/cert-manager
+#   - mirrors:
+#     - cr.ticq.org/ocp4/openshift4/kube-descheduler-operator
+#     source: registry.redhat.io/kube-descheduler-operator
+#   - mirrors:
+#     - cr.ticq.org/ocp4/openshift4/lvms4
+#     source: registry.redhat.io/lvms4
+#   - mirrors:
+#     - cr.ticq.org/ocp4/openshift4/rhel8
+#     source: registry.redhat.io/rhel8
+#   - mirrors:
+#     - cr.ticq.org/ocp4/openshift4/rh-sso-7
+#     source: registry.redhat.io/rh-sso-7
+#   - mirrors:
+#     - cr.ticq.org/ocp4/openshift4/openshift-community-operators
+#     source: quay.io/openshift-community-operators
 {{- end -}}
