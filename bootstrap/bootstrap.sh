@@ -25,9 +25,8 @@ cd ../../bootstrap/
 sleep 5
 
 source secrets.sh
-helm template . \
+helm template . -f ./values.yaml \
     --set "githubClientId=$GITHUB_CLIENT_ID" \
     --set "githubClientSecret=$GITHUB_CLIENT_SECRET" \
     --set "cloudFlareApiToken=$CLOUDFLARE_API_TOKEN" \
-    --set "enableDisconnected=true" \
     | kubectl apply -f -
