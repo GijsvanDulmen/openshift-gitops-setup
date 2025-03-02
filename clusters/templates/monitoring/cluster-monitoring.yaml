@@ -1,0 +1,113 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-monitoring-config
+  namespace: openshift-monitoring
+data:
+  config.yaml: |
+    enableUserWorkload: false # too much resources
+    alertmanagerMain:
+      nodeSelector: 
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute
+      volumeClaimTemplate:
+        spec:
+          storageClassName: lvms-vg1
+          resources:
+            requests:
+              storage: 2Gi
+    prometheusK8s:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute
+      volumeClaimTemplate:
+        spec:
+          storageClassName: lvms-vg1
+          resources:
+            requests:
+              storage: 8Gi
+      retention: 24h
+      retentionSize: 7GB
+    prometheusOperator:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute
+    metricsServer:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute
+    kubeStateMetrics:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute
+    telemeterClient:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute
+    openshiftStateMetrics:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute
+    thanosQuerier:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute
+    monitoringPlugin:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute
