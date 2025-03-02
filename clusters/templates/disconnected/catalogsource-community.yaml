@@ -3,9 +3,9 @@
 apiVersion: operators.coreos.com/v1alpha1
 kind: CatalogSource
 metadata:
-  name: cs-redhat-operator-index
+  name: cs-community-operator-index
   namespace: openshift-marketplace
 spec:
-  image: cr.ticq.org/ocp4/openshift4/redhat/redhat-operator-index:v4.17
+  image: cr.ticq.org/ocp4/openshift4/redhat/community-operator-index:v4.17
   sourceType: grpc
 {{- end -}}
