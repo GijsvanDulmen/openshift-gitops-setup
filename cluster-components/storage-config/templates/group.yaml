@@ -5,6 +5,13 @@ metadata:
   name: test-lvmcluster
   namespace: openshift-storage
 spec:
+  tolerations:
+    - key: node-role.kubernetes.io/infra
+      value: reserved
+      effect: NoSchedule
+    - key: node-role.kubernetes.io/infra
+      value: reserved
+      effect: NoExecute
   storage:
     deviceClasses:
       - deviceSelector:
