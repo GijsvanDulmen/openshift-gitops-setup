@@ -1,20 +1,20 @@
 {{- if eq $.Values.enableDisconnected "true" }}
 ---
-apiVersion: operator.openshift.io/v1alpha1
-kind: ImageContentSourcePolicy
-metadata:
-  name: generic-0
-spec:
-  repositoryDigestMirrors:
-  - mirrors:
-    - cr.ticq.org/ocp4/openshift4/openshift4
-    source: registry.redhat.io/openshift4
-  - mirrors:
-    - cr.ticq.org/ocp4/openshift4/ubi9
-    source: registry.redhat.io/ubi9
-  - mirrors:
-    - cr.ticq.org/ocp4/openshift4/rhel9
-    source: registry.redhat.io/rhel9
+# apiVersion: operator.openshift.io/v1alpha1
+# kind: ImageContentSourcePolicy
+# metadata:
+#   name: generic-0
+# spec:
+#   repositoryDigestMirrors:
+#   - mirrors:
+#     - cr.ticq.org/ocp4/openshift4/openshift4
+#     source: registry.redhat.io/openshift4
+#   - mirrors:
+#     - cr.ticq.org/ocp4/openshift4/ubi9
+#     source: registry.redhat.io/ubi9
+#   - mirrors:
+#     - cr.ticq.org/ocp4/openshift4/rhel9
+#     source: registry.redhat.io/rhel9
 ---
 # apiVersion: operator.openshift.io/v1alpha1
 # kind: ImageContentSourcePolicy
