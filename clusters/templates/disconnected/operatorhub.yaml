@@ -1,0 +1,12 @@
+
+{{- if eq $.Values.enableDisconnected "true" }}
+---
+apiVersion: config.openshift.io/v1
+kind: OperatorHub
+metadata:
+  name: cluster
+  annotations:
+    argocd.argoproj.io/sync-options: "Delete=false"
+spec:
+  disableAllDefaultSources: true
+{{- end -}}
