@@ -7,7 +7,7 @@ operators-installer:
       sourceNamespace: openshift-marketplace
       source: redhat-operators
 
-      csv: servicemeshoperator3.v3.0.0-tp.1
+      csv: servicemeshoperator3.v3.0.0-tp.2
       namespace: service-mesh
       automaticIntermediateManualUpgrades: true
 
