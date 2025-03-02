@@ -1,13 +1,13 @@
 {{- if eq $.Values.enableDisconnected "true" }}
-# ---
-# apiVersion: operators.coreos.com/v1alpha1
-# kind: CatalogSource
-# metadata:
-#   name: cs-redhat-operator-index-v4-17
-#   namespace: openshift-marketplace
-# spec:
-#   image: cr.ticq.org/ocp4/openshift4/redhat/redhat-operator-index:v4.17
-#   sourceType: grpc
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: cs-redhat-operator-index-v4-17
+  namespace: openshift-marketplace
+spec:
+  image: cr.ticq.org/ocp4/openshift4/redhat/redhat-operator-index:v4.17
+  sourceType: grpc
 # ---
 # apiVersion: olm.operatorframework.io/v1
 # kind: ClusterCatalog

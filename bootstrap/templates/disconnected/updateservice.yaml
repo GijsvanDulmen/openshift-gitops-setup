@@ -1,11 +1,11 @@
 {{- if eq $.Values.enableDisconnected "true" }}
----
-apiVersion: updateservice.operator.openshift.io/v1
-kind: UpdateService
-metadata:
-  name: update-service-oc-mirror
-spec:
-  graphDataImage: cr.ticq.org/ocp4/openshift4/openshift/graph-image:latest
-  releases: cr.ticq.org/ocp4/openshift4/openshift/release-images
-  replicas: 2
+# ---
+# apiVersion: updateservice.operator.openshift.io/v1
+# kind: UpdateService
+# metadata:
+#   name: update-service-oc-mirror
+# spec:
+#   graphDataImage: cr.ticq.org/ocp4/openshift4/openshift/graph-image:latest
+#   releases: cr.ticq.org/ocp4/openshift4/openshift/release-images
+#   replicas: 2
 {{- end -}}
