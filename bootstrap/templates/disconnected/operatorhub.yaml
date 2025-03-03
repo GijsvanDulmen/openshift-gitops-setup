@@ -8,5 +8,5 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: "Delete=false"
 spec:
-  disableAllDefaultSources: true
+  disableAllDefaultSources: false # TODO: set back to true
 {{- end -}}
