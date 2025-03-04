@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: minio-backup
+  name: minio-backup
+spec:
+  selector:
+    matchLabels:
+      app: minio-backup
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: minio-backup
+    spec:
+      securityContext:
+        fsGroup: 1001010000
+      containers:
+      - name: minio
+        ports:
+        - containerPort: 9001
+        - containerPort: 9000
+        image: quay.io/minio/minio:latest
+        command:
+        - /bin/bash
+        - -c
+        args: 
+        - minio server /data --console-address :9001
+        volumeMounts:
+        - mountPath: /data
+          name: localvolume
+        securityContext:
+          runAsNonRoot: true
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
+          runAsUser: 1001010000
+          seccompProfile:
+            type: RuntimeDefault
+      volumes:
+      - name: localvolume
+        persistentVolumeClaim:
+          claimName: minio-backup
