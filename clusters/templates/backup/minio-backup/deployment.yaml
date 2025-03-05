@@ -30,12 +30,12 @@ spec:
         - mountPath: /data
           name: localvolume
         securityContext:
-          runAsNonRoot: true
+          runAsNonRoot: false
           allowPrivilegeEscalation: false
           capabilities:
             drop:
               - ALL
-          runAsUser: 1001010000
+          # runAsUser: 1001010000
           seccompProfile:
             type: RuntimeDefault
       volumes:
