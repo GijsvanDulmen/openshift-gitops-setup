@@ -35,7 +35,7 @@ spec:
           capabilities:
             drop:
               - ALL
-          # runAsUser: 1001010000
+          runAsUser: 1000
           seccompProfile:
             type: RuntimeDefault
       volumes:
