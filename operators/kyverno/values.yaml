@@ -1,0 +1,16 @@
+operators-installer:
+
+  operators:
+    - channel: alpha
+      installPlanApproval: "Manual"
+      name: kyverno-operator
+      sourceNamespace: openshift-marketplace
+      source: operatorhubio-catalog
+      csv: kyverno-operator.v1.13.1
+      namespace: kyverno
+      automaticIntermediateManualUpgrades: true
+
+  operatorGroups:
+  - name: kyverno
+    createNamespace: true
+    targetOwnNamespace: false
