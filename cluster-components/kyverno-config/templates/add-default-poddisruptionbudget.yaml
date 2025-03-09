@@ -1,0 +1,45 @@
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: add-default-pdb
+spec:
+  generateExisting: true
+  rules:
+  - name: create-default-pdb
+    match:
+      any:
+      - resources:
+          kinds:
+          - Deployment
+          namespaceSelector:
+            matchExpressions:
+              - key: gitops.ticq.dev/type
+                operator: In
+                values:
+                - tenant
+              - key: gitops.ticq.dev/default-pdb
+                operator: NotIn
+                values:
+                - "false"
+    preconditions:
+      all:
+      - key: "{{request.object.spec.replicas}}"
+        operator: GreaterThan
+        value: 0 # should be 1
+      - key: "{{request.object.metadata.labels.\"gitops.ticq.dev/default-pdb\" || 'true'}}"
+        operator: NotIn
+        value: "false"
+    generate:
+      synchronize: true
+      apiVersion: policy/v1
+      kind: PodDisruptionBudget
+      name: "{{request.object.metadata.name}}-default-pdb"
+      namespace: "{{request.object.metadata.namespace}}"
+      data:
+        metadata:
+          labels:
+            gitops.ticq.dev/auto-generated-pdb: "true"
+        spec:
+          minAvailable: 1
+          selector: "{{request.object.spec.selector}}"

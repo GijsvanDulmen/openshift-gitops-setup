@@ -1,0 +1,47 @@
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: add-default-vpa
+spec:
+  generateExisting: true
+  rules:
+    - name: create-for-podcontrollers
+      match:
+        any:
+        - resources:
+            kinds:
+            - Deployment
+            - StatefulSet
+            namespaceSelector:
+              matchExpressions:
+                - key: gitops.ticq.dev/type
+                  operator: In
+                  values:
+                  - tenant
+                - key: gitops.ticq.dev/default-vpa
+                  operator: NotIn
+                  values:
+                  - "false"
+      preconditions:
+      all:
+      - key: "{{request.object.metadata.labels.\"gitops.ticq.dev/default-vpa\" || 'true'}}"
+        operator: NotIn
+        value: "false"
+      generate:
+        synchronize: true
+        kind: VerticalPodAutoscaler
+        apiVersion: autoscaling.k8s.io/v1
+        name: "{{request.object.metadata.name}}-default-vpa" 
+        namespace: "{{request.object.metadata.namespace}}"
+        data:
+          metadata:
+            labels:
+              gitops.ticq.dev/auto-generated-vpa: "true"
+          spec:
+            targetRef:
+              apiVersion: "{{request.object.apiVersion}}"
+              kind: "{{request.object.kind}}"
+              name: "{{request.object.metadata.name}}"
+            updatePolicy:
+              updateMode: "Off" 
