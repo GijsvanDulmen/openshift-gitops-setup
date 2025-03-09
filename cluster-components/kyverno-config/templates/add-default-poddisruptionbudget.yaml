@@ -30,6 +30,7 @@ spec:
       - key: "{{`{{request.object.metadata.labels.\"gitops.ticq.dev/default-pdb\" || 'true'}}`}}"
         operator: NotIn
         value: "false"
+    skipBackgroundRequests: true
     generate:
       synchronize: true
       apiVersion: policy/v1
