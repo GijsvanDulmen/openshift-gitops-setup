@@ -24,22 +24,22 @@ spec:
                 - "false"
     preconditions:
       all:
-      - key: "{{request.object.spec.replicas}}"
+      - key: "{{`{{request.object.spec.replicas}}`}}"
         operator: GreaterThan
         value: 0 # should be 1
-      - key: "{{request.object.metadata.labels.\"gitops.ticq.dev/default-pdb\" || 'true'}}"
+      - key: "{{`{{request.object.metadata.labels.\"gitops.ticq.dev/default-pdb\" || 'true'}}`}}"
         operator: NotIn
         value: "false"
     generate:
       synchronize: true
       apiVersion: policy/v1
       kind: PodDisruptionBudget
-      name: "{{request.object.metadata.name}}-default-pdb"
-      namespace: "{{request.object.metadata.namespace}}"
+      name: "{{`{{request.object.metadata.name}}`}}-default-pdb"
+      namespace: "{{`{{request.object.metadata.namespace}}`}}"
       data:
         metadata:
           labels:
             gitops.ticq.dev/auto-generated-pdb: "true"
         spec:
           minAvailable: 1
-          selector: "{{request.object.spec.selector}}"
+          selector: "{{`{{request.object.spec.selector}}`}}"
