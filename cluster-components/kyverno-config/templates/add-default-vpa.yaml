@@ -24,10 +24,10 @@ spec:
                   values:
                   - "false"
       preconditions:
-      all:
-      - key: "{{`{{request.object.metadata.labels.\"gitops.ticq.dev/default-vpa\" || 'true'}}`}}"
-        operator: NotIn
-        value: "false"
+        all:
+        - key: "{{`{{request.object.metadata.labels.\"gitops.ticq.dev/default-vpa\" || 'true'}}`}}"
+          operator: NotIn
+          value: "false"
       generate:
         synchronize: true
         kind: VerticalPodAutoscaler
