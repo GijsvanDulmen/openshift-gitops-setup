@@ -6,7 +6,7 @@ operators-installer:
       name: openshift-cert-manager-operator
       sourceNamespace: openshift-marketplace
       source: redhat-operators
-      csv: cert-manager-operator.v1.14.1
+      csv: cert-manager-operator.v1.15.1
       namespace: cert-manager-operator
       automaticIntermediateManualUpgrades: true
 

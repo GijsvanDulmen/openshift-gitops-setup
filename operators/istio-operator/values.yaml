@@ -1,13 +1,13 @@
 operators-installer:
 
   operators:
-    - channel: candidates
+    - channel: stable
       installPlanApproval: "Manual"
       name: servicemeshoperator3
       sourceNamespace: openshift-marketplace
       source: redhat-operators
 
-      csv: servicemeshoperator3.v3.0.0-tp.2
+      csv: servicemeshoperator3.v3.0.1
       namespace: service-mesh
       automaticIntermediateManualUpgrades: true
 
