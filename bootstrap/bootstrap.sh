@@ -10,8 +10,9 @@ helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
 kubectl patch --type=merge scheduler cluster -p '{"spec":{"mastersSchedulable":true}}'
 
 # needed for istio
-kubectl get crd gateways.gateway.networking.k8s.io &> /dev/null || \
-  { kubectl kustomize "github.com/kubernetes-sigs/gateway-api/config/crd/experimental?ref=v1.1.0" | kubectl apply -f -; }
+# from 4.18 this is done by OpenShift itself
+# kubectl get crd gateways.gateway.networking.k8s.io &> /dev/null || \
+#   { kubectl kustomize "github.com/kubernetes-sigs/gateway-api/config/crd/experimental?ref=v1.1.0" | kubectl apply -f -; }
 
 # install gitops operators
 cd ../operators/gitops-operator
