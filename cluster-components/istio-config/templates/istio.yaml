@@ -16,6 +16,6 @@ spec:
   updateStrategy:
     type: InPlace
     inactiveRevisionDeletionGracePeriodSeconds: 30
-  version: v1.23.0
+  version: v1.24-latest
   profile: openshift
 
