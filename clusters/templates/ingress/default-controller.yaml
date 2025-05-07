@@ -8,7 +8,7 @@ metadata:
 spec:
   replicas: 1 # should be more obviously
 
-  # only TLS 1.3
+  # only TLS 1.3 - CIS benchmark
   tlsSecurityProfile:
     type: Modern
 
