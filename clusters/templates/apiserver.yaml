@@ -20,4 +20,4 @@ spec:
       - ECDHE-RSA-AES256-GCM-SHA384
       - ECDHE-ECDSA-CHACHA20-POLY1305
       - ECDHE-RSA-CHACHA20-POLY1305
-    minTLSVersion: VersionTLS11
+      minTLSVersion: VersionTLS11
