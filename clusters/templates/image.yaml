@@ -9,3 +9,8 @@ spec:
   allowedRegistriesForImport:
     - domainName: my-trusted-registry.internal.example.com
       insecure: false
+
+  # set this for CIS benchmark
+  # registrySources:
+  #   allowedRegistries:
+  #     - "*"
