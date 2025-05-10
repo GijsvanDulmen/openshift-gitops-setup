@@ -1,7 +1,9 @@
 apiVersion: machineconfiguration.openshift.io/v1
 kind: KubeletConfig
 metadata:
-  name: worker-kubeconfig 
+  name: worker-kubeconfig
+  annotations:
+    argocd.argoproj.io/sync-options: "Delete=false"
 spec:
   # CIS benchmark
   tlsSecurityProfile:
