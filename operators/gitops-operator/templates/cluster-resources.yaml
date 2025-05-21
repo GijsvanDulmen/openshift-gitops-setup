@@ -18,9 +18,9 @@ spec:
       targetRevision: HEAD
       helm:
         valueFiles:
-        - $values/config/values.yaml
-        - $values/config/{{ $.Values.clusterType }}/values.yaml
-        - $values/config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/values.yaml
+        - $values/clusters/values.yaml
+        - $values/clusters/{{ $.Values.clusterType }}/values.yaml
+        - $values/clusters/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/values.yaml
         - $values/tenants/resources.yaml
         parameters:
         - name: "disableAutoSync"

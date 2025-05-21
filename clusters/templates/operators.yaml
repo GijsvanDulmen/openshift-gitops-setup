@@ -29,8 +29,8 @@ spec:
       helm:
         valueFiles:
         - values.yaml
-        - $values/config/{{ $.Values.clusterType }}/values.yaml
-        - $values/config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/values.yaml
+        - $values/clusters/{{ $.Values.clusterType }}/values.yaml
+        - $values/clusters/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/values.yaml
         ignoreMissingValueFiles: true
 
         {{- if eq $.Values.enableDisconnected "true" }}
