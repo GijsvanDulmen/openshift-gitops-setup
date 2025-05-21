@@ -23,10 +23,16 @@ spec:
         - $tenants/namespaces.yaml
         {{- end }}
 
-        - $values/config/tenant-defaults.yaml
-        - $values/config/tenant-resources.yaml
-        - $values/config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/tenants/values.yaml
-        - $values/config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/tenants/{{ $name }}/values.yaml
+        # cluster stuff
+        - $values/tenants/defaults.yaml
+        - $values/tenants/resources.yaml
+        - $values/tenants/{{ $.Values.clusterType }}/defaults.yaml
+        - $values/tenants/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/defaults.yaml
+
+        - $values/tenants/{{ $name }}.yaml
+        - $values/tenants/{{ $.Values.clusterType }}/{{ $name }}.yaml
+        - $values/tenants/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/{{ $name }}.yaml
+        ignoreMissingValueFiles: true
         parameters:
         - name: "disableAutoSync"
           value: "{{ $.Values.disableAutoSync }}"
