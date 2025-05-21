@@ -21,7 +21,7 @@ spec:
         - $values/config/values.yaml
         - $values/config/{{ $.Values.clusterType }}/values.yaml
         - $values/config/{{ $.Values.clusterType }}/{{ $.Values.clusterInstance }}/values.yaml
-        - $values/config/tenant-resources.yaml
+        - $values/tenants/resources.yaml
         parameters:
         - name: "disableAutoSync"
           value: "{{ $.Values.disableAutoSync }}"
