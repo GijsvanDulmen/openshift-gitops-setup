@@ -12,6 +12,8 @@ metadata:
     topology.kubernetes.io/zone: "deventer-01"
     node-role.kubernetes.io/infra: ""
 
+    node-role.kubernetes.io/scan-compliancy: ""
+
     # make egress ips possible
     k8s.ovn.org/egress-assignable: ""
 
@@ -37,6 +39,8 @@ metadata:
     topology.kubernetes.io/zone: "deventer-02"
     node-role.kubernetes.io/infra: ""
 
+    node-role.kubernetes.io/scan-compliancy: ""
+
     # make egress ips possible
     k8s.ovn.org/egress-assignable: ""
 
@@ -58,6 +62,8 @@ metadata:
     topology.kubernetes.io/zone: "deventer-01"
     k8s.ovn.org/egress-assignable: ""
 
+    node-role.kubernetes.io/scan-compliancy: ""
+
     # has storage
     lvm-storage: ""
   annotations:
@@ -73,6 +79,8 @@ metadata:
     topology.kubernetes.io/zone: "deventer-02"
     k8s.ovn.org/egress-assignable: ""
 
+    node-role.kubernetes.io/scan-compliancy: ""
+
     # has storage
     lvm-storage: ""
   annotations:
@@ -87,6 +95,8 @@ metadata:
   labels:
     topology.kubernetes.io/zone: "deventer-02"
     k8s.ovn.org/egress-assignable: ""
+
+    node-role.kubernetes.io/scan-compliancy: ""
 
     # has storage
     lvm-storage: ""
