@@ -8,7 +8,9 @@ metadata:
 spec:
   audit:
     # CIS Benchmark
-    profile: "Default" # For CIS this should be: WriteRequestBodies
+    # profile: "Default" # For CIS this should be: WriteRequestBodies
+    profile: "WriteRequestBodies"
+
   encryption:
     type: "aesgcm"
   
@@ -23,4 +25,4 @@ spec:
       - ECDHE-RSA-AES256-GCM-SHA384
       - ECDHE-ECDSA-CHACHA20-POLY1305
       - ECDHE-RSA-CHACHA20-POLY1305
-      minTLSVersion: VersionTLS11
+      minTLSVersion: VersionTLS12
