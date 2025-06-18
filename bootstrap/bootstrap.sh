@@ -18,8 +18,8 @@ kubectl patch --type=merge scheduler cluster -p '{"spec":{"mastersSchedulable":t
 cd ../operators/gitops-operator
 helm dependency build
 helm template . \
-    -f ../../../openshift-gitops-config/config/onprem-dev/values.yaml \
-    -f ../../../openshift-gitops-config/config/onprem-dev/onprem-dev-1/values.yaml \
+    -f ../../../openshift-gitops-config/clusters/onprem-dev/values.yaml \
+    -f ../../../openshift-gitops-config/clusters/onprem-dev/onprem-dev-1/values.yaml \
     --name-template gitops-operator | kubectl apply -f -
 
 cd ../../bootstrap/

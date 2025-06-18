@@ -9,8 +9,8 @@ operators-installer:
       name: openshift-gitops-operator
       sourceNamespace: openshift-marketplace
       
-      # source: redhat-operators # use this for non disconnected
-      source: "cs-redhat-operator-index-v4-18"
+      source: redhat-operators # use this for non disconnected
+      # source: "cs-redhat-operator-index-v4-18" # use this for disconnected
 
       csv: openshift-gitops-operator.v1.16.0
       namespace: openshift-gitops-operator
