@@ -30,7 +30,6 @@ spec:
         enabled: false
     ingress:
       enabled: false
-    host: gitops
     resources:
       limits:
         cpu: "1"
