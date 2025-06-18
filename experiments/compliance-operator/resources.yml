@@ -42,7 +42,7 @@ rawResultStorage:
   tolerations:
   - operator: Exists
 roles:
-- worker
+- scan-compliancy
 - master
 scanTolerations:
   - operator: Exists
