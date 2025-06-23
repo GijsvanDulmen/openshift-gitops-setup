@@ -1,0 +1,20 @@
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: Agent
+metadata:
+  name: 5e18ca81-b958-434f-8b2d-6f51b4d690dd
+  namespace: infra02
+spec:
+  approved: true
+  clusterDeploymentName:
+    name: os3
+    namespace: os3-os3
+  hostname: hcp-worker-1
+  ignitionEndpointHTTPHeaders:
+    NodePool: os3/nodepool-os3-1
+    TargetConfigVersionHash: 69c390bf
+  ignitionEndpointTokenReference:
+    name: agent-user-data-nodepool-os3-1-69c390bf
+    namespace: os3-os3
+  machineConfigPool: ignition
+  role: worker

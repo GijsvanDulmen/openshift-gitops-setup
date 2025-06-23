@@ -26,6 +26,7 @@ spec:
         storage: 10Gi
     storageClassName: lvms-vg1
   osImages:
-    - openshiftVersion: "4.18"
-      url: "https://mirror.openshift.com/pub/openshift-v4/x86_64/dependencies/rhcos/4.18/4.18.1/rhcos-4.18.1-x86_64-live.x86_64.iso"
-      cpuArchitecture: "x86_64"
+    - cpuArchitecture: x86_64
+      openshiftVersion: '4.18'
+      url: 'https://mirror.openshift.com/pub/openshift-v4/x86_64/dependencies/rhcos/4.18/4.18.1/rhcos-4.18.1-x86_64-live.x86_64.iso'
+      version: 4.18.1

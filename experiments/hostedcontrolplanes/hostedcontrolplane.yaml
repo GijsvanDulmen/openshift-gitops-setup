@@ -1,0 +1,59 @@
+---
+apiVersion: hypershift.openshift.io/v1beta1
+kind: HostedControlPlane
+metadata:
+  name: os3
+  namespace: os3-os3
+spec:
+  channel: stable-4.18
+  fips: false
+  dns:
+    baseDomain: ticq.org
+  controllerAvailabilityPolicy: SingleReplica
+  infraID: os3
+  etcd:
+    managed:
+      storage:
+        persistentVolume:
+          size: 8Gi
+        type: PersistentVolume
+    managementType: Managed
+  infrastructureAvailabilityPolicy: SingleReplica
+  platform:
+    agent:
+      agentNamespace: infra02
+    type: None
+  releaseImage: 'quay.io/openshift-release-dev/ocp-release:4.18.17-multi'
+  networking:
+    clusterNetwork:
+      - cidr: 10.132.0.0/14
+    networkType: OVNKubernetes
+    serviceNetwork:
+      - cidr: 172.31.0.0/16
+  clusterID: "NOT SHOWED"
+  pullSecret:
+    name: pull-secret
+  capabilities: {}
+  issuerURL: 'https://kubernetes.default.svc'
+  sshKey:
+    name: ssh-key
+  autoscaling: {}
+  olmCatalogPlacement: guest
+  services:
+    - service: APIServer
+      servicePublishingStrategy:
+        nodePort:
+          address: api.os3.ticq.org
+        type: NodePort
+    - service: OAuthServer
+      servicePublishingStrategy:
+        type: Route
+    - service: OIDC
+      servicePublishingStrategy:
+        type: Route
+    - service: Konnectivity
+      servicePublishingStrategy:
+        type: Route
+    - service: Ignition
+      servicePublishingStrategy:
+        type: Route
