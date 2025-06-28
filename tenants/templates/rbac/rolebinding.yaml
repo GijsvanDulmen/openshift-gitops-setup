@@ -19,6 +19,21 @@ roleRef:
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
+  name: "deployer-edit-{{ $.Values.name }}"
+  namespace: "{{ $ns.namespaceName }}"
+subjects:
+  - kind: ServiceAccount
+    name: "deployer-tenant-{{ $.Values.name }}"
+    namespace: tenant-gitops
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  # name: view # was edit
+  name: tenant-edit
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
   name: "tenant-monitoring-edit-{{ $.Values.name }}"
   namespace: "{{ $ns.namespaceName }}"
 subjects:

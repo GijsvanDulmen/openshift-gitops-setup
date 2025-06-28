@@ -33,6 +33,15 @@ spec:
     namespace: "{{ $ns.namespaceName }}"
     server: https://kubernetes.default.svc
   {{- end }}
+  
+  destinationServiceAccounts:
+  {{- $namespaces := (include "tenants.namespaces" .) | fromYamlArray -}}
+  {{- range $ns := $namespaces }}
+    - server: https://kubernetes.default.svc
+      namespace: "{{ $ns.namespaceName }}"
+      defaultServiceAccount: "deployer-tenant-{{ $.Values.name }}"
+  {{- end }}
+
   roles:
     - description: Group for tenant
       groups:

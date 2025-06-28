@@ -195,3 +195,5 @@ spec:
     help.chatText: ""
     help.chatUrl: ""
     server.rbac.log.enforce.enable: "true"
+    application.sync.impersonation.enabled: "true"
+
