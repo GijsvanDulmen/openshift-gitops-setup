@@ -39,7 +39,7 @@ spec:
   {{- range $ns := $namespaces }}
     - server: https://kubernetes.default.svc
       namespace: "{{ $ns.namespaceName }}"
-      defaultServiceAccount: "deployer-tenant-{{ $.Values.name }}"
+      defaultServiceAccount: "tenant-gitops:deployer-tenant-{{ $.Values.name }}"
   {{- end }}
 
   roles:
