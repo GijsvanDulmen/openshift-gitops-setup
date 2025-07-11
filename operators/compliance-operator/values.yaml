@@ -6,7 +6,7 @@ operators-installer:
       name: compliance-operator
       sourceNamespace: openshift-marketplace
       source: redhat-operators
-      csv: compliance-operator.v1.6.2
+      csv: compliance-operator.v1.7.0
       namespace: openshift-compliance
       automaticIntermediateManualUpgrades: true
 
