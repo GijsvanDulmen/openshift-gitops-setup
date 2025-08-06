@@ -13,8 +13,8 @@ spec:
     type: Modern
 
   # enable this for cert-manager provided wildcard cert
-  # defaultCertificate:
-  #   name: apps-os2-ticq-org
+  defaultCertificate:
+    name: apps-os2-ticq-org
 
   tuningOptions:
     reloadInterval: 0s
