@@ -12,7 +12,7 @@ operators-installer:
       source: redhat-operators # use this for non disconnected
       # source: "cs-redhat-operator-index-v4-18" # use this for disconnected
 
-      csv: openshift-gitops-operator.v1.16.1
+      csv: openshift-gitops-operator.v1.17.0
       namespace: openshift-gitops-operator
       automaticIntermediateManualUpgrades: true
       config:
