@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # export KUBECONFIG=/Users/gijs/Documents/repos/proxmox-terraform/openshift/kubeconfig-noingress
-export KUBECONFIG=/Users/gijs/Documents/repos/proxmox-terraform/openshift-upi/installation/auth/kubeconfig
+export KUBECONFIG=/Users/gijs/Documents/repos/proxmox-terraform/openshift-upi/installation/os2-4.19/auth/kubeconfig
 
 # add helm repos
 helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
