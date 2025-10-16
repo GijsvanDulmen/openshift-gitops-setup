@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: second-network
+  labels:
+    app: second-network
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: second-network
+  template:
+    metadata:
+      labels:
+        app: second-network
+      annotations:
+        k8s.v1.cni.cncf.io/networks: macvlan1
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: worker-3
+      containers:
+      - image: alpine:3.2
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsUser: 0
+          capabilities:
+            add:
+             - NET_RAW
+        command: ["/bin/sh"]
+        args:
+        - -c
+        - >-
+          apk update &&
+          apk add nmap &&
+          nmap --script-updatedb &&
+          echo "container is ready" &&
+          sleep 365d
+        imagePullPolicy: IfNotPresent
+        name: debugger
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: second-network-other
+  labels:
+    app: second-network-other
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: second-network-other
+  template:
+    metadata:
+      labels:
+        app: second-network-other
+      annotations:
+        # access to both host network without hostNetwork: true!
+        k8s.v1.cni.cncf.io/networks: macvlan1,host-network
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: worker-4
+      containers:
+      - image: alpine:3.2
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsUser: 0
+          capabilities:
+            add:
+             - NET_RAW
+        command: ["/bin/sh"]
+        args:
+        - -c
+        - >-
+          apk update &&
+          apk add nmap &&
+          nmap --script-updatedb &&
+          echo "container is ready" &&
+          sleep 365d
+        imagePullPolicy: IfNotPresent
+        name: debugger

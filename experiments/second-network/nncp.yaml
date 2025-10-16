@@ -1,0 +1,45 @@
+# Add a zone to Proxmox (type=evpn, mtu=1450, ipam=pve)
+# Add a vnet to the zone (tag=501)
+# Add on worker3 and worker4 a 2nd network interface to this vnet
+---
+# Adds a secondary interface on worker-3
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: ens19-policy-worker3
+spec:
+  nodeSelector: 
+    kubernetes.io/hostname: worker-3
+  desiredState:
+    interfaces:
+    - name: ens19
+      description: "worker-3 2nd"
+      type: ethernet 
+      state: up 
+      ipv4: 
+        enabled: true
+        dhcp: true
+        address:
+        - ip: 192.168.122.250
+          prefix-length: 24
+---
+# Adds a secondary interface on worker-4
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: ens19-policy-worker4
+spec:
+  nodeSelector: 
+    kubernetes.io/hostname: worker-4
+  desiredState:
+    interfaces:
+    - name: ens19
+      description: "worker-4 2nd"
+      type: ethernet 
+      state: up 
+      ipv4: 
+        enabled: true
+        dhcp: true
+        address:
+        - ip: 192.168.122.251
+          prefix-length: 24
