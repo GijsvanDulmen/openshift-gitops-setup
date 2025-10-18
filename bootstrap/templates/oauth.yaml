@@ -13,6 +13,11 @@ spec:
         name: github-secret
       organizations: 
       - Ticq
-
+  - name: htpasswd
+    mappingMethod: claim
+    type: HTPasswd
+    htpasswd:
+      fileData:
+        name: htpass-secret
 
     

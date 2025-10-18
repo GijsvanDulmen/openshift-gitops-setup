@@ -1,0 +1,30 @@
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: macvlan1
+  namespace: default
+spec:
+  # add pods onto a network on ens19
+  # range is dhcp for these pods
+  # mode bridge connects every pod on this network
+  config: '{
+            "cniVersion": "0.3.1",
+            "name": "macvlan-net",
+            "type": "macvlan",
+            "master": "ens19",
+            "mode": "bridge",
+            "ipam": {
+              "type": "whereabouts",
+              "range": "192.168.150.192/24",
+              "exclude": [
+                "192.168.150.100",
+                "192.168.150.101"
+              ]
+            }
+        }'
+
+  # whereabouts:
+  # instead of range you could use
+  # range_start: 192.168.150.1
+  # range_end: 192.168.150.100
