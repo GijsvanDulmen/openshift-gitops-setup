@@ -6,9 +6,9 @@ metadata:
     argocd.argoproj.io/sync-options: "Delete=false"
 spec:
   # don't allow anything (CIS benchmark)
-  allowedRegistriesForImport:
-    - domainName: my-trusted-registry.internal.example.com
-      insecure: false
+  # allowedRegistriesForImport:
+  #   - domainName: my-trusted-registry.internal.example.com
+  #     insecure: false
 
   # set this for CIS benchmark
   # registrySources:
