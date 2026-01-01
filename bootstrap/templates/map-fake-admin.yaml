@@ -11,3 +11,10 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: cluster-admin
+---
+kind: Group
+apiVersion: user.openshift.io/v1
+metadata:
+  name: cluster-admins
+users:
+  - fake-admin
