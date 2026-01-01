@@ -6,7 +6,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: "Delete=false"
 spec:
-  replicas: 1 # should be more obviously
+  replicas: 2 # should be more obviously
 
   # only TLS 1.3 - CIS benchmark
   tlsSecurityProfile:
@@ -23,18 +23,18 @@ spec:
     threadCount: 4 # = default
     maxConnections: 50000 # 50000 = default
 
-  nodePlacement:
-    nodeSelector:
-      matchLabels:
-        node-role.kubernetes.io/infra: ""  
+  # nodePlacement:
+  #   nodeSelector:
+  #     matchLabels:
+  #       node-role.kubernetes.io/infra: ""  
 
-    tolerations:
-    - effect: NoSchedule
-      key: node-role.kubernetes.io/infra
-      value: reserved
-    - effect: NoExecute
-      key: node-role.kubernetes.io/infra
-      value: reserved
+  #   tolerations:
+  #   - effect: NoSchedule
+  #     key: node-role.kubernetes.io/infra
+  #     value: reserved
+  #   - effect: NoExecute
+  #     key: node-role.kubernetes.io/infra
+  #     value: reserved
 
   # tenant namespaces cant use the default
   namespaceSelector:
