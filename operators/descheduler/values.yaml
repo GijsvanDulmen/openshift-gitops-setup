@@ -6,7 +6,7 @@ operators-installer:
       name: cluster-kube-descheduler-operator
       sourceNamespace: openshift-marketplace
       source: redhat-operators
-      csv: clusterkubedescheduleroperator.v5.2.0
+      csv: clusterkubedescheduleroperator.v5.3.1
       namespace: openshift-kube-descheduler-operator
       automaticIntermediateManualUpgrades: true
 
