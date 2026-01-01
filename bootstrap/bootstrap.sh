@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # export KUBECONFIG=/Users/gijs/Documents/repos/proxmox-terraform/openshift/kubeconfig-noingress
-export KUBECONFIG=/Users/gijs/Documents/repos/proxmox-terraform/openshift-upi/installation/os2-4.20/auth/kubeconfig
+export KUBECONFIG=/Users/gijs/Documents/repos/homelab/openshift-virtualization/osv-resources/hcp/kubevirt-based/credentials/hc02/kubeconfig.yaml
 
 # add helm repos
 helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
 
 # make more room on cluster
-kubectl patch --type=merge scheduler cluster -p '{"spec":{"mastersSchedulable":true}}'
+# kubectl patch --type=merge scheduler cluster -p '{"spec":{"mastersSchedulable":true}}'
 
 # needed for istio
 # from 4.18 this is done by OpenShift itself

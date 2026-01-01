@@ -1,16 +1,16 @@
-apiVersion: config.openshift.io/v1
-kind: Image
-metadata:
-  name: cluster
-  annotations:
-    argocd.argoproj.io/sync-options: "Delete=false"
-spec:
-  # don't allow anything (CIS benchmark)
-  # allowedRegistriesForImport:
-  #   - domainName: my-trusted-registry.internal.example.com
-  #     insecure: false
+# apiVersion: config.openshift.io/v1
+# kind: Image
+# metadata:
+#   name: cluster
+#   annotations:
+#     argocd.argoproj.io/sync-options: "Delete=false"
+# spec:
+#   # don't allow anything (CIS benchmark)
+#   # allowedRegistriesForImport:
+#   #   - domainName: my-trusted-registry.internal.example.com
+#   #     insecure: false
 
-  # set this for CIS benchmark
-  # registrySources:
-  #   allowedRegistries:
-  #     - "*"
+#   # set this for CIS benchmark
+#   # registrySources:
+#   #   allowedRegistries:
+#   #     - "*"

@@ -1,7 +1,7 @@
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: minio-backup
-  labels:
-    name: minio-backup
+# ---
+# apiVersion: v1
+# kind: Namespace
+# metadata:
+#   name: minio-backup
+#   labels:
+#     name: minio-backup

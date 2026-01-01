@@ -1,18 +1,18 @@
-apiVersion: machineconfiguration.openshift.io/v1
-kind: MachineConfig
-metadata:
-  labels:
-    machineconfiguration.openshift.io/role: worker
-  name: 100-reboot-worker
-spec:
-  config:
-    ignition:
-      version: 3.4.0
-    storage:
-      files:
-        - contents:
-            compression: ""
-            # update this to reboot the machines
-            source: data:,111
-          mode: 420
-          path: /home/reboot
+# apiVersion: machineconfiguration.openshift.io/v1
+# kind: MachineConfig
+# metadata:
+#   labels:
+#     machineconfiguration.openshift.io/role: worker
+#   name: 100-reboot-worker
+# spec:
+#   config:
+#     ignition:
+#       version: 3.4.0
+#     storage:
+#       files:
+#         - contents:
+#             compression: ""
+#             # update this to reboot the machines
+#             source: data:,111
+#           mode: 420
+#           path: /home/reboot

@@ -1,13 +1,13 @@
-apiVersion: config.openshift.io/v1
-kind: Network
-metadata:
-  name: cluster
-  annotations:
-    argocd.argoproj.io/sync-options: "Delete=false"
-spec:
-  externalIP:
-    policy:
-      allowedCIDRs:
-      - "192.168.2.100/26"
-    autoAssignCIDRs:
-      - "192.168.2.100/26"
+# apiVersion: config.openshift.io/v1
+# kind: Network
+# metadata:
+#   name: cluster
+#   annotations:
+#     argocd.argoproj.io/sync-options: "Delete=false"
+# spec:
+#   externalIP:
+#     policy:
+#       allowedCIDRs:
+#       - "192.168.2.100/26"
+#     autoAssignCIDRs:
+#       - "192.168.2.100/26"

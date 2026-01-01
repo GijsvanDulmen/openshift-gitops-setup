@@ -1,3 +1,5 @@
+{{- if eq $.Values.isHostedControlPlane "false" }}
+---
 apiVersion: config.openshift.io/v1
 kind: OAuth
 metadata:
@@ -19,5 +21,4 @@ spec:
     htpasswd:
       fileData:
         name: htpass-secret
-
-    
+{{- end }}

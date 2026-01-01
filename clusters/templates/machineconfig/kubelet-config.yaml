@@ -1,49 +1,49 @@
-apiVersion: machineconfiguration.openshift.io/v1
-kind: KubeletConfig
-metadata:
-  name: worker-kubeconfig
-  annotations:
-    argocd.argoproj.io/sync-options: "Delete=false"
-spec:
-  # CIS benchmark
-  tlsSecurityProfile:
-    type: Custom     
-    custom: 
-      ciphers:
-      - ECDHE-RSA-AES128-GCM-SHA256
-      - ECDHE-ECDSA-AES128-GCM-SHA256
-      - ECDHE-ECDSA-AES256-GCM-SHA384
-      - ECDHE-RSA-AES256-GCM-SHA384
-      - ECDHE-ECDSA-CHACHA20-POLY1305
-      - ECDHE-RSA-CHACHA20-POLY1305
-      minTLSVersion: VersionTLS12
+# apiVersion: machineconfiguration.openshift.io/v1
+# kind: KubeletConfig
+# metadata:
+#   name: worker-kubeconfig
+#   annotations:
+#     argocd.argoproj.io/sync-options: "Delete=false"
+# spec:
+#   # CIS benchmark
+#   tlsSecurityProfile:
+#     type: Custom     
+#     custom: 
+#       ciphers:
+#       - ECDHE-RSA-AES128-GCM-SHA256
+#       - ECDHE-ECDSA-AES128-GCM-SHA256
+#       - ECDHE-ECDSA-AES256-GCM-SHA384
+#       - ECDHE-RSA-AES256-GCM-SHA384
+#       - ECDHE-ECDSA-CHACHA20-POLY1305
+#       - ECDHE-RSA-CHACHA20-POLY1305
+#       minTLSVersion: VersionTLS12
 
-  machineConfigPoolSelector:
-    matchLabels:
-      pool/workerpool-canary: ""
-  kubeletConfig:
-    # sample - not defaults!!!!
-    evictionSoft: 
-      memory.available: "500Mi" 
-      nodefs.available: "10%"
-      nodefs.inodesFree: "5%"
-      imagefs.available: "15%"
-      imagefs.inodesFree: "10%"
-    evictionSoftGracePeriod:  
-      memory.available: "1m30s"
-      nodefs.available: "1m30s"
-      nodefs.inodesFree: "1m30s"
-      imagefs.available: "1m30s"
-      imagefs.inodesFree: "1m30s"
-    evictionHard: 
-      memory.available: "200Mi"
-      nodefs.available: "5%"
-      nodefs.inodesFree: "4%"
-      imagefs.available: "10%"
-      imagefs.inodesFree: "5%"
-    evictionPressureTransitionPeriod: 0s 
+#   machineConfigPoolSelector:
+#     matchLabels:
+#       pool/workerpool-canary: ""
+#   kubeletConfig:
+#     # sample - not defaults!!!!
+#     evictionSoft: 
+#       memory.available: "500Mi" 
+#       nodefs.available: "10%"
+#       nodefs.inodesFree: "5%"
+#       imagefs.available: "15%"
+#       imagefs.inodesFree: "10%"
+#     evictionSoftGracePeriod:  
+#       memory.available: "1m30s"
+#       nodefs.available: "1m30s"
+#       nodefs.inodesFree: "1m30s"
+#       imagefs.available: "1m30s"
+#       imagefs.inodesFree: "1m30s"
+#     evictionHard: 
+#       memory.available: "200Mi"
+#       nodefs.available: "5%"
+#       nodefs.inodesFree: "4%"
+#       imagefs.available: "10%"
+#       imagefs.inodesFree: "5%"
+#     evictionPressureTransitionPeriod: 0s 
 
-    # defaults
-    imageMinimumGCAge: 2m
-    imageGCHighThresholdPercent: 85
-    imageGCLowThresholdPercent: 80
+#     # defaults
+#     imageMinimumGCAge: 2m
+#     imageGCHighThresholdPercent: 85
+#     imageGCLowThresholdPercent: 80

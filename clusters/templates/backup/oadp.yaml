@@ -1,0 +1,50 @@
+# ---
+# kind: DataProtectionApplication
+# apiVersion: oadp.openshift.io/v1alpha1
+# metadata:
+#   name: velero-backup
+#   namespace: openshift-adp
+# spec:
+#   backupLocations:
+#     - velero:
+#         config:
+#           profile: default
+#           region: minio
+#           s3Url: http://minio-backup.minio-backup.svc.cluster.local:9000
+#           insecureSkipTLSVerify: "true"
+#           s3ForcePathStyle: "true"
+#         # oc create secret generic cloud-credentials -n openshift-adp --from-file cloud=credentials-velero
+#         credential:
+#           key: cloud
+#           name: cloud-credentials
+#         default: true
+#         objectStorage:
+#           bucket: backup
+#           prefix: velero
+#         provider: aws
+#   backupImages: false
+#   configuration:
+#     nodeAgent:
+#       uploaderType: restic
+#       enable: true
+#       podConfig:
+#         tolerations:
+#           - key: node-role.kubernetes.io/infra
+#             value: reserved
+#             effect: NoSchedule
+#           - key: node-role.kubernetes.io/infra
+#             value: reserved
+#             effect: NoExecute
+#     velero:
+#       podConfig:
+#         tolerations:
+#           - key: node-role.kubernetes.io/infra
+#             value: reserved
+#             effect: NoSchedule
+#           - key: node-role.kubernetes.io/infra
+#             value: reserved
+#             effect: NoExecute
+#       defaultPlugins:
+#         - aws
+#         - openshift
+#         - csi

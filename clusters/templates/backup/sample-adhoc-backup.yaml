@@ -1,0 +1,11 @@
+# ---
+# apiVersion: velero.io/v1
+# kind: Backup
+# metadata:
+#   name: openshift-monitoring-7
+#   namespace: openshift-adp
+# spec:
+#   defaultVolumesToRestic: true
+#   includedNamespaces:
+#     - team-backend-accept
+#   ttl: 720h0m0s

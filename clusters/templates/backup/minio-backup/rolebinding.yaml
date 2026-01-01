@@ -1,14 +1,14 @@
----
-kind: RoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: use-less-secure-scc
-  namespace: minio-backup
-subjects:
-  - kind: ServiceAccount
-    name: minio-backup
-    namespace: minio-backup
-roleRef:
-  kind: Role
-  name: use-less-secure-scc
-  apiGroup: rbac.authorization.k8s.io
+# ---
+# kind: RoleBinding
+# apiVersion: rbac.authorization.k8s.io/v1
+# metadata:
+#   name: use-less-secure-scc
+#   namespace: minio-backup
+# subjects:
+#   - kind: ServiceAccount
+#     name: minio-backup
+#     namespace: minio-backup
+# roleRef:
+#   kind: Role
+#   name: use-less-secure-scc
+#   apiGroup: rbac.authorization.k8s.io

@@ -1,18 +1,18 @@
----
-apiVersion: operator.openshift.io/v1
-kind: DNS
-metadata:
-  name: default
-  annotations:
-    argocd.argoproj.io/sync-options: "Delete=false"
-spec:
-  servers:
+# ---
+# apiVersion: operator.openshift.io/v1
+# kind: DNS
+# metadata:
+#   name: default
+#   annotations:
+#     argocd.argoproj.io/sync-options: "Delete=false"
+# spec:
+#   servers:
 
-  # just a small example from docs
-  - name: foo-server
-    zones:
-      - foo.com
-    forwardPlugin:
-      policy: Random
-      upstreams:
-        - 1.1.1.1
+#   # just a small example from docs
+#   - name: foo-server
+#     zones:
+#       - foo.com
+#     forwardPlugin:
+#       policy: Random
+#       upstreams:
+#         - 1.1.1.1

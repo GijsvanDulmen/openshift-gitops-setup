@@ -1,0 +1,13 @@
+# ---
+# apiVersion: velero.io/v1
+# kind: Schedule
+# metadata:
+#   name: regular-backups
+#   namespace: openshift-adp
+# spec:
+#   schedule: "*/5 * * * *"
+#   template:
+#     includedNamespaces:
+#       - team-backend-accept
+#     defaultVolumesToRestic: true 
+#     ttl: 24h0m0s

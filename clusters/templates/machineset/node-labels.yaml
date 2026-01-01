@@ -1,106 +1,106 @@
-# usually we add this to the machineset for node labeling
-# for now we test this way
-# infra nodes:
-# https://docs.openshift.com/container-platform/4.16/machine_management/creating-infrastructure-machinesets.html#infrastructure-components_creating-infrastructure-machinesets
----
-apiVersion: v1
-kind: Node
-metadata:
-  name: worker-2
-  labels:
-    # tenant: team-backend-apps
-    topology.kubernetes.io/zone: "deventer-01"
-    node-role.kubernetes.io/infra: ""
+# # usually we add this to the machineset for node labeling
+# # for now we test this way
+# # infra nodes:
+# # https://docs.openshift.com/container-platform/4.16/machine_management/creating-infrastructure-machinesets.html#infrastructure-components_creating-infrastructure-machinesets
+# ---
+# apiVersion: v1
+# kind: Node
+# metadata:
+#   name: worker-2
+#   labels:
+#     # tenant: team-backend-apps
+#     topology.kubernetes.io/zone: "deventer-01"
+#     node-role.kubernetes.io/infra: ""
 
-    node-role.kubernetes.io/scan-compliancy: ""
+#     node-role.kubernetes.io/scan-compliancy: ""
 
-    # make egress ips possible
-    k8s.ovn.org/egress-assignable: ""
+#     # make egress ips possible
+#     k8s.ovn.org/egress-assignable: ""
 
-    # has storage
-    lvm-storage: ""
-  annotations:
-    argocd.argoproj.io/sync-options: "Delete=false"
-spec:
-#   taints:
-#   - effect: NoSchedule
-#     key: team-backend-apps
-#     value: ""
-  taints: 
-    - key: node-role.kubernetes.io/infra
-      value: reserved
-      effect: NoSchedule
----
-apiVersion: v1
-kind: Node
-metadata:
-  name: worker-1
-  labels:
-    topology.kubernetes.io/zone: "deventer-02"
-    node-role.kubernetes.io/infra: ""
+#     # has storage
+#     lvm-storage: ""
+#   annotations:
+#     argocd.argoproj.io/sync-options: "Delete=false"
+# spec:
+# #   taints:
+# #   - effect: NoSchedule
+# #     key: team-backend-apps
+# #     value: ""
+#   taints: 
+#     - key: node-role.kubernetes.io/infra
+#       value: reserved
+#       effect: NoSchedule
+# ---
+# apiVersion: v1
+# kind: Node
+# metadata:
+#   name: worker-1
+#   labels:
+#     topology.kubernetes.io/zone: "deventer-02"
+#     node-role.kubernetes.io/infra: ""
 
-    node-role.kubernetes.io/scan-compliancy: ""
+#     node-role.kubernetes.io/scan-compliancy: ""
 
-    # make egress ips possible
-    k8s.ovn.org/egress-assignable: ""
+#     # make egress ips possible
+#     k8s.ovn.org/egress-assignable: ""
 
-    # has storage
-    lvm-storage: ""
-  annotations:
-    argocd.argoproj.io/sync-options: "Delete=false"
-spec:
-  taints: 
-    - key: node-role.kubernetes.io/infra
-      value: reserved
-      effect: NoSchedule
----
-apiVersion: v1
-kind: Node
-metadata:
-  name: worker-3
-  labels:
-    topology.kubernetes.io/zone: "deventer-01"
-    k8s.ovn.org/egress-assignable: ""
+#     # has storage
+#     lvm-storage: ""
+#   annotations:
+#     argocd.argoproj.io/sync-options: "Delete=false"
+# spec:
+#   taints: 
+#     - key: node-role.kubernetes.io/infra
+#       value: reserved
+#       effect: NoSchedule
+# ---
+# apiVersion: v1
+# kind: Node
+# metadata:
+#   name: worker-3
+#   labels:
+#     topology.kubernetes.io/zone: "deventer-01"
+#     k8s.ovn.org/egress-assignable: ""
 
-    node-role.kubernetes.io/scan-compliancy: ""
+#     node-role.kubernetes.io/scan-compliancy: ""
 
-    # has storage
-    lvm-storage: ""
-  annotations:
-    argocd.argoproj.io/sync-options: "Delete=false"
-spec:
-  taints: []
----
-apiVersion: v1
-kind: Node
-metadata:
-  name: worker-4
-  labels:
-    topology.kubernetes.io/zone: "deventer-02"
-    k8s.ovn.org/egress-assignable: ""
+#     # has storage
+#     lvm-storage: ""
+#   annotations:
+#     argocd.argoproj.io/sync-options: "Delete=false"
+# spec:
+#   taints: []
+# ---
+# apiVersion: v1
+# kind: Node
+# metadata:
+#   name: worker-4
+#   labels:
+#     topology.kubernetes.io/zone: "deventer-02"
+#     k8s.ovn.org/egress-assignable: ""
 
-    node-role.kubernetes.io/scan-compliancy: ""
+#     node-role.kubernetes.io/scan-compliancy: ""
 
-    # has storage
-    lvm-storage: ""
-  annotations:
-    argocd.argoproj.io/sync-options: "Delete=false"
-spec:
-  taints: []
----
-apiVersion: v1
-kind: Node
-metadata:
-  name: worker-5
-  labels:
-    topology.kubernetes.io/zone: "deventer-02"
-    k8s.ovn.org/egress-assignable: ""
+#     # has storage
+#     lvm-storage: ""
+#   annotations:
+#     argocd.argoproj.io/sync-options: "Delete=false"
+# spec:
+#   taints: []
+# ---
+# apiVersion: v1
+# kind: Node
+# metadata:
+#   name: worker-5
+#   labels:
+#     topology.kubernetes.io/zone: "deventer-02"
+#     k8s.ovn.org/egress-assignable: ""
 
-    node-role.kubernetes.io/scan-compliancy: ""
+#     node-role.kubernetes.io/scan-compliancy: ""
 
-    # has storage
-    lvm-storage: ""
-  annotations:
-    argocd.argoproj.io/sync-options: "Delete=false"
-spec:
-  taints: []
+#     # has storage
+#     lvm-storage: ""
+#   annotations:
+#     argocd.argoproj.io/sync-options: "Delete=false"
+# spec:
+#   taints: []

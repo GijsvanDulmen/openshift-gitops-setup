@@ -1,13 +1,13 @@
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: minio-backup 
-  namespace: minio-backup
-spec:
-   storageClassName: "lvms-vg1"
-   accessModes:
-     - ReadWriteOnce
-   resources:
-     requests:
-       storage: 4Gi
+# ---
+# kind: PersistentVolumeClaim
+# apiVersion: v1
+# metadata:
+#   name: minio-backup 
+#   namespace: minio-backup
+# spec:
+#    storageClassName: "lvms-vg1"
+#    accessModes:
+#      - ReadWriteOnce
+#    resources:
+#      requests:
+#        storage: 4Gi

@@ -1,1 +1,2 @@
 enableDisconnected: "false"
+isHostedControlPlane: "true"
