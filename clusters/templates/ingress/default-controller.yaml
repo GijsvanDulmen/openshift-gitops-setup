@@ -14,7 +14,7 @@ spec:
 
   # enable this for cert-manager provided wildcard cert
   defaultCertificate:
-    name: apps-os2-ticq-org
+    name: apps-hc02-homelab-ticq-org
 
   tuningOptions:
     reloadInterval: 0s
