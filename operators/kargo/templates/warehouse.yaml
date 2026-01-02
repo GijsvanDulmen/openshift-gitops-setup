@@ -1,0 +1,11 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: application-a
+  namespace: kargo
+spec:
+  subscriptions:
+  - git:
+      repoURL: https://github.com/GijsvanDulmen/openshift-gitops-tenants-setup.git
+      includePaths:
+      - application-a/images/test.yaml
