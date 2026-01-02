@@ -6,3 +6,5 @@ kargo:
       # default: admin / admin
       tokenSigningKey: iwishtowashmyirishwristwatch
     host: kargo.apps.hc02.homelab.ticq.org 
+    ingress:
+      enabled: true
