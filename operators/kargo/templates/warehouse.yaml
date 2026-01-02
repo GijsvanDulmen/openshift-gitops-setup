@@ -7,5 +7,8 @@ spec:
   subscriptions:
   - git:
       repoURL: https://github.com/GijsvanDulmen/openshift-gitops-tenants-setup.git
+      commitSelectionStrategy: NewestFromBranch	
+      discoveryLimit: 20
+      strictSemvers: true
       includePaths:
       - application-a/images/created.yaml
