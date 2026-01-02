@@ -11,3 +11,4 @@ kargo:
     
     tls:
       enabled: false
+      terminatedUpstream: true
