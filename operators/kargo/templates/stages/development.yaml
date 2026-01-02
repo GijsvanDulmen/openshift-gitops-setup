@@ -1,0 +1,39 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Stage
+metadata:
+  name: development
+  namespace: kargo-team-backend
+spec:
+  requestedFreight:
+  - origin:
+      kind: Warehouse
+      name: application-a
+    sources:
+      direct: true
+      autoPromotionOptions:
+        selectionPolicy: NewestFreight
+  promotionTemplate:
+    spec:
+      vars:
+      - name: gitopsRepo
+        value: https://github.com/GijsvanDulmen/openshift-gitops-tenants-setup.git
+      - name: srcPath
+        value: ./src
+      - name: targetBranch
+        value: main
+      steps:
+      - uses: git-clone
+        config:
+          repoURL: ${{ vars.gitopsRepo }}
+          checkout:
+          - branch: main
+            path: ${{ vars.srcPath }}
+      - uses: copy
+        config:
+          inPath: ./src/application-a/builds/created.yaml
+          outPath: ./src/application-a/images/test.yaml
+      - uses: git-commit
+        config:
+          path: ./src
+          message: "Updating from created"
+      # TODO: add push and make separate tag/branch/directory structure
