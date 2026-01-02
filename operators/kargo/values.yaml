@@ -8,3 +8,6 @@ kargo:
     host: kargo.apps.hc02.homelab.ticq.org 
     ingress:
       enabled: true
+    
+    tls:
+      enabled: false
