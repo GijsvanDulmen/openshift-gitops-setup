@@ -11,4 +11,4 @@ spec:
       discoveryLimit: 20
       strictSemvers: true
       includePaths:
-      - application-a/images/created.yaml
+      - application-a/builds/
