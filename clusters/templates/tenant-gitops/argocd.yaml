@@ -57,7 +57,7 @@ spec:
         memory: 512Mi
       requests:
         cpu: 50m
-        memory: 100Mi
+        memory: 70Mi
   rbac:
     # default anyone should have zero policies applied
     # and therefore no access to anything - not even read-only
@@ -87,7 +87,7 @@ spec:
         memory: 3Gi
       requests:
         cpu: 50m
-        memory: 256Mi
+        memory: 150Mi
 
   resourceInclusions: |
     {{- range $resource := $.Values.tenantResources }}
@@ -123,7 +123,7 @@ spec:
           memory: 128Mi
         requests:
           cpu: 20m
-          memory: 128Mi
+          memory: 100Mi
 
   ha:
     enabled: false #!!!
@@ -186,10 +186,10 @@ spec:
       limits:
         # more cpu = more load on API server when it has a lot of resources
         cpu: "2"
-        memory: 3Gi # argocd needs a lot!
+        memory: 2Gi # argocd needs a lot!
       requests:
-        cpu: 500m
-        memory: 1Gi
+        cpu: 100m
+        memory: 512Mi
     sharding: {}
   extraConfig:
     help.chatText: ""
