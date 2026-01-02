@@ -33,7 +33,7 @@ spec:
     resources:
       limits:
         cpu: "1"
-        memory: 2Gi
+        memory: 1Gi
       requests:
         cpu: 125m
         memory: 128Mi
@@ -75,7 +75,7 @@ spec:
     resources:
       limits:
         cpu: "1500m"
-        memory: 3Gi
+        memory: 2Gi
       requests:
         cpu: 50m
         memory: 256Mi
@@ -147,10 +147,10 @@ spec:
       limits:
         # more cpu = more load on API server when it has a lot of resources
         cpu: "2"
-        memory: 5Gi # argocd needs a lot!
+        memory: 3Gi # argocd needs a lot!
       requests:
         cpu: 500m
-        memory: 3Gi
+        memory: 1Gi
     sharding: {}
   extraConfig:
     help.chatText: ""

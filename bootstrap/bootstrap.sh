@@ -1,7 +1,15 @@
 #!/bin/bash
 
+# Examples
+# $1 = hc02
+# $2 = onprem-dev
+# $3 = onprem-dev-1
+
+# ./bootstrap.sh hc02 onprem-dev onprem-dev-1
+# ./bootstrap.sh hc03 onprem-prod onprem-prod-1
+
 # export KUBECONFIG=/Users/gijs/Documents/repos/proxmox-terraform/openshift/kubeconfig-noingress
-export KUBECONFIG=/Users/gijs/Documents/repos/homelab/openshift-virtualization/osv-resources/hcp/kubevirt-based/credentials/hc02/kubeconfig.yaml
+export KUBECONFIG="/Users/gijs/Documents/repos/homelab/openshift-virtualization/osv-resources/hcp/kubevirt-based/credentials/$1.yaml"
 
 # add helm repos
 helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
@@ -18,8 +26,8 @@ helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
 cd ../operators/gitops-operator
 helm dependency build
 helm template . \
-    -f ../../../openshift-gitops-config/clusters/onprem-dev/values.yaml \
-    -f ../../../openshift-gitops-config/clusters/onprem-dev/onprem-dev-1/values.yaml \
+    -f ../../../openshift-gitops-config/clusters/$2/values.yaml \
+    -f ../../../openshift-gitops-config/clusters/$2/$3/values.yaml \
     --name-template gitops-operator | kubectl apply -f -
 
 cd ../../bootstrap/
