@@ -23,6 +23,7 @@ spec:
     threadCount: 4 # = default
     maxConnections: 50000 # 50000 = default
 
+  {{- if eq $.Values.enableInfraNodes "true" }}
   nodePlacement:
     nodeSelector:
       matchLabels:
@@ -35,6 +36,7 @@ spec:
     - effect: NoExecute
       key: node-role.kubernetes.io/infra
       value: reserved
+  {{- end }}
 
   # tenant namespaces cant use the default
   namespaceSelector:

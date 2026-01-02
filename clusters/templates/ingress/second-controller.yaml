@@ -22,6 +22,7 @@ spec:
   httpErrorCodePages:
     name: custom-error-code-pages
 
+  {{- if eq $.Values.enableInfraNodes "true" }}
   nodePlacement:
     nodeSelector:
       matchLabels:
@@ -34,6 +35,7 @@ spec:
       - effect: NoExecute
         key: node-role.kubernetes.io/infra
         value: reserved
+  {{- end }}
 
   # Publish on different hostnetwork
   endpointPublishingStrategy:

@@ -8,6 +8,7 @@ data:
   config.yaml: |
     enableUserWorkload: false # too much resources
     alertmanagerMain:
+      {{- if eq $.Values.enableInfraNodes "true" }}
       nodeSelector: 
         node-role.kubernetes.io/infra: ""
       tolerations:
@@ -17,13 +18,14 @@ data:
       - key: node-role.kubernetes.io/infra
         value: reserved
         effect: NoExecute
+      {{- end }}
       volumeClaimTemplate:
         spec:
-          storageClassName: lvms-vg1
           resources:
             requests:
               storage: 2Gi
     prometheusK8s:
+      {{- if eq $.Values.enableInfraNodes "true" }}
       nodeSelector:
         node-role.kubernetes.io/infra: ""
       tolerations:
@@ -33,15 +35,16 @@ data:
       - key: node-role.kubernetes.io/infra
         value: reserved
         effect: NoExecute
+      {{- end }}
       volumeClaimTemplate:
         spec:
-          storageClassName: lvms-vg1
           resources:
             requests:
               storage: 8Gi
       retention: 24h
       retentionSize: 7GB
     prometheusOperator:
+      {{- if eq $.Values.enableInfraNodes "true" }}
       nodeSelector:
         node-role.kubernetes.io/infra: ""
       tolerations:
@@ -51,7 +54,9 @@ data:
       - key: node-role.kubernetes.io/infra
         value: reserved
         effect: NoExecute
+      {{- end }}
     metricsServer:
+      {{- if eq $.Values.enableInfraNodes "true" }}
       nodeSelector:
         node-role.kubernetes.io/infra: ""
       tolerations:
@@ -61,7 +66,9 @@ data:
       - key: node-role.kubernetes.io/infra
         value: reserved
         effect: NoExecute
+      {{- end }}
     kubeStateMetrics:
+      {{- if eq $.Values.enableInfraNodes "true" }}
       nodeSelector:
         node-role.kubernetes.io/infra: ""
       tolerations:
@@ -71,7 +78,9 @@ data:
       - key: node-role.kubernetes.io/infra
         value: reserved
         effect: NoExecute
+      {{- end }}
     telemeterClient:
+      {{- if eq $.Values.enableInfraNodes "true" }}
       nodeSelector:
         node-role.kubernetes.io/infra: ""
       tolerations:
@@ -81,7 +90,9 @@ data:
       - key: node-role.kubernetes.io/infra
         value: reserved
         effect: NoExecute
+      {{- end }}
     openshiftStateMetrics:
+      {{- if eq $.Values.enableInfraNodes "true" }}
       nodeSelector:
         node-role.kubernetes.io/infra: ""
       tolerations:
@@ -91,7 +102,9 @@ data:
       - key: node-role.kubernetes.io/infra
         value: reserved
         effect: NoExecute
+      {{- end }}
     thanosQuerier:
+      {{- if eq $.Values.enableInfraNodes "true" }}
       nodeSelector:
         node-role.kubernetes.io/infra: ""
       tolerations:
@@ -101,7 +114,9 @@ data:
       - key: node-role.kubernetes.io/infra
         value: reserved
         effect: NoExecute
+      {{- end }}
     monitoringPlugin:
+      {{- if eq $.Values.enableInfraNodes "true" }}
       nodeSelector:
         node-role.kubernetes.io/infra: ""
       tolerations:
@@ -111,3 +126,4 @@ data:
       - key: node-role.kubernetes.io/infra
         value: reserved
         effect: NoExecute
+      {{- end }}

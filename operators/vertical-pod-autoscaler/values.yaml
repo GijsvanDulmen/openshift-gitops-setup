@@ -11,13 +11,13 @@ operators-installer:
       automaticIntermediateManualUpgrades: true
 
       # VPA may run on Infra nodes
-      config:
-        nodeSelector:
-          node-role.kubernetes.io/infra: ""
-        tolerations: 
-        - key: "node-role.kubernetes.io/infra"
-          operator: "Exists"
-          effect: "NoSchedule"
+      # config:
+      #   nodeSelector:
+      #     node-role.kubernetes.io/infra: ""
+      #   tolerations: 
+      #   - key: "node-role.kubernetes.io/infra"
+      #     operator: "Exists"
+      #     effect: "NoSchedule"
 
   operatorGroups:
   - name: openshift-vertical-pod-autoscaler
