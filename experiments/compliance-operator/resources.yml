@@ -32,7 +32,6 @@ metadata:
   name: rs-on-workers
   namespace: openshift-compliance
 rawResultStorage:
-  storageClassName: lvms-vg1
   nodeSelector:
     node-role.kubernetes.io/worker: ""
   pvAccessModes:

@@ -11,5 +11,5 @@ spec:
     href: 'https://platform.internal.domain'
     text: More information
   color: '#fff'
-  backgroundColor: '#ff2c2c'
+  backgroundColor: "{{ $.Values.maintenanceColor }}"
 {{- end }}
