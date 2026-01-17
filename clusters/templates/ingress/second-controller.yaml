@@ -8,7 +8,7 @@ metadata:
   name: second-controller
   namespace: openshift-ingress-operator
 spec:
-  replicas: 2
+  replicas: 1
 
   # only TLS 1.3 - CIS benchmark
   tlsSecurityProfile:
@@ -17,7 +17,11 @@ spec:
   routeSelector:
     matchLabels:
       type: custom-second-domain
-  domain: "second.hc02.homelab.ticq.org"
+
+  defaultCertificate:
+    name: cloud-domain-cert
+
+  domain: "{{ .Values.ingressDomain }}"
 
   httpErrorCodePages:
     name: custom-error-code-pages
