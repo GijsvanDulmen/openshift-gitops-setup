@@ -1,0 +1,10 @@
+---
+apiVersion: metallb.io/v1alpha1
+kind: AddressPool
+metadata:
+  namespace: metallb-system
+  name: addresspool
+spec:
+  protocol: standard-pool
+  addresses:
+  - {{ .Values.metallb.addressPool }}
