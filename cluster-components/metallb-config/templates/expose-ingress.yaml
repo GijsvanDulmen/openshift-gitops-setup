@@ -1,0 +1,24 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  annotations:
+    metallb.universe.tf/address-pool: standard-pool
+    metallb.io/loadBalancerIPs: "{{ .Values.ingressLoadBalancerIp }}"
+  name: metallb-ingress
+  namespace: openshift-ingress
+spec:
+  ipFamilies:
+  - IPv4
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 180
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 1443
+  selector:
+    ingresscontroller.operator.openshift.io/deployment-ingresscontroller: second-controller
+  type: LoadBalancer
