@@ -3,17 +3,16 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  # apps.hc02.homelab.ticq.org
-  name: apps-hc02-homelab-ticq-org
+  name: apps-domain-cert
   namespace: openshift-ingress
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
-  commonName: apps.hc02.homelab.ticq.org
+  commonName: {{ .Values.appsDomain }}
   dnsNames:
-    - "apps.hc02.homelab.ticq.org" 
-    - "*.apps.hc02.homelab.ticq.org"
-  secretName: apps-hc02-homelab-ticq-org
+    - "{{ .Values.appsDomain }}" 
+    - "*.{{ .Values.appsDomain }}
+  secretName: apps-domain-cert
   isCA: false
   issuerRef:
     group: cert-manager.io
