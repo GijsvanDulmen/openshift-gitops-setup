@@ -1,10 +1,9 @@
 ---
-apiVersion: metallb.io/v1alpha1
-kind: AddressPool
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
 metadata:
   namespace: metallb-system
   name: addresspool
 spec:
-  protocol: standard-pool
   addresses:
   - {{ .Values.metallb.addressPool }}
