@@ -14,4 +14,4 @@ operators-installer:
   operatorGroups:
   - name: metallb-system
     createNamespace: true
-    targetOwnNamespace: true
+    targetOwnNamespace: false
