@@ -11,7 +11,7 @@ spec:
   commonName: {{ .Values.appsDomain }}
   dnsNames:
     - "{{ .Values.appsDomain }}" 
-    - "*.{{ .Values.appsDomain }}
+    - "*.{{ .Values.appsDomain }}"
   secretName: apps-domain-cert
   isCA: false
   issuerRef:
