@@ -21,13 +21,6 @@ data:
         value: reserved
         effect: NoExecute
       {{- end }}
-      # volumeClaimTemplate:
-      #   spec:
-      #     accessModes:
-      #     - ReadWriteMany
-      #     resources:
-      #       requests:
-      #         storage: 2Gi
     prometheusK8s:
       {{- if eq $.Values.enableInfraNodes "true" }}
       nodeSelector:
@@ -40,13 +33,6 @@ data:
         value: reserved
         effect: NoExecute
       {{- end }}
-      # volumeClaimTemplate:
-      #   spec:
-      #     accessModes:
-      #     - ReadWriteMany
-      #     resources:
-      #       requests:
-      #         storage: 8Gi
       retention: 24h
       retentionSize: 7GB
     prometheusOperator:
