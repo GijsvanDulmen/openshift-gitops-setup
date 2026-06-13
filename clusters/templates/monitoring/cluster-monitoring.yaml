@@ -5,6 +5,7 @@ metadata:
   name: cluster-monitoring-config
   namespace: openshift-monitoring
 data:
+  # ReadWriteMany for PVCs are needed for HCP live migration
   config.yaml: |
     enableUserWorkload: false # too much resources
     alertmanagerMain:
@@ -21,6 +22,8 @@ data:
       {{- end }}
       volumeClaimTemplate:
         spec:
+          accessModes:
+          - ReadWriteMany
           resources:
             requests:
               storage: 2Gi
@@ -38,6 +41,8 @@ data:
       {{- end }}
       volumeClaimTemplate:
         spec:
+          accessModes:
+          - ReadWriteMany
           resources:
             requests:
               storage: 8Gi
